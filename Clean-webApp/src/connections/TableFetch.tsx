@@ -1,4 +1,4 @@
-const apiServer = "http://localhost:8080";
+const apiServer = "http://127.0.0.1:8080";
 const sweepServer = "http://localhost:5555";
 
 // Sweep Server

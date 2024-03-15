@@ -8,8 +8,8 @@ import pandas as pd
 app = Flask(__name__)
 app.config.from_object("config")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-db2 = SQLAlchemy(app)
-db1 = MongoEngine(app)
+db1 = SQLAlchemy(app)
+db2 = MongoEngine(app)
 
 
 @app.route("/getServices", methods=["GET"])

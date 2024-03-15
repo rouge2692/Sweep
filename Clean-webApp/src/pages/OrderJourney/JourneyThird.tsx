@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+// Components
 import NavBar from "../../components/Journey/NavBar/NavBar";
 import Search from "../../components/Journey/ThirdStep/Search";
+
+// Connections
 import { _fetchData } from "../../connections/TableFetch";
-import SelectedRow from "../../components/Journey/ThirdStep/Selected";
-import { Link } from "react-router-dom";
 
 function JourneyThird() {
   const [response, setResponse] = useState<
@@ -24,7 +27,7 @@ function JourneyThird() {
       setResponse(data);
     });
   }, []);
-
+  console.log(response);
   return (
     <>
       <NavBar />
@@ -56,20 +59,12 @@ function JourneyThird() {
         <div className="relative flex rounded-full items-center p-5 justify-center w-full md:w-1/2">
           {/* Table */}
           <div className="border-2 border-dashed border-slate-400 rounded-lg w-full p-5">
-            <table className=" w-full">
-              {selection.length == 0 ? (
-                <tr className="text-slate-500">
-                  Search Above to Add Rooms Here
-                </tr>
-              ) : (
-                selection.map((item, index) => (
-                  <SelectedRow
-                    index={index}
-                    data={item}
-                    removeFromSelection={removeFromSelection}
-                  />
-                ))
-              )}
+            <table className="w-full">
+              {response
+                .filter((item) => item.SpaceType == "Residential")
+                .map((item, index) => {
+                  return <tr key={index}>{item.Space}</tr>;
+                })}
             </table>
           </div>
           {/* Table */}

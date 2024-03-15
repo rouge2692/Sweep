@@ -4,3 +4,5 @@ export default {
     autoprefixer: {},
   },
 };
+
+//bloody fucking important for tailwind styles to apply

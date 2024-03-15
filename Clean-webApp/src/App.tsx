@@ -1,12 +1,24 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import OrderJourney from "./pages/OrderJourney/OrderJourney";
+import JourneySecond from "./pages/OrderJourney/JourneySecond";
+import JourneyThird from "./pages/OrderJourney/JourneyThird";
+import JourneyFinal from "./pages/OrderJourney/JourneyFinal";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <></>;
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/JourneyStart" element={<OrderJourney />} />
+          <Route path="/JourneySecond" element={<JourneySecond />} />
+          <Route path="/JourneyThird" element={<JourneyThird />} />
+          <Route path="/JourneyFinal" element={<JourneyFinal />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
 
 export default App;

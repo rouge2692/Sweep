@@ -22,8 +22,8 @@ from flask_mongoengine import MongoEngine
 
 # POSTGRES
 @dataclass
-class SP02_Services(db1.Model):
-    __tablename__ = "SP02_Services"
+class SP02_Rooms(db1.Model):
+    __tablename__ = "SP02_Rooms"
 
     SP02_id: int
     Space: str

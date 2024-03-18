@@ -15,6 +15,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function JourneySecond() {
+  const [simpleCheck, setSimpleCheck] = useState(false);
+  const [deepCheck, setDeepCheck] = useState(false);
+
   const [oneTimeCheck, setOneTimeCheck] = useState(false);
   const [reOccCheck, setReOccCheck] = useState(false);
 
@@ -37,89 +40,92 @@ function JourneySecond() {
         {/* ^Title */}
 
         {/* Next */}
-        {(oneTimeCheck || reOccCheck) && (entireCheck || singleCheck) && (
-          <div
-            className="m-2 mb-5 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300"
-            onClick={() => navigate("/JourneyThird")}
-          >
-            {/* <Link to="/JourneyThird" className="text-2xl">
+        {(deepCheck || simpleCheck) &&
+          (oneTimeCheck || reOccCheck) &&
+          (entireCheck || singleCheck) && (
+            <div
+              className="m-2 mb-5 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300"
+              onClick={() => navigate("/JourneyThird")}
+            >
+              {/* <Link to="/JourneyThird" className="text-2xl">
                 NEXT
               </Link> */}
-            <h1 className="text-2xl text-white font-bold">NEXT</h1>
-          </div>
-        )}
+              <h1 className="text-2xl text-white font-bold">NEXT</h1>
+            </div>
+          )}
 
         {/* Next */}
 
         {/* Level and Freq Selections */}
         <div>
           <div className="p-3 border flex-row flex flex-wrap items-center justify-center">
-            {/* Space */}
-            <div className="m-2 mr-10">
-              <h1 className="text-center mt-2 font-bold">Space Type</h1>
+            {/* Level */}
+            <div className="mx-5">
+              <h1 className="text-center mt-2 font-bold">Cleaning Level</h1>
               <div className="flex-row flex">
-                {/* Entire */}
+                {/* Simple */}
                 <div
                   className={`flex flex-col justify-center items-center border m-2 border-solid ${
-                    entireCheck
+                    simpleCheck
                       ? "transition-color duration-500 border-blue-600"
                       : "border-slate-300"
                   } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
                   onClick={() => {
-                    setEntireCheck(!entireCheck);
-                    setSingleCheck(false);
+                    setSimpleCheck(!simpleCheck);
+                    setDeepCheck(false);
                   }}
                 >
                   <div className="m-1 flex flex-row items-center">
-                    {entireCheck ? (
+                    {simpleCheck ? (
                       <AiFillCheckCircle className="text-blue-600" />
                     ) : (
                       <BsCircle className="text-slate-300" />
                     )}
-                    <h2 className="mx-2">Entire Home</h2>
+                    <h2 className="mx-2">Simple</h2>
                   </div>
 
-                  <MdOutlineHomeWork
+                  <PiBroom
                     className={`text-8xl ${
-                      entireCheck
+                      simpleCheck
                         ? "transition-color duration-500 text-blue-600"
                         : "text-slate-300 "
                     } m-2`}
                   />
                 </div>
-                {/* Entire */}
-                {/* Single */}
+                {/* Simple */}
+                {/* Deep */}
                 <div
                   className={`flex flex-col justify-center items-center border m-2 border-solid ${
-                    singleCheck
+                    deepCheck
                       ? "transition-color duration-500 border-blue-600"
                       : "border-slate-300"
                   } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
                   onClick={() => {
-                    setSingleCheck(!singleCheck);
-                    setEntireCheck(false);
+                    setDeepCheck(!deepCheck);
+                    setSimpleCheck(false);
                   }}
                 >
                   <div className="m-1 flex flex-row items-center">
-                    {singleCheck ? (
+                    {deepCheck ? (
                       <AiFillCheckCircle className="text-blue-600" />
                     ) : (
                       <BsCircle className="text-slate-300" />
                     )}
-                    <h2 className="mx-2">Single Space</h2>
+                    <h2 className="mx-2">Deep</h2>
                   </div>
 
-                  <MdOutlineBedroomParent
+                  <MdOutlineCleanHands
                     className={`text-8xl ${
-                      singleCheck
+                      deepCheck
                         ? "transition-color duration-500 text-blue-600"
                         : "text-slate-300 "
                     } m-2`}
                   />
                 </div>
+                {/* Deep */}
               </div>
             </div>
-            {/* ^Space */}
+            {/* ^Level */}
             {/* Frequency */}
             <div>
               <h1 className="text-center mt-2 font-bold">Frequency</h1>
@@ -130,7 +136,7 @@ function JourneySecond() {
                     oneTimeCheck
                       ? "transition-color duration-500 border-blue-600"
                       : "border-slate-300"
-                  } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 px-4 bg-white`}
+                  } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
                   onClick={() => {
                     setOneTimeCheck(!oneTimeCheck);
                     setReOccCheck(false);
@@ -142,7 +148,7 @@ function JourneySecond() {
                     ) : (
                       <BsCircle className="text-slate-300" />
                     )}
-                    <h2 className="mx-2">One Time</h2>
+                    <h2 className="mx-2">One-Time</h2>
                   </div>
 
                   <IoMdCheckboxOutline
@@ -189,6 +195,72 @@ function JourneySecond() {
           </div>
         </div>
         {/* ^Level and Freq Selections */}
+        {/* Space */}
+        <div className="m-2">
+          <h1 className="text-center mt-2 font-bold">Space Type</h1>
+          <div className="flex-row flex">
+            {/* Entire */}
+            <div
+              className={`flex flex-col justify-center items-center border m-2 border-solid ${
+                entireCheck
+                  ? "transition-color duration-500 border-blue-600"
+                  : "border-slate-300"
+              } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
+              onClick={() => {
+                setEntireCheck(!entireCheck);
+                setSingleCheck(false);
+              }}
+            >
+              <div className="m-1 flex flex-row items-center">
+                {entireCheck ? (
+                  <AiFillCheckCircle className="text-blue-600" />
+                ) : (
+                  <BsCircle className="text-slate-300" />
+                )}
+                <h2 className="mx-2">Entire Home</h2>
+              </div>
+
+              <MdOutlineHomeWork
+                className={`text-8xl ${
+                  entireCheck
+                    ? "transition-color duration-500 text-blue-600"
+                    : "text-slate-300 "
+                } m-2`}
+              />
+            </div>
+            {/* Entire */}
+            {/* Single */}
+            <div
+              className={`flex flex-col justify-center items-center border m-2 border-solid ${
+                singleCheck
+                  ? "transition-color duration-500 border-blue-600"
+                  : "border-slate-300"
+              } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
+              onClick={() => {
+                setSingleCheck(!singleCheck);
+                setEntireCheck(false);
+              }}
+            >
+              <div className="m-1 flex flex-row items-center">
+                {singleCheck ? (
+                  <AiFillCheckCircle className="text-blue-600" />
+                ) : (
+                  <BsCircle className="text-slate-300" />
+                )}
+                <h2 className="mx-2">Single Space</h2>
+              </div>
+
+              <MdOutlineBedroomParent
+                className={`text-8xl ${
+                  singleCheck
+                    ? "transition-color duration-500 text-blue-600"
+                    : "text-slate-300 "
+                } m-2`}
+              />
+            </div>
+          </div>
+        </div>
+        {/* ^Space */}
       </section>
     </>
   );

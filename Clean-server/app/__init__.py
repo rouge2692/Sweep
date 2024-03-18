@@ -12,10 +12,10 @@ db1 = SQLAlchemy(app)
 db2 = MongoEngine(app)
 
 
-@app.route("/getServices", methods=["GET"])
+@app.route("/getRooms", methods=["GET"])
 def readServices():
-    serviceSession = models.SP02_Services
-    query = db1.session.query(serviceSession)
+    roomSession = models.SP02_Rooms
+    query = db1.session.query(roomSession)
     records = query.all()
 
     print(records)

@@ -9,18 +9,16 @@ import { _fetchData } from "../../connections/TableFetch";
 import SerOptions from "../../components/Journey/ThirdStep/Options";
 
 function JourneyThird() {
-  const [response, setResponse] = useState<
-    { [key: string]: string | number }[]
-  >([]);
+  const [response, setResponse] = useState<{ [key: string]: string }[]>([]);
+  const [serFilter, setSerFilter] = useState("");
+
   const [serRooms, setSerRooms] = useState<
     { [key: string]: string | number }[]
   >([]);
-  const [serFilter, setSerFilter] = useState("");
-
   const getSerRooms = (title: string, amount: number) => {
     if (serRooms.filter((item) => item.Category == title).length > 0) {
       if (amount == 0) {
-        setSerRooms((preData) =>
+        return setSerRooms((preData) =>
           preData.filter((item) => item.Category != title)
         );
       } else {
@@ -30,7 +28,7 @@ function JourneyThird() {
         });
       }
     } else {
-      setSerRooms((preData) => [
+      return setSerRooms((preData) => [
         ...preData,
         { Category: title, Amount: amount },
       ]);
@@ -43,12 +41,16 @@ function JourneyThird() {
     });
   }, []);
 
+  useEffect(() => {
+    console.log(serRooms);
+  }, [serRooms]);
+
   return (
     <>
       <NavBar />
-      <section className="relative items-center flex flex-col">
+      <section className="relative items-center flex flex-col bg-gray-50">
         {/* Header */}
-        <div className="sticky top-0 z-50 w-full justify-center items-center flex flex-col bg-white">
+        <div className="w-full justify-center items-center flex flex-col bg-gray-50">
           {/* Title */}
           <div className="flex justify-center items-end">
             <h1 className="font-semibold text-4xl text-center my-2 mt-10">
@@ -71,18 +73,18 @@ function JourneyThird() {
           {/* Next */}
 
           {/* Open Search Options */}
-          <div className="md:w-1/2 mb-5 mt-2 shadow-xl rounded-full flex items-center p-3">
-            <div className="md:w-1/2">
+          <div className="sticky top-0 lg:w-1/2 mb-5 mt-2 shadow-xl rounded-lg sm:rounded-full flex flex-col sm:flex-row items-center p-3 bg-white border border-sky-600">
+            <div className="lg:w-1/2">
               <input
                 placeholder="Search"
-                className="border-2 p-3 rounded-full flex md:w-full"
+                className="border-2 p-3 rounded-full flex lg:w-full mb-2 sm:mb-0"
                 onChange={(e) => setSerFilter(e.target.value)}
                 value={serFilter}
               ></input>
             </div>
 
             <select
-              className="p-3 md:w-1/2 mx-3 rounded-full bg-white"
+              className="p-3 lg:w-1/2 mx-3 rounded-full bg-white"
               defaultValue={"Apartment/Condo"}
             >
               <optgroup label="Residential">
@@ -104,19 +106,26 @@ function JourneyThird() {
         {/* Header */}
 
         {/* Selections */}
-        <div className="relative flex rounded-full items-center p-5 justify-center w-full md:w-1/2">
+        <div className="relative flex rounded-full items-center p-5 justify-center w-full lg:w-2/3">
           {/* Table */}
           <div className="border-2 border-dashed border-slate-400 rounded-lg w-full p-5">
+            <h1 className="text-black justify-center mb-5 italic text-center">
+              -- Click the tabs to open more information --
+            </h1>
             <table className="w-full">
               {response
                 .filter((item) => item.SpaceType == "Residential")
                 .filter((item) =>
-                  serFilter == "" ? item : item.Category == serFilter
+                  serFilter != "" ? item.Category == serFilter : item
                 )
                 .map((item, index) => {
                   return (
                     <tr key={index}>
-                      <SerOptions data={item} getSerRoom={getSerRooms} />
+                      <SerOptions
+                        data={item}
+                        getSerRoom={getSerRooms}
+                        cate={item.Category}
+                      />
                     </tr>
                   );
                 })}
@@ -124,7 +133,7 @@ function JourneyThird() {
           </div>
           {/* Table */}
           {/* Header */}
-          <h1 className="absolute top-1 text-slate-500 bg-white px-3 font-bold text-xl">
+          <h1 className="absolute top-1 text-slate-500 bg-gray-50 px-3 font-bold text-xl">
             Rooms
           </h1>
           {/* Header */}

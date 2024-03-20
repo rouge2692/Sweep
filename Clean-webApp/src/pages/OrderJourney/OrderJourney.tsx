@@ -17,7 +17,7 @@ function OrderJourney() {
     <>
       <NavBar />
       {/* Parent */}
-      <section className="items-center flex flex-col h-screen p-3">
+      <section className="items-center flex flex-col h-screen p-3 bg-gray-50">
         {/* Title */}
         <div className="w-full h-1/5 flex justify-center items-end">
           <h1 className="font-semibold text-4xl text-center mb-2 p-3">

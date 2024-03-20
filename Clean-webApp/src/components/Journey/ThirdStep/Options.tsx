@@ -1,48 +1,197 @@
 import React, { useState } from "react";
 
+import { AiFillCheckCircle } from "react-icons/ai";
+import { BsCircle } from "react-icons/bs";
+import {
+  MdOutlineKeyboardArrowUp,
+  MdOutlineKeyboardArrowDown,
+  MdOutlineCleanHands,
+} from "react-icons/md";
+import { PiBroom } from "react-icons/pi";
+import ServiceItem from "./ServiceItem";
+
 interface Props {
   data: { [key: string]: string | number };
+  cate: string;
   getSerRoom: (title: string, amount: number) => void;
 }
 
-function SerOptions({ data, getSerRoom }: Props) {
+function SerOptions({ data, getSerRoom, cate }: Props) {
   const [amount, setAmount] = useState(0);
 
-  const handleAmount = (oper: string, amount: number) => {
+  const [openAcc, setOpenAcc] = useState(false);
+  const [openSerList, setOpenSerList] = useState(false);
+
+  const [simpleCheck, setSimpleCheck] = useState(false);
+  const [deepCheck, setDeepCheck] = useState(false);
+
+  const handleAmount = (oper: string, unitamount: number, title: string) => {
     if (oper == "+") {
       setAmount((preAmount) => preAmount + 1);
+      getSerRoom(title, amount);
     } else {
-      if (amount == 0) {
-        return null;
+      if (unitamount == 0) {
+        if (oper == "+") {
+          setAmount((preAmount) => preAmount + 1);
+          getSerRoom(title, amount);
+        } else {
+          return null;
+        }
       } else {
         setAmount((preAmount) => preAmount - 1);
+        getSerRoom(title, amount);
       }
     }
   };
 
   return (
-    <div className="flex flex-row shadow-lg justify-between p-3 items-center mb-5 bg-slate-50 rounded-md">
-      <div className="flex flex-row">
-        <h1 className="mx-5">img</h1>
-        <h1 className="font-bold">{data.Category}</h1>
-      </div>
-      <div className="flex flex-row">
+    <div className="shadow-lg mb-5 rounded-lg hover:scale-105 transition-transform duration-200 bg-white">
+      <div
+        className={`sm:flex sm:flex-row sm:justify-between flex flex-col ${
+          openAcc ? "bg-teal-600 border-4 border-white shadow-lg" : "bg-white"
+        } rounded-lg`}
+      >
         <button
-          onClick={() => handleAmount("-", amount)}
-          className="bg-red-800 p-2 px-4 rounded-lg font-bold text-white hover:opacity-80 transition-opacity duration-200"
+          onClick={() => setOpenAcc(!openAcc)}
+          className={`${
+            openAcc && "text-white"
+          } flex flex-row hover:opacity-50 font-bold w-full items-center rounded-lg p-2`}
         >
-          -
+          <h1 className="xs:ml-5 mr-3 ml-2">img</h1>
+          {data.Category}
         </button>
-        <h1 className="bg-slate-200 p-2 px-5 rounded-lg font-bold text-black mx-2">
-          {amount}
-        </h1>
-        <button
-          onClick={() => handleAmount("+", amount)}
-          className="p-2 bg-green-800 px-4 rounded-lg font-bold text-white hover:opacity-80 transition-opacity duration-200"
-        >
-          +
-        </button>
+        <div className="flex flex-row bg-white p-3 sm:px-5">
+          <button
+            onClick={() => handleAmount("-", amount, cate)}
+            className="bg-red-800 p-2 px-4 rounded-lg font-bold text-white hover:bg-red-600 transition-opacity duration-200"
+          >
+            -
+          </button>
+          <h1 className="bg-slate-300 p-2 px-4 rounded-lg font-bold text-black mx-2">
+            {amount}
+          </h1>
+          <button
+            onClick={() => handleAmount("+", amount, cate)}
+            className="p-2 bg-green-800 px-4 rounded-lg font-bold text-white hover:bg-green-600 transition-opacity duration-200"
+          >
+            +
+          </button>
+        </div>
       </div>
+      {/* Hidden Element */}
+      <div
+        className={`p-4 rounded-lg transition duration-200 ${
+          openAcc ? "h-1/2" : "h-0 hidden"
+        }`}
+      >
+        {/* Level */}
+        <div className="mr-2 lg:mr-6">
+          <div className="sm:flex-row sm:flex mt-1">
+            <h1 className="font-bold mr-5 mb-2">Cleaning Level:</h1>
+            {/* General */}
+            <div
+              className={`flex flex-col border border-solid sm:mr-2 sm:m-0 mb-2 px-1 ${
+                simpleCheck
+                  ? "transition-color duration-500 border-teal-600 border-2"
+                  : "border-slate-300"
+              } transition-transform duration-200 hover:scale-90 shadow-md rounded-xl bg-white hover:cursor-pointer`}
+              onClick={() => {
+                setSimpleCheck(!simpleCheck);
+                setDeepCheck(false);
+              }}
+            >
+              <div className="m-1 flex flex-row items-center">
+                {simpleCheck ? (
+                  <AiFillCheckCircle className="text-teal-600 hover:cursor-pointer" />
+                ) : (
+                  <BsCircle className="text-slate-300 hover:cursor-pointer" />
+                )}
+                <PiBroom
+                  className={`size-5 md:size-10 ${
+                    simpleCheck
+                      ? "transition-color duration-500 text-teal-600"
+                      : "text-slate-600 hover:cursor-pointer"
+                  } m-2`}
+                />
+                <h2 className="text-xs lg:text-base hover:cursor-pointer">
+                  General Clean
+                </h2>
+              </div>
+            </div>
+            {/* General */}
+            {/* Deep */}
+            <div
+              className={`flex flex-col border border-solid px-1 ${
+                deepCheck
+                  ? "transition-color duration-500 border-teal-600 border-2"
+                  : "border-slate-300"
+              } transition-transform duration-200 hover:scale-90 shadow-md rounded-xl bg-white hover:cursor-pointer`}
+              onClick={() => {
+                setDeepCheck(!deepCheck);
+                setSimpleCheck(false);
+              }}
+            >
+              <div className="m-1 flex flex-row items-center">
+                {deepCheck ? (
+                  <AiFillCheckCircle className="text-teal-600 hover:cursor-pointer" />
+                ) : (
+                  <BsCircle className="text-slate-300 hover:cursor-pointer" />
+                )}
+                <MdOutlineCleanHands
+                  className={`size-5 md:size-10 ${
+                    deepCheck
+                      ? "transition-color duration-500 text-teal-600"
+                      : "text-slate-600 hover:cursor-pointer"
+                  } m-2`}
+                />
+                <h2 className="text-xs lg:text-base hover:cursor-pointer">
+                  Deep Cleaning
+                </h2>
+              </div>
+            </div>
+            {/* Deep */}
+          </div>
+        </div>
+        {/* ^Level */}
+        {/* Combo - Multi Sel Parent */}
+        <div className="w-full mt-3 md:flex md:flex-row hover:cursor-pointer">
+          <h1 className="font-bold md:mr-16">Services:</h1>
+
+          <div className="border-2 border-slate-300 hover:border-slate-300 rounded-lg mt-1 w-full shadow-md">
+            {/* Header Button */}
+            <div className="flex flex-row justify-between px-3 p-2">
+              <button
+                onClick={() => setOpenSerList(!openSerList)}
+                className="w-full hover:opacity-50  h-full flex items-start text-sm lg:text-base"
+              >
+                List of Services
+              </button>
+              {openSerList ? (
+                <MdOutlineKeyboardArrowUp
+                  onClick={() => setOpenSerList(!openSerList)}
+                  className="lg:size-7 size-5 hover:opacity-50 text-slate-600 hover:cursor-pointer h-full"
+                />
+              ) : (
+                <MdOutlineKeyboardArrowDown
+                  onClick={() => setOpenSerList(!openSerList)}
+                  className="lg:size-7 size-5 hover:opacity-50 text-slate-600 hover:cursor-pointer h-full"
+                />
+              )}
+            </div>
+            {/* ^ Header Button */}
+            {/* Hidden Element */}
+            {openSerList && (
+              <div className="px-3 pb-3">
+                <div className="border-t mb-3"></div>
+                <ServiceItem />
+              </div>
+            )}
+            {/* ^ Hidden Element */}
+          </div>
+        </div>
+        {/* ^ Combo - Multi Sel Parent  */}
+      </div>
+      {/* Hidden Element */}
     </div>
   );
 }

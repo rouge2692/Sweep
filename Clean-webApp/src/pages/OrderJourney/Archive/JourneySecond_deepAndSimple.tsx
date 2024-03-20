@@ -1,4 +1,4 @@
-import NavBar from "../../components/Journey/NavBar/NavBar";
+import NavBar from "../../../components/Journey/NavBar/NavBar";
 
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle } from "react-icons/bs";

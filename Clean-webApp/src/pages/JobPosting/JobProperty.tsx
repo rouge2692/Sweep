@@ -1,4 +1,4 @@
-import NavBar from "../../components/Journey/NavBar/NavBar";
+import NavBar from "../../components/JobPosting/NavBar/NavBar";
 
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle, BsBuildingsFill } from "react-icons/bs";
@@ -8,7 +8,7 @@ import { IoStorefrontSharp } from "react-icons/io5";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function OrderJourney() {
+function JobProperty() {
   const [homeCheck, setHomeCheck] = useState(false);
   const [aptCheck, setAptCheck] = useState(false);
   const [comCheck, setComCheck] = useState(false);
@@ -139,4 +139,4 @@ function OrderJourney() {
   );
 }
 
-export default OrderJourney;
+export default JobProperty;

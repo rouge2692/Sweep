@@ -1,4 +1,4 @@
-import NavBar from "../../components/Journey/NavBar/NavBar";
+import NavBar from "../../components/JobPosting/NavBar/NavBar";
 
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle } from "react-icons/bs";
@@ -6,15 +6,13 @@ import {
   MdOutlineBedroomParent,
   MdOutlineHomeWork,
   MdOutlineEventRepeat,
-  MdOutlineCleanHands,
 } from "react-icons/md";
 import { IoMdCheckboxOutline } from "react-icons/io";
-import { PiBroom } from "react-icons/pi";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function JourneySecond() {
+function JobFreq() {
   const [oneTimeCheck, setOneTimeCheck] = useState(false);
   const [reOccCheck, setReOccCheck] = useState(false);
 
@@ -194,4 +192,4 @@ function JourneySecond() {
   );
 }
 
-export default JourneySecond;
+export default JobFreq;

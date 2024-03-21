@@ -45,9 +45,13 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
   };
 
   return (
-    <div className="shadow-lg mb-5 rounded-lg hover:scale-105 transition-transform duration-200 bg-white">
+    <div
+      className={`shadow-lg mb-5 rounded-lg hover:scale-105 transition-transform duration-200 bg-white ${
+        openAcc ? "border-teal-600 border-2" : "border-teal-600 border-2"
+      }`}
+    >
       <div
-        className={`sm:flex sm:flex-row sm:justify-between flex flex-col ${
+        className={`sm:flex sm:flex-row sm:justify-between ${
           openAcc ? "bg-teal-600 border-4 border-white shadow-lg" : "bg-white"
         } rounded-lg`}
       >
@@ -55,12 +59,16 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
           onClick={() => setOpenAcc(!openAcc)}
           className={`${
             openAcc && "text-white"
-          } flex flex-row hover:opacity-50 font-bold w-full items-center rounded-lg p-2`}
+          } sm:flex sm:flex-row hover:opacity-50 font-bold w-full justify-center sm:justify-start items-center rounded-lg p-2`}
         >
-          <h1 className="xs:ml-5 mr-3 ml-2">img</h1>
+          <h1 className="sm:ml-5 mr-3 ml-2">img</h1>
           {data.Category}
         </button>
-        <div className="flex flex-row bg-white p-3 sm:px-5">
+        <div
+          className={`flex flex-row justify-center bg-slate-100 p-3 sm:px-5 ${
+            !openAcc && "rounded-lg"
+          }`}
+        >
           <button
             onClick={() => handleAmount("-", amount, cate)}
             className="bg-red-800 p-2 px-4 rounded-lg font-bold text-white hover:bg-red-600 transition-opacity duration-200"

@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Components
-import NavBar from "../../components/Journey/NavBar/NavBar";
+import NavBar from "../../components/JobPosting/NavBar/NavBar";
 
 // Connections
 import { _fetchData } from "../../connections/TableFetch";
-import SerOptions from "../../components/Journey/ThirdStep/Options";
+import SerOptions from "../../components/JobPosting/JobRooms/Options";
 
-function JourneyThird() {
+function JobRooms() {
   const [response, setResponse] = useState<{ [key: string]: string }[]>([]);
   const [serFilter, setSerFilter] = useState("");
 
@@ -144,4 +144,4 @@ function JourneyThird() {
   );
 }
 
-export default JourneyThird;
+export default JobRooms;

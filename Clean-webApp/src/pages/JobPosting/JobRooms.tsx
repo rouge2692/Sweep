@@ -48,12 +48,12 @@ function JobRooms() {
   return (
     <>
       <NavBar />
-      <section className="relative items-center flex flex-col bg-gray-50">
+      <section className="relative items-center flex flex-col">
         {/* Header */}
-        <div className="w-full justify-center items-center flex flex-col bg-gray-50">
+        <div className="w-full justify-center items-center flex flex-col">
           {/* Title */}
           <div className="flex justify-center items-end">
-            <h1 className="font-semibold text-4xl text-center my-2 mt-10">
+            <h1 className="font-semibold text-4xl text-center my-2 mx-5 mt-10">
               Add rooms that require service...
             </h1>
           </div>
@@ -73,11 +73,11 @@ function JobRooms() {
           {/* Next */}
 
           {/* Open Search Options */}
-          <div className="sticky top-0 lg:w-1/2 mb-5 mt-2 shadow-xl rounded-lg sm:rounded-full flex flex-col sm:flex-row items-center p-3 bg-white border border-sky-600">
+          <div className="sticky top-0 lg:w-1/2 mb-5 mt-2 shadow-xl rounded-lg sm:rounded-full flex flex-col sm:flex-row items-center p-3 bg-gray-100">
             <div className="lg:w-1/2">
               <input
                 placeholder="Search"
-                className="border-2 p-3 rounded-full flex lg:w-full mb-2 sm:mb-0"
+                className="p-3 rounded-full flex lg:w-full mb-2 sm:mb-0"
                 onChange={(e) => setSerFilter(e.target.value)}
                 value={serFilter}
               ></input>
@@ -94,6 +94,7 @@ function JobRooms() {
               <optgroup label="Commerical">
                 <option>Events</option>
                 <option>Restaurant</option>
+                <option>Office</option>
               </optgroup>
               <optgroup label="Airbnb">
                 <option>House</option>

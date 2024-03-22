@@ -47,7 +47,7 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
   return (
     <div
       className={`shadow-lg mb-5 rounded-lg hover:scale-105 transition-transform duration-200 bg-white ${
-        openAcc ? "border-teal-600 border-2" : "border-teal-600 border-2"
+        openAcc ? "border-teal-600 border-2" : "border-gray-300 border"
       }`}
     >
       <div

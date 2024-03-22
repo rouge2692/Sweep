@@ -13,7 +13,7 @@ db2 = MongoEngine(app)
 
 
 @app.route("/getRooms", methods=["GET"])
-def readServices():
+def readRooms():
     roomSession = models.SP02_Rooms
     query = db1.session.query(roomSession)
     records = query.all()
@@ -21,6 +21,15 @@ def readServices():
     print(records)
 
     return jsonify(records)
+
+
+@app.route("/getServices", methods=["GET"])
+def readServices():
+    serviceSession = list(models.SP03_Services.objects)
+
+    print(serviceSession)
+
+    return jsonify(serviceSession)
 
 
 from app import models

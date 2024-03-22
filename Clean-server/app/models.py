@@ -17,7 +17,12 @@ from mongoengine import (
 )
 from flask_mongoengine import MongoEngine
 
+
 # MONGO
+class SP03_Services(Document):
+    Service = StringField()
+    Description = StringField()
+    meta = {"collection": "SPO3_Services", "allow_inheritance": False}
 
 
 # POSTGRES

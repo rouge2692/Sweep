@@ -37,8 +37,8 @@ function JobFreq() {
         {/* Next */}
         {(oneTimeCheck || reOccCheck) && (entireCheck || singleCheck) && (
           <div
-            className="m-2 mb-5 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300"
-            onClick={() => navigate("/JourneyThird")}
+            className="m-2 shadow-md cursor-pointer bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300"
+            onClick={() => navigate("/JourneyService")}
           >
             {/* <Link to="/JourneyThird" className="text-2xl">
                 NEXT
@@ -51,16 +51,16 @@ function JobFreq() {
 
         {/* Level and Freq Selections */}
         <div>
-          <div className="p-3 border flex-row flex flex-wrap items-center justify-center">
+          <div className="p-2 sm:p-3 flex-row flex flex-wrap items-center justify-center">
             {/* Space */}
-            <div className="m-2 mr-10">
+            <div className="sm:m-2 md:mr-10">
               <h1 className="text-center mt-2 font-bold">Space Type</h1>
               <div className="flex-row flex">
                 {/* Entire */}
                 <div
                   className={`flex flex-col justify-center items-center border m-2 border-solid ${
                     entireCheck
-                      ? "transition-color duration-500 border-blue-600"
+                      ? "transition-color duration-500 border-teal-600"
                       : "border-slate-300"
                   } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
                   onClick={() => {
@@ -70,7 +70,7 @@ function JobFreq() {
                 >
                   <div className="m-1 flex flex-row items-center">
                     {entireCheck ? (
-                      <AiFillCheckCircle className="text-blue-600" />
+                      <AiFillCheckCircle className="text-teal-600" />
                     ) : (
                       <BsCircle className="text-slate-300" />
                     )}
@@ -80,7 +80,7 @@ function JobFreq() {
                   <MdOutlineHomeWork
                     className={`text-8xl ${
                       entireCheck
-                        ? "transition-color duration-500 text-blue-600"
+                        ? "transition-color duration-500 text-teal-600"
                         : "text-slate-300 "
                     } m-2`}
                   />
@@ -90,7 +90,7 @@ function JobFreq() {
                 <div
                   className={`flex flex-col justify-center items-center border m-2 border-solid ${
                     singleCheck
-                      ? "transition-color duration-500 border-blue-600"
+                      ? "transition-color duration-500 border-teal-600"
                       : "border-slate-300"
                   } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
                   onClick={() => {
@@ -100,7 +100,7 @@ function JobFreq() {
                 >
                   <div className="m-1 flex flex-row items-center">
                     {singleCheck ? (
-                      <AiFillCheckCircle className="text-blue-600" />
+                      <AiFillCheckCircle className="text-teal-600" />
                     ) : (
                       <BsCircle className="text-slate-300" />
                     )}
@@ -110,7 +110,7 @@ function JobFreq() {
                   <MdOutlineBedroomParent
                     className={`text-8xl ${
                       singleCheck
-                        ? "transition-color duration-500 text-blue-600"
+                        ? "transition-color duration-500 text-teal-600"
                         : "text-slate-300 "
                     } m-2`}
                   />
@@ -126,7 +126,7 @@ function JobFreq() {
                 <div
                   className={`flex flex-col justify-center items-center border m-2 border-solid ${
                     oneTimeCheck
-                      ? "transition-color duration-500 border-blue-600"
+                      ? "transition-color duration-500 border-teal-600"
                       : "border-slate-300"
                   } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 px-4 bg-white`}
                   onClick={() => {
@@ -136,7 +136,7 @@ function JobFreq() {
                 >
                   <div className="m-1 flex flex-row items-center">
                     {oneTimeCheck ? (
-                      <AiFillCheckCircle className="text-blue-600" />
+                      <AiFillCheckCircle className="text-teal-600" />
                     ) : (
                       <BsCircle className="text-slate-300" />
                     )}
@@ -146,7 +146,7 @@ function JobFreq() {
                   <IoMdCheckboxOutline
                     className={`text-8xl ${
                       oneTimeCheck
-                        ? "transition-color duration-500 text-blue-600"
+                        ? "transition-color duration-500 text-teal-600"
                         : "text-slate-300 "
                     } m-2`}
                   />
@@ -155,7 +155,7 @@ function JobFreq() {
                 <div
                   className={`flex flex-col justify-center items-center border m-2 border-solid ${
                     reOccCheck
-                      ? "transition-color duration-500 border-blue-600"
+                      ? "transition-color duration-500 border-teal-600"
                       : "border-slate-300"
                   } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl p-2 bg-white`}
                   onClick={() => {
@@ -165,7 +165,7 @@ function JobFreq() {
                 >
                   <div className="m-1 flex flex-row items-center">
                     {reOccCheck ? (
-                      <AiFillCheckCircle className="text-blue-600" />
+                      <AiFillCheckCircle className="text-teal-600" />
                     ) : (
                       <BsCircle className="text-slate-300" />
                     )}
@@ -175,7 +175,7 @@ function JobFreq() {
                   <MdOutlineEventRepeat
                     className={`text-8xl ${
                       reOccCheck
-                        ? "transition-color duration-500 text-blue-600"
+                        ? "transition-color duration-500 text-teal-600"
                         : "text-slate-300 "
                     } m-2`}
                   />

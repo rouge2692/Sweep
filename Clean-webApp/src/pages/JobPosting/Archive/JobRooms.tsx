@@ -2,23 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Components
-import NavBar from "../../components/JobPosting/NavBar/NavBar";
-import AddRoom from "../../components/JobPosting/JobRooms/AddRoomButton";
-import RoomOptions from "../../components/JobPosting/JobRooms/RoomOptions";
+import NavBar from "../../../components/JobPosting/NavBar/NavBar";
 
 // Connections
-import { _fetchData } from "../../connections/TableFetch";
-import { _fetchService } from "../../connections/ServiceFetch";
-import ServiceSelection from "../../components/JobPosting/JobRooms/ServiceSelection";
-
-//icons
+import { _fetchData } from "../../../connections/TableFetch";
+import RoomOptions from "../../../components/JobPosting/JobRooms/RoomOptions";
 
 function JobRooms() {
   const [response, setResponse] = useState<{ [key: string]: string }[]>([]);
-  const [serviceResponse, setServiceResponse] = useState<
-    { [key: string]: string }[]
-  >([]);
-  const [selectedServices, setSelectedServices] = useState([]);
   const [serFilter, setSerFilter] = useState("");
 
   const [serRooms, setSerRooms] = useState<
@@ -48,9 +39,6 @@ function JobRooms() {
     _fetchData().then((data) => {
       setResponse(data);
     });
-    _fetchService().then((data) => {
-      setServiceResponse(data);
-    });
   }, []);
 
   useEffect(() => {
@@ -72,7 +60,7 @@ function JobRooms() {
           {/* ^Title */}
 
           {/* Next */}
-          {response.length < 0 && (
+          {response.length > 0 && (
             <div className="m-2 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300">
               <Link
                 to="/JourneyFinal"
@@ -85,68 +73,49 @@ function JobRooms() {
           {/* Next */}
 
           {/* Open Search Options */}
-          <div className="mb-2 mt-2 shadow-md flex flex-col rounded-xl border-white border p-3 bg-gray-100">
-            <div className="flex flex-col sm:flex-row mb-3">
-              <div className="">
-                <input
-                  placeholder="Search"
-                  className="p-3 rounded-full flex mb-2 sm:mb-0"
-                  onChange={(e) => setSerFilter(e.target.value)}
-                  value={serFilter}
-                ></input>
-              </div>
+          <div className="sticky top-0 lg:w-1/2 mb-5 mt-2 shadow-md rounded-lg sm:rounded-full flex flex-col sm:flex-row sm:items-center p-3 bg-gray-100">
+            <div className="lg:w-1/2">
+              <input
+                placeholder="Search"
+                className="p-3 rounded-full flex lg:w-full mb-2 sm:mb-0"
+                onChange={(e) => setSerFilter(e.target.value)}
+                value={serFilter}
+              ></input>
+            </div>
 
-              <select
-                className="p-3 sm:mx-3 rounded-full bg-white"
-                defaultValue={"Apartment/Condo"}
-              >
-                <optgroup label="Residential">
-                  <option>House</option>
-                  <option>Apartment/Condo</option>
-                </optgroup>
-                <optgroup label="Commerical">
-                  <option>Events</option>
-                  <option>Restaurant</option>
-                  <option>Office</option>
-                </optgroup>
-                <optgroup label="Airbnb">
-                  <option>House</option>
-                  <option>Apartment/Condo</option>
-                </optgroup>
-              </select>
-            </div>
-            <h1 className="font-bold mb-1">Selected Services:</h1>
-            <div className="overflow-x-auto flex flex-wrap w-full">
-              {serviceResponse.map((item, index) => {
-                return <ServiceSelection keys={index} data={item} />;
-              })}
-            </div>
+            <select
+              className="p-3 lg:w-1/2 sm:mx-3 rounded-full bg-white"
+              defaultValue={"Apartment/Condo"}
+            >
+              <optgroup label="Residential">
+                <option>House</option>
+                <option>Apartment/Condo</option>
+              </optgroup>
+              <optgroup label="Commerical">
+                <option>Events</option>
+                <option>Restaurant</option>
+                <option>Office</option>
+              </optgroup>
+              <optgroup label="Airbnb">
+                <option>House</option>
+                <option>Apartment/Condo</option>
+              </optgroup>
+            </select>
           </div>
           {/* Open Search Options */}
         </div>
         {/* Header */}
 
         {/* Selections */}
-        <div className="relative flex flex-col rounded-full items-center p-5 justify-center w-full lg:w-3/4">
-          <div className="overflow-x-auto flex w-full">
-            {selectedServices.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className="text-sm border p-3 m-1 rounded-full bg-white border-collapse hover:cursor-pointer"
-                >
-                  {item}
-                </div>
-              );
-            })}
-          </div>
+        <div className="relative flex rounded-full items-center p-5 justify-center w-full lg:w-3/4">
           {/* Table */}
-          <div className="w-full p-5 border">
-            <AddRoom />
-
+          <div className="border-2 border-dashed border-slate-400 rounded-lg w-full p-5">
+            <h1 className="text-black justify-center mb-5 italic text-center">
+              -- Click the tabs to open more information --
+            </h1>
             <table className="w-full">
               {response
-                .filter((item) => item.Space == "House")
+                .filter((item) => item.SpaceType == "Residential")
                 .filter((item) =>
                   serFilter != "" ? item.Category == serFilter : item
                 )
@@ -164,6 +133,11 @@ function JobRooms() {
             </table>
           </div>
           {/* Table */}
+          {/* Header */}
+          <h1 className="absolute top-1 text-slate-500 bg-white px-3 font-bold text-xl">
+            Rooms
+          </h1>
+          {/* Header */}
         </div>
         {/* Selections */}
       </section>

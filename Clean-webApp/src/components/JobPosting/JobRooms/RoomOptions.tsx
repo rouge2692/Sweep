@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// Icons
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle } from "react-icons/bs";
 import {
@@ -7,7 +8,9 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineCleanHands,
 } from "react-icons/md";
-import { PiBroom } from "react-icons/pi";
+import { TfiBrushAlt } from "react-icons/tfi";
+
+// Components
 import ServiceItem from "./ServiceItem";
 
 interface Props {
@@ -16,7 +19,7 @@ interface Props {
   getSerRoom: (title: string, amount: number) => void;
 }
 
-function SerOptions({ data, getSerRoom, cate }: Props) {
+function RoomOptions({ data, getSerRoom, cate }: Props) {
   const [amount, setAmount] = useState(0);
 
   const [openAcc, setOpenAcc] = useState(false);
@@ -46,7 +49,7 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
 
   return (
     <div
-      className={`shadow-lg mb-5 rounded-lg hover:scale-105 transition-transform duration-200 bg-white ${
+      className={`shadow-lg mb-3 rounded-lg hover:scale-105 transition-transform duration-200 bg-white ${
         openAcc ? "border-teal-600 border-2" : "border-gray-300 border"
       }`}
     >
@@ -55,15 +58,25 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
           openAcc ? "bg-teal-600 border-4 border-white shadow-lg" : "bg-white"
         } rounded-lg`}
       >
-        <button
-          onClick={() => setOpenAcc(!openAcc)}
-          className={`${
-            openAcc && "text-white"
-          } sm:flex sm:flex-row hover:opacity-50 font-bold w-full justify-center sm:justify-start items-center rounded-lg p-2`}
-        >
-          <h1 className="sm:ml-5 mr-3 ml-2">img</h1>
-          {data.Category}
-        </button>
+        <div className="flex p-3 justify-between w-full">
+          <button
+            onClick={() => setOpenAcc(!openAcc)}
+            className={`${
+              openAcc && "text-white"
+            } flex font-bold w-full justify-start items-center rounded-lg`}
+          >
+            <h1 className="sm:ml-5 mr-3 ml-2">img</h1>
+            {data.Category}
+          </button>
+          <button
+            className={`${
+              openAcc ? "text-white" : "text-gray-500"
+            } font-bold text-xs hover:underline hover:opacity-40`}
+          >
+            Remove
+          </button>
+        </div>
+
         <div
           className={`flex flex-row justify-center bg-slate-100 p-3 sm:px-5 ${
             !openAcc && "rounded-lg"
@@ -95,7 +108,7 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
         {/* Level */}
         <div className="mr-2 lg:mr-6">
           <div className="sm:flex-row sm:flex mt-1">
-            <h1 className="font-bold mr-5 mb-2">Cleaning Level:</h1>
+            <h1 className="font-bold mr-3 mb-2">Cleaning Level:</h1>
             {/* General */}
             <div
               className={`flex flex-col border border-solid sm:mr-2 sm:m-0 mb-2 px-1 ${
@@ -110,20 +123,18 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
             >
               <div className="m-1 flex flex-row items-center">
                 {simpleCheck ? (
-                  <AiFillCheckCircle className="text-teal-600 hover:cursor-pointer" />
+                  <AiFillCheckCircle className="text-teal-600" />
                 ) : (
-                  <BsCircle className="text-slate-300 hover:cursor-pointer" />
+                  <BsCircle className="text-slate-300" />
                 )}
-                <PiBroom
-                  className={`size-5 md:size-10 ${
+                <TfiBrushAlt
+                  className={`size-5 md:size-7 ${
                     simpleCheck
                       ? "transition-color duration-500 text-teal-600"
-                      : "text-slate-600 hover:cursor-pointer"
+                      : "text-slate-300"
                   } m-2`}
                 />
-                <h2 className="text-xs lg:text-base hover:cursor-pointer">
-                  General Clean
-                </h2>
+                <h2 className="text-xs lg:text-base">General Clean</h2>
               </div>
             </div>
             {/* General */}
@@ -141,20 +152,18 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
             >
               <div className="m-1 flex flex-row items-center">
                 {deepCheck ? (
-                  <AiFillCheckCircle className="text-teal-600 hover:cursor-pointer" />
+                  <AiFillCheckCircle className="text-teal-600" />
                 ) : (
-                  <BsCircle className="text-slate-300 hover:cursor-pointer" />
+                  <BsCircle className="text-slate-300" />
                 )}
                 <MdOutlineCleanHands
-                  className={`size-5 md:size-10 ${
+                  className={`size-5 md:size-7 ${
                     deepCheck
                       ? "transition-color duration-500 text-teal-600"
-                      : "text-slate-600 hover:cursor-pointer"
+                      : "text-slate-300"
                   } m-2`}
                 />
-                <h2 className="text-xs lg:text-base hover:cursor-pointer">
-                  Deep Cleaning
-                </h2>
+                <h2 className="text-xs lg:text-base">Deep Cleaning</h2>
               </div>
             </div>
             {/* Deep */}
@@ -163,14 +172,14 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
         {/* ^Level */}
         {/* Combo - Multi Sel Parent */}
         <div className="w-full mt-3 md:flex md:flex-row hover:cursor-pointer">
-          <h1 className="font-bold md:mr-16">Services:</h1>
+          <h1 className="font-bold md:mr-20">Tasks:</h1>
 
           <div className="border-2 border-slate-300 hover:border-slate-300 rounded-lg mt-1 w-full shadow-md">
             {/* Header Button */}
             <div className="flex flex-row justify-between px-3 p-2">
               <button
                 onClick={() => setOpenSerList(!openSerList)}
-                className="w-full hover:opacity-50  h-full flex items-start text-sm lg:text-base"
+                className="w-full hover:opacity-50 h-full flex items-start text-sm lg:text-base"
               >
                 List of Services
               </button>
@@ -204,4 +213,4 @@ function SerOptions({ data, getSerRoom, cate }: Props) {
   );
 }
 
-export default SerOptions;
+export default RoomOptions;

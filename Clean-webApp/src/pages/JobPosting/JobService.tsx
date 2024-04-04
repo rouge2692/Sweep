@@ -1,16 +1,40 @@
 import { useEffect, useState } from "react";
+
+// Components
 import NavBar from "../../components/JobPosting/NavBar/NavBar";
-import { Link } from "react-router-dom";
+import ServicePoster from "../../components/JobPosting/JobServices/ServicePoster";
+
+// Connections
 import { _fetchService } from "../../connections/ServiceFetch";
+import { db } from "../../config/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 function JobService() {
   const [response, setResponse] = useState<{ [key: string]: string }[]>([]);
 
+  const [fireResponse, setFireResponse] = useState([]);
+  const [temp, setTemp] = useState({});
+
+  const getFireServices = async () => {
+    const querySnapshot = await getDocs(collection(db, "SP03_Services"));
+    const serv = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setTemp(serv);
+  };
+
   useEffect(() => {
+    getFireServices();
     _fetchService().then((data) => {
       setResponse(data);
     });
   }, []);
+
+  useEffect(() => {
+    console.log(temp);
+  }, [temp]);
+
   return (
     <>
       <NavBar />
@@ -19,35 +43,26 @@ function JobService() {
         <div className="w-full justify-center items-center flex flex-col">
           {/* Title */}
           <div className="flex justify-center items-end">
-            <h1 className="font-semibold text-4xl text-center my-2 mx-5 mt-10">
+            <h1 className="font-semibold text-4xl text-center m-5">
               What can we help you with?
             </h1>
           </div>
           {/* ^Title */}
-
-          {/* Next */}
-          {response.length > 0 && (
-            <div className="m-2 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300">
-              <Link
-                to="/JourneyFinal"
-                className="text-2xl text-white font-bold"
-              >
-                NEXT
-              </Link>
-            </div>
-          )}
-          {/* Next */}
         </div>
         {/* Header */}
-        <div className="flex- flex-wrap">
-          <div className="border p-3 rounded-2xl border-gray-300 hover:scale-110 transition-transform duration-200 shadow-lg flex flex-col items-center justify-center">
-            <h1>img</h1>
-            <h1 className="text-lg font-bold">Service</h1>
-            <h2 className="text-white bg-teal-600 p-2 rounded-lg">
-              Description
-            </h2>
-          </div>
+        {/* Service Selection */}
+        <div className="flex flex-wrap justify-center mb-24">
+          {response.map((item, index) => (
+            <ServicePoster
+              title={item.Service}
+              descript={item.Description}
+              key={index}
+              route={item.Route}
+            />
+          ))}
         </div>
+
+        {/* Service Selection */}
       </section>
     </>
   );

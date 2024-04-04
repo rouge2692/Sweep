@@ -7,16 +7,18 @@ import JobProperty from "./pages/JobPosting/JobProperty";
 import JobFreq from "./pages/JobPosting/JobFreq";
 import JobRooms from "./pages/JobPosting/JobRooms";
 import JobService from "./pages/JobPosting/JobService";
+import LandingHome from "./pages/Home/LandingHome";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/JourneyStart" element={<JobProperty />} />
+          <Route path="/HomeMain" element={<LandingHome />} />
+          <Route path="/JourneyStart/:D1002" element={<JobProperty />} />
           <Route path="/JourneySecond" element={<JobFreq />} />
           <Route path="/JourneyService" element={<JobService />} />
-          <Route path="/JourneyThird" element={<JobRooms />} />
+          <Route path="/Cleaning" element={<JobRooms />} />
           <Route path="/JourneyFinal" element={<JourneyFinal />} />
         </Routes>
       </BrowserRouter>

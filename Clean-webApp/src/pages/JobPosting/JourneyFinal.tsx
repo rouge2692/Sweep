@@ -22,19 +22,19 @@ function JourneyFinal() {
   return (
     <>
       <NavBar />
-      <section className="items-center flex flex-col h-screen bg-slate-100">
+      <section className="items-center flex flex-col">
         {/* Title */}
-        <div className="w-full h-1/5 flex justify-center items-end">
-          <h1 className="font-semibold text-4xl text-center mb-2">
+        <div className="h-1/5 flex flex-col justify-center items-center">
+          <h1 className="font-semibold text-4xl mb-2">
             We just need to "Iron" out a few more details
           </h1>
+          <h2 className="text-left w-full italic">--Pun intended</h2>
         </div>
-        <h2 className="text-left flex w-full pl-32">--Pun intended</h2>
 
         {/* ^Title */}
 
         {/* Form */}
-        <div className="bg-white p-5 m-5 w-1/2 shadow-lg">
+        <div className="bg-white p-5 m-5 w-1/2 shadow-lg border">
           <form className="w-1/2">
             {/* Ava */}
             <div className="m-5">

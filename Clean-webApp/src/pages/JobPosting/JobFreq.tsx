@@ -38,7 +38,7 @@ function JobFreq() {
         {(oneTimeCheck || reOccCheck) && (entireCheck || singleCheck) && (
           <div
             className="m-2 shadow-md cursor-pointer bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300"
-            onClick={() => navigate("/JourneyService")}
+            // onClick={() => navigate("/JourneyService")}
           >
             {/* <Link to="/JourneyThird" className="text-2xl">
                 NEXT

@@ -6,7 +6,7 @@ import JourneyFinal from "./pages/JobPosting/JourneyFinal";
 import JobProperty from "./pages/JobPosting/JobProperty";
 import JobFreq from "./pages/JobPosting/JobFreq";
 import JobRooms from "./pages/JobPosting/JobRooms";
-import JobService from "./pages/JobPosting/JobService";
+import JobService from "./pages/ServiceListings/JobService";
 import LandingHome from "./pages/Home/LandingHome";
 
 function App() {

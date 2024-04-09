@@ -30,3 +30,20 @@ export const getJobCreationTemp = async (D1002 = "") => {
     return [];
   }
 };
+
+export const refreshCustomerJobs = async (D1003 = "") => {
+  try {
+    const pack = await fetch(sweepServer + `/refreshST01`, {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(D1003),
+    });
+    return await pack.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};

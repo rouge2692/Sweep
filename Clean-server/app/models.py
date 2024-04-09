@@ -19,10 +19,14 @@ from flask_mongoengine import MongoEngine
 
 
 # MONGO
-class SP03_Services(Document):
-    Service = StringField()
-    Description = StringField()
-    Route = StringField()
+# class SP03_Services(Document):
+#     Service = StringField()
+#     Description = StringField()
+#     Route = StringField()
+#     meta = {"collection": "SP03_Services", "allow_inheritance": False}
+
+
+class SP03_Services(DynamicDocument):
     meta = {"collection": "SP03_Services", "allow_inheritance": False}
 
 

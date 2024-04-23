@@ -1,8 +1,8 @@
 // React
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 // Components
-import NavBar from "../../components/JobPosting/NavBar/NavBar";
+import NavBar from "../../../components/JobPosting/NavBar/NavBar";
 // Icons
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle, BsBuildingsFill } from "react-icons/bs";
@@ -13,11 +13,15 @@ import { TbBrandAirbnb } from "react-icons/tb";
 import {
   getJobCreationTemp,
   postHandleJobCreation,
-} from "../../connections/HandleJobCreation";
+} from "../../../connections/HandleJobCreation";
 
 function JobProperty() {
-  //Params
-  const { D1002 } = useParams();
+  // Initialize Navigate
+  const navigate = useNavigate();
+
+  // Params
+  const { st01_D1002 } = useParams();
+  const { sp01_D1002 } = useParams();
 
   // Button States
   const [homeCheck, setHomeCheck] = useState(false);
@@ -31,7 +35,7 @@ function JobProperty() {
     {}
   );
   useEffect(() => {
-    getJobCreationTemp(D1002).then((data) => {
+    getJobCreationTemp(st01_D1002).then((data) => {
       setStagedJobData(data);
     });
   }, []);
@@ -40,18 +44,6 @@ function JobProperty() {
     console.log(stagedJobData);
   }, [stagedJobData]);
 
-  //Get Variation Data for Buttons
-  const [propertyVari, setPropertyVari] = useState([]);
-  useEffect(() => {
-    setPropertyVari(
-      Object.keys(stagedJobData).length > 0
-        ? stagedJobData["D1006"]["Variations"]
-        : []
-    );
-  }, [stagedJobData]);
-  useEffect(() => {
-    console.log(propertyVari);
-  }, [propertyVari]);
   return (
     <>
       <NavBar />
@@ -63,31 +55,48 @@ function JobProperty() {
             Tell us about your Property?
           </h1>
         </div>
-        {/* ^Title */}
+        {/* ^ Title */}
 
         {/* Next */}
-        {(homeCheck || aptCheck || comCheck || airHomeCheck) && (
+        {(homeCheck || aptCheck || comCheck || airHomeCheck || airAptCheck) && (
           <div className="m-2 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300">
-            <Link
-              to="/JourneySecond"
+            <button
               onClick={() => {
-                postHandleJobCreation({
-                  ...stagedJobData,
-                  D1007: homeCheck || aptCheck ? "Residential" : "Commercial",
-                  D1006: homeCheck
-                    ? "Home"
-                    : aptCheck
-                    ? "Apartment"
-                    : "Commercial",
+                postHandleJobCreation(
+                  {
+                    ...stagedJobData,
+                    ST01D1007:
+                      homeCheck || aptCheck
+                        ? "Residential"
+                        : comCheck
+                        ? "Commercial"
+                        : "AirBnb",
+                    ST01D1006: homeCheck
+                      ? "House"
+                      : aptCheck
+                      ? "Apartment"
+                      : "Commercial",
+                  },
+                  stagedJobData.ST01D1002
+                ).then((data) => {
+                  if (
+                    sp01_D1002 == "CLES1" ||
+                    sp01_D1002 == "PAIS9" ||
+                    sp01_D1002 == "FLOS6"
+                  ) {
+                    navigate(`/JourneyRooms/${sp01_D1002}/${data.response}`);
+                  } else {
+                    navigate("/JourneyFinal");
+                  }
                 });
               }}
               className="text-2xl text-white font-bold"
             >
               NEXT
-            </Link>
+            </button>
           </div>
         )}
-        {/* Next */}
+        {/* ^ Next */}
 
         <div className="flex flex-col sm:flex-row sm:justify-center w-full">
           {/* Buttons */}
@@ -104,7 +113,7 @@ function JobProperty() {
                   homeCheck
                     ? "transition-color duration-500 border-blue-600"
                     : "border-slate-300"
-                } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
+                } transition-transform duration-200 hover:scale-95 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
                 onClick={() => {
                   setHomeCheck(!homeCheck);
                   setAptCheck(false);
@@ -133,14 +142,14 @@ function JobProperty() {
                   </div>
                 </div>
               </div>
-              {/* ^House Selection */}
+              {/* ^ House Selection */}
               {/* Apt Selection */}
               <div
                 className={`flex flex-col justify-center items-center border m-1 border-solid ${
                   aptCheck
                     ? "transition-color duration-500 border-teal-600"
                     : "border-slate-300"
-                } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
+                } transition-transform duration-200 hover:scale-95 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
                 onClick={() => {
                   setAptCheck(!aptCheck);
                   setHomeCheck(false);
@@ -169,7 +178,7 @@ function JobProperty() {
                   </div>
                 </div>
               </div>
-              {/* ^Apt Selection */}
+              {/* ^ Apt Selection */}
             </div>
             {/* ^ Selections */}
           </div>
@@ -187,7 +196,7 @@ function JobProperty() {
                   comCheck
                     ? "transition-color duration-500 border-teal-600"
                     : "border-slate-300"
-                } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
+                } transition-transform duration-200 hover:scale-95 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
                 onClick={() => {
                   setComCheck(!comCheck);
                   setAptCheck(false);
@@ -195,23 +204,28 @@ function JobProperty() {
                   setAirHomeCheck(false);
                 }}
               >
-                <div className="flex flex-row items-center mx-5">
+                <div className="flex flex-row items-center w-full justify-between mx-5">
                   {comCheck ? (
                     <AiFillCheckCircle className="text-teal-600" />
                   ) : (
                     <BsCircle className="text-slate-300" />
                   )}
-                  <IoStorefrontSharp
-                    className={`text-5xl ${
-                      comCheck
-                        ? "transition-color duration-500 text-teal-600"
-                        : "text-slate-300 "
-                    } m-1`}
-                  />
-                  <h2 className="">Commercial</h2>
+                  <div className="flex flex-row items-center">
+                    <IoStorefrontSharp
+                      className={`text-5xl ${
+                        comCheck
+                          ? "transition-color duration-500 text-teal-600"
+                          : "text-slate-300 "
+                      } m-1`}
+                    />
+                    <h2 className="">Commercial</h2>
+                  </div>
+                  <div>
+                    <h1 className="text-white">h</h1>
+                  </div>
                 </div>
               </div>
-              {/* ^Commercial Selection */}
+              {/* ^ Commercial Selection */}
             </div>
           </div>
           {/* AirBnb */}
@@ -219,53 +233,24 @@ function JobProperty() {
             <div>
               <h1 className="font-bold">AirBnb</h1>
             </div>
-            {/* AirBnb Selection */}
-            <div
-              className={`flex flex-col justify-center items-center border m-1 border-solid ${
-                airHomeCheck
-                  ? "transition-color duration-500 border-teal-600"
-                  : "border-slate-300"
-              } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
-              onClick={() => {
-                setAirHomeCheck(!airHomeCheck);
-                setComCheck(false);
-                setAptCheck(false);
-                setHomeCheck(false);
-              }}
-            >
-              <div className="flex flex-row items-center mx-5">
-                {airHomeCheck ? (
-                  <AiFillCheckCircle className="text-teal-600" />
-                ) : (
-                  <BsCircle className="text-slate-300" />
-                )}
-                <TbBrandAirbnb
-                  className={`text-5xl ${
-                    airHomeCheck
-                      ? "transition-color duration-500 text-teal-600"
-                      : "text-slate-300 "
-                  } m-1`}
-                />
-                <h2 className="">AirBnb</h2>
-              </div>
-            </div>
-            {/* ^AirBnb Selection */}
+
             {/* AirBnb House Selection */}
             <div
               className={`flex flex-col justify-center items-center border m-1 border-solid bg-white ${
-                homeCheck
+                airHomeCheck
                   ? "transition-color duration-500 border-blue-600"
                   : "border-slate-300"
-              } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
+              } transition-transform duration-200 hover:scale-95 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
               onClick={() => {
-                setHomeCheck(!homeCheck);
+                setHomeCheck(false);
                 setAptCheck(false);
                 setComCheck(false);
-                setAirHomeCheck(false);
+                setAirHomeCheck(!airHomeCheck);
+                setAirAptCheck(false);
               }}
             >
               <div className="flex flex-row items-center w-full justify-between mx-5">
-                {homeCheck ? (
+                {airHomeCheck ? (
                   <AiFillCheckCircle className="text-teal-600" />
                 ) : (
                   <BsCircle className="text-slate-300" />
@@ -273,7 +258,7 @@ function JobProperty() {
                 <div className="flex flex-row items-center">
                   <GiFamilyHouse
                     className={`text-5xl ${
-                      homeCheck
+                      airHomeCheck
                         ? "transition-color duration-500 text-teal-600"
                         : "text-slate-300 "
                     } m-1`}
@@ -285,23 +270,24 @@ function JobProperty() {
                 </div>
               </div>
             </div>
-            {/* ^House Selection */}
-            {/* Apt Selection */}
+            {/* ^ Airbnb House Selection */}
+            {/* Airbnb Apt Selection */}
             <div
               className={`flex flex-col justify-center items-center border m-1 border-solid ${
-                aptCheck
+                airAptCheck
                   ? "transition-color duration-500 border-teal-600"
                   : "border-slate-300"
-              } transition-transform duration-200 hover:scale-110 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
+              } transition-transform duration-200 hover:scale-95 shadow-lg border-slate-300 rounded-xl px-3 p-1 sm:p-2 bg-white`}
               onClick={() => {
-                setAptCheck(!aptCheck);
+                setAptCheck(false);
                 setHomeCheck(false);
                 setComCheck(false);
                 setAirHomeCheck(false);
+                setAirAptCheck(!airAptCheck);
               }}
             >
               <div className="flex flex-row items-center justify-between w-full mx-5">
-                {aptCheck ? (
+                {airAptCheck ? (
                   <AiFillCheckCircle className="text-teal-600" />
                 ) : (
                   <BsCircle className="text-slate-300" />
@@ -309,7 +295,7 @@ function JobProperty() {
                 <div className="flex items-center">
                   <BsBuildingsFill
                     className={`text-5xl ${
-                      aptCheck
+                      airAptCheck
                         ? "transition-color duration-500 text-teal-600"
                         : "text-slate-300 "
                     } m-1`}
@@ -321,9 +307,10 @@ function JobProperty() {
                 </div>
               </div>
             </div>
-            {/* ^Apt Selection */}
+            {/* ^ Airbnb Apt Selection */}
           </div>
-          {/* ^Buttons */}
+          {/* ^ AirBnb */}
+          {/* ^ Buttons */}
         </div>
       </section>
       {/* ^Parent */}

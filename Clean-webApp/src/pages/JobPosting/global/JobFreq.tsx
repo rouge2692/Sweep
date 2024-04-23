@@ -1,4 +1,4 @@
-import NavBar from "../../components/JobPosting/NavBar/NavBar";
+import NavBar from "../../../components/JobPosting/NavBar/NavBar";
 
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle } from "react-icons/bs";

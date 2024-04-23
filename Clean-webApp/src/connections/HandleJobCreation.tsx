@@ -1,8 +1,8 @@
 const sweepServer = "http://localhost:8080";
 
-export const postHandleJobCreation = async (a = {}) => {
+export const postHandleJobCreation = async (a = {}, D1002: any) => {
   try {
-    const pack = await fetch(sweepServer + "/handleJobCreation/jobHash", {
+    const pack = await fetch(sweepServer + `/handleJobCreation/${D1002}`, {
       mode: "cors",
       method: "POST",
       headers: {

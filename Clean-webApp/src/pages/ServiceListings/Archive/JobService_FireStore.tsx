@@ -7,6 +7,9 @@ import ServicePoster from "../../components/JobServices/ServicePoster";
 
 // Connections
 import { _fetchService } from "../../connections/ServiceFetch";
+import { db } from "../../config/firestore";
+import { collection, getDocs } from "firebase/firestore";
+import { getDataTemp } from "../../connections/DataTemps";
 import {
   getJobCreationTemp,
   refreshCustomerJobs,
@@ -18,11 +21,25 @@ function JobService() {
   const [serviceData, setServiceData] = useState<{ [key: string]: string }[]>(
     []
   );
+  // const [fireResponse, setFireResponse] = useState([]);
+  // const [temp, setTemp] = useState({});
+  // const getFireServices = async () => {
+  //   const querySnapshot = await getDocs(collection(db, "SP03_Services"));
+  //   const serv = querySnapshot.docs.map((doc) => ({
+  //     id: doc.id,
+  //     ...doc.data(),
+  //   }));
+  //   setTemp(serv);
+  // };
   useEffect(() => {
+    // getFireServices();
     _fetchService().then((data) => {
       setServiceData(data);
     });
   }, []);
+  // useEffect(() => {
+  //   console.log(temp);
+  // }, [temp]);
 
   const [stagedJobData, setStagedJobData] = useState<{ [key: string]: string }>(
     {}
@@ -33,6 +50,10 @@ function JobService() {
     });
     // refreshCustomerJobs(stagedJobData.ST01D1003);
   }, []);
+  useEffect(() => {
+    console.log(stagedJobData);
+    refreshCustomerJobs(stagedJobData.ST01D1003);
+  }, [stagedJobData]);
 
   return (
     <>
@@ -60,7 +81,6 @@ function JobService() {
               customer={stagedJobData.ST01D1003}
               dataTemp={stagedJobData}
               service={item.SP01D1002}
-              // st01_D1002={stagedJobData.ST01D1002}
             />
           ))}
         </div>

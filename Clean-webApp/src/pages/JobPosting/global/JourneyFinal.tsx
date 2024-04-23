@@ -1,4 +1,4 @@
-import NavBar from "../../components/JobPosting/NavBar/NavBar";
+import NavBar from "../../../components/JobPosting/NavBar/NavBar";
 
 function JourneyFinal() {
   const daysOfWeek = [

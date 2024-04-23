@@ -35,6 +35,7 @@ db2 = MongoEngine(app)
 #     return jsonify(docs)
 
 
+# mongo
 @app.route("/getServices", methods=["GET"])
 def readServices():
     serviceSession = list(models.SP03_Services.objects)
@@ -44,6 +45,7 @@ def readServices():
     return jsonify(serviceSession)
 
 
+# post
 @app.route("/getRooms", methods=["GET"])
 def readRooms():
     roomSession = models.SP02_Rooms
@@ -55,9 +57,31 @@ def readRooms():
     return jsonify(records)
 
 
+@app.route("/getSP01Services", methods=["GET"])
+def readSP01Services():
+    serviceSession = models.SP01_Services
+    query = db1.session.query(serviceSession)
+    records = query.all()
+
+    print(records)
+
+    return records
+
+
+@app.route("/getSP02ServicesProps", methods=["GET"])
+def readSP02SerProps():
+    serPropSession = models.SP02_ServiceProperties
+    query = db1.session.query(serPropSession)
+    records = query.all()
+
+    print(records)
+
+    return records
+
+
 @app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])
 def handleJobCreation(jobHash):
-    stagedJobSession = models.ST01_HandleJobCreation.objects(D1002=jobHash)
+    stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
     stagedJob = stagedJobSession.first()
 
     if request.method == "POST":
@@ -70,29 +94,30 @@ def handleJobCreation(jobHash):
             recId = "".join(random.sample(hashSet, 10))
 
             new_record = models.ST01_HandleJobCreation(**data)
-            new_record.D1002 = recId
+            new_record.ST01D1002 = recId
             new_record.save()
 
             coll = models.ST01_HandleJobCreation.objects
 
-            updatedRec = coll(D1002=recId)
+            updatedRec = coll(ST01D1002=recId)
             updatedRec = updatedRec.first()
 
-            return jsonify({"response": updatedRec.D1002})
+            return jsonify({"response": updatedRec.ST01D1002})
         else:
+            data = request.json
             stagedJob.delete()
             new_record = models.ST01_HandleJobCreation(**data)
             new_record.save()
 
             coll = models.ST01_HandleJobCreation.objects
 
-            updatedRec = coll(D1002=jobHash)
+            updatedRec = coll(ST01D1002=jobHash)
             updatedRec = updatedRec.first()
 
-            return jsonify({"response": updatedRec.D1002})
+            return jsonify({"response": updatedRec.ST01D1002})
 
     else:
-        stagedJobSession = models.ST01_HandleJobCreation.objects(D1002=jobHash)
+        stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
         stagedJob = stagedJobSession.first()
         print(stagedJob)
         return jsonify(stagedJob)
@@ -101,7 +126,7 @@ def handleJobCreation(jobHash):
 @app.route("/refreshST01", methods=["POST"])
 def findCustomer():
     customerID = request.json
-    customerJobs = models.ST01_HandleJobCreation.objects(D1003=customerID)
+    customerJobs = models.ST01_HandleJobCreation.objects(ST01D1003=customerID)
 
     if not customerJobs:
         return jsonify({"error": "no data"})

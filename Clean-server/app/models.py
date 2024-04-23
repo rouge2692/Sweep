@@ -52,3 +52,47 @@ class SP02_Rooms(db1.Model):
     Space = db1.Column(db1.String())
     SpaceType = db1.Column(db1.String())
     Category = db1.Column(db1.String())
+
+
+@dataclass
+class SP01_Services(db1.Model):
+    __tablename__ = "SP01_Services"
+
+    SP01_id: int
+    SP01D1004: str
+    SP01D1005: str
+    SP01D1006: str
+    SP01D1001: str
+    SP01D1007: str
+    SP01D1008: str
+    SP01D1002: str
+    SP01D1009: str
+    SP01D1003: int
+
+    SP01_id = db1.Column(db1.Integer(), primary_key=True)
+    SP01D1004 = db1.Column(db1.String())
+    SP01D1005 = db1.Column(db1.String())
+    SP01D1006 = db1.Column(db1.String())
+    SP01D1001 = db1.Column(db1.String())
+    SP01D1007 = db1.Column(db1.String())
+    SP01D1008 = db1.Column(db1.String())
+    SP01D1002 = db1.Column(db1.String())
+    SP01D1009 = db1.Column(db1.String())
+    SP01D1003 = db1.Column(db1.Integer())
+
+
+@dataclass
+class SP02_ServiceProperties(db1.Model):
+    __tablename__ = "SP02_ServiceProperties"
+
+    SP02_id: int
+    SP02D1001: str
+    SP02D1002: str
+    SP02D1003: int
+    SP02D1010: bool
+
+    SP02_id = db1.Column(db1.Integer(), primary_key=True)
+    SP02D1001 = db1.Column(db1.String())
+    SP02D1002 = db1.Column(db1.String())
+    SP02D1003 = db1.Column(db1.Integer())
+    SP02D1010 = db1.Column(db1.Boolean())

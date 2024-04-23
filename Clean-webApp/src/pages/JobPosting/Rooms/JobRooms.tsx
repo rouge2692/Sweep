@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Components
-import NavBar from "../../components/JobPosting/NavBar/NavBar";
-import AddRoom from "../../components/JobPosting/JobRooms/AddRoomButton";
-import RoomOptions from "../../components/JobPosting/JobRooms/RoomOptions";
+import NavBar from "../../../components/JobPosting/NavBar/NavBar";
+import AddRoom from "../../../components/JobPosting/JobRooms/AddRoomButton";
+import RoomOptions from "../../../components/JobPosting/JobRooms/RoomOptions";
 
 // Connections
-import { _fetchData } from "../../connections/TableFetch";
-import { _fetchService } from "../../connections/ServiceFetch";
-import ServiceSelection from "../../components/JobPosting/JobRooms/ServiceSelection";
+import { _fetchData } from "../../../connections/TableFetch";
+import { _fetchService } from "../../../connections/ServiceFetch";
+import ServiceSelection from "../../../components/JobPosting/JobRooms/ServiceSelection";
 
 //icons
 

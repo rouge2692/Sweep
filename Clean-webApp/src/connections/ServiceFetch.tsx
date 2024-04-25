@@ -26,3 +26,16 @@ export const _fetchService = async () => {
     return [];
   }
 };
+
+export const fetchRooms = async (SP04D1008: any) => {
+  try {
+    const resp = await fetch(sweepServer + "/getSP04Rooms/" + SP04D1008, {
+      mode: "cors",
+    });
+    // const resp = await fetch(url + "/_readonhand", { mode: "cors" });
+    return await resp.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};

@@ -66,7 +66,7 @@ function RoomOptions({ data, getSerRoom, cate }: Props) {
             } flex font-bold w-full justify-start items-center rounded-lg`}
           >
             <h1 className="sm:ml-5 mr-3 ml-2">img</h1>
-            {data.Category}
+            {data.SP04D1001}
           </button>
           <button
             className={`${

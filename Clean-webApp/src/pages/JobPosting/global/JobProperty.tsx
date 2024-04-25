@@ -84,7 +84,11 @@ function JobProperty() {
                     sp01_D1002 == "PAIS9" ||
                     sp01_D1002 == "FLOS6"
                   ) {
-                    navigate(`/JourneyRooms/${sp01_D1002}/${data.response}`);
+                    navigate(
+                      `/JourneyRooms/${sp01_D1002}/${
+                        data.response
+                      }/${"RESHOUP1"}`
+                    );
                   } else {
                     navigate("/JourneyFinal");
                   }

@@ -1,5 +1,6 @@
+// React
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // Components
 import NavBar from "../../../components/JobPosting/NavBar/NavBar";
@@ -7,23 +8,29 @@ import AddRoom from "../../../components/JobPosting/JobRooms/AddRoomButton";
 import RoomOptions from "../../../components/JobPosting/JobRooms/RoomOptions";
 
 // Connections
-import { _fetchData } from "../../../connections/TableFetch";
-import { _fetchService } from "../../../connections/ServiceFetch";
+import { _fetchService, fetchRooms } from "../../../connections/ServiceFetch";
 import ServiceSelection from "../../../components/JobPosting/JobRooms/ServiceSelection";
 
 //icons
 
 function JobRooms() {
-  const [response, setResponse] = useState<{ [key: string]: string }[]>([]);
-  const [serviceResponse, setServiceResponse] = useState<
-    { [key: string]: string }[]
-  >([]);
+  // Initialize Navigate
+  const navigate = useNavigate();
+
+  // Params
+  const { st01_D1002 } = useParams();
+  const { st01_D1007D1006 } = useParams();
+  const { sp01_D1002 } = useParams();
+
   const [selectedServices, setSelectedServices] = useState([]);
   const [serFilter, setSerFilter] = useState("");
-
-  const [serRooms, setSerRooms] = useState<
-    { [key: string]: string | number }[]
-  >([]);
+  const [rooms, setRooms] = useState<{ [key: string]: any }[]>([]);
+  useEffect(() => {
+    fetchRooms(st01_D1007D1006).then((data) => {
+      setRooms(data);
+    });
+  }, []);
+  const [serRooms, setSerRooms] = useState<{ [key: string]: any }[]>([]);
   const getSerRooms = (title: string, amount: number) => {
     if (serRooms.filter((item) => item.Category == title).length > 0) {
       if (amount == 0) {
@@ -44,19 +51,6 @@ function JobRooms() {
     }
   };
 
-  useEffect(() => {
-    _fetchData().then((data) => {
-      setResponse(data);
-    });
-    _fetchService().then((data) => {
-      setServiceResponse(data);
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log(serRooms);
-  }, [serRooms]);
-
   return (
     <>
       <NavBar />
@@ -72,7 +66,7 @@ function JobRooms() {
           {/* ^Title */}
 
           {/* Next */}
-          {response.length < 0 && (
+          {rooms.length < 0 && (
             <div className="m-2 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300">
               <Link
                 to="/JourneyFinal"
@@ -117,7 +111,7 @@ function JobRooms() {
             </div>
             <h1 className="font-bold mb-1">Selected Services:</h1>
             <div className="overflow-x-auto flex flex-wrap w-full">
-              {serviceResponse.map((item, index) => {
+              {rooms.map((item, index) => {
                 return <ServiceSelection keys={index} data={item} />;
               })}
             </div>
@@ -145,22 +139,17 @@ function JobRooms() {
             <AddRoom />
 
             <table className="w-full">
-              {response
-                .filter((item) => item.Space == "House")
-                .filter((item) =>
-                  serFilter != "" ? item.Category == serFilter : item
-                )
-                .map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <RoomOptions
-                        data={item}
-                        getSerRoom={getSerRooms}
-                        cate={item.Category}
-                      />
-                    </tr>
-                  );
-                })}
+              {rooms.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <RoomOptions
+                      data={item}
+                      getSerRoom={getSerRooms}
+                      cate={item.SP01D1001}
+                    />
+                  </tr>
+                );
+              })}
             </table>
           </div>
           {/* Table */}

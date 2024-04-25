@@ -17,7 +17,7 @@ function ServiceSelection({ keys, data }: Props) {
       } text-sm p-2 md:p-3 m-1 rounded-full bg-white border-collapse hover:cursor-pointer`}
       onClick={() => setSel(!sel)}
     >
-      {data.Service}
+      {data.SP01D1001}
     </div>
   );
 }

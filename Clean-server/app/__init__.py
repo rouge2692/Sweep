@@ -63,9 +63,13 @@ def readSP01Services():
     query = db1.session.query(serviceSession)
     records = query.all()
 
-    print(records)
+    recDf = pd.DataFrame(records).sort_values(by=["SP01D1003"])
+    recDict = recDf.to_dict("records")
 
-    return records
+    print("Service Page")
+    print(recDict)
+
+    return jsonify(recDict)
 
 
 @app.route("/getSP02ServicesProps", methods=["GET"])
@@ -77,6 +81,22 @@ def readSP02SerProps():
     print(records)
 
     return records
+
+
+@app.route("/getSP04Rooms/<string:SP04D1008>", methods=["GET"])
+def readSP04Rooms(SP04D1008):
+    roomSession = models.SP04_Rooms
+    query = db1.session.query(roomSession)
+    records = query.all()
+
+    recDf = pd.DataFrame(records)
+    propBuildDf = recDf[(recDf["SP04D1008"] == SP04D1008)]
+    propBuildDict = propBuildDf.to_dict("records")
+
+    print("Rooms Page")
+    print(propBuildDict)
+
+    return jsonify(propBuildDict)
 
 
 @app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])

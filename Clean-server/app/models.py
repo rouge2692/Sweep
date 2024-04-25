@@ -4,6 +4,8 @@ from dataclasses import dataclass
 import datetime
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy import String
 
 from mongoengine import (
     Document,
@@ -40,21 +42,6 @@ class SP98_DataTemps(DynamicDocument):
 
 # POSTGRES
 @dataclass
-class SP02_Rooms(db1.Model):
-    __tablename__ = "SP02_Rooms"
-
-    SP02_id: int
-    Space: str
-    SpaceType: str
-    Category: str
-
-    SP02_id = db1.Column(db1.Integer(), primary_key=True)
-    Space = db1.Column(db1.String())
-    SpaceType = db1.Column(db1.String())
-    Category = db1.Column(db1.String())
-
-
-@dataclass
 class SP01_Services(db1.Model):
     __tablename__ = "SP01_Services"
 
@@ -68,6 +55,8 @@ class SP01_Services(db1.Model):
     SP01D1002: str
     SP01D1009: str
     SP01D1003: int
+    SP01D1010: bool
+    SP01D1011: bool
 
     SP01_id = db1.Column(db1.Integer(), primary_key=True)
     SP01D1004 = db1.Column(db1.String())
@@ -79,6 +68,8 @@ class SP01_Services(db1.Model):
     SP01D1002 = db1.Column(db1.String())
     SP01D1009 = db1.Column(db1.String())
     SP01D1003 = db1.Column(db1.Integer())
+    SP01D1010 = db1.Column(db1.Boolean())
+    SP01D1011 = db1.Column(db1.Boolean())
 
 
 @dataclass
@@ -96,3 +87,98 @@ class SP02_ServiceProperties(db1.Model):
     SP02D1002 = db1.Column(db1.String())
     SP02D1003 = db1.Column(db1.Integer())
     SP02D1010 = db1.Column(db1.Boolean())
+
+
+@dataclass
+class SP03_PropertyBuildings(db1.Model):
+    __tablename__ = "SP03_PropertyBuildings"
+
+    SP03_id: int
+    SP03D1003: int
+    SP03D1006: str
+    SP03D1004: str
+    SP03D1002: str
+    SP03D1001: str
+    SP03D1012: str
+    SP03D1020: bool
+
+    SP03_id = db1.Column(db1.Integer(), primary_key=True)
+    SP03D1003 = db1.Column(db1.Integer())
+    SP03D1006 = db1.Column(db1.String())
+    SP03D1004 = db1.Column(db1.String())
+    SP03D1002 = db1.Column(db1.String())
+    SP03D1001 = db1.Column(db1.String())
+    SP03D1012 = db1.Column(db1.String())
+    SP03D1020 = db1.Column(db1.Boolean())
+
+
+@dataclass
+class SP04_Rooms(db1.Model):
+    __tablename__ = "SP04_Rooms"
+
+    SP04_id: int
+    SP04D1003: int
+    SP04D1002: str
+    SP04D1005: str
+    SP04D1007: str
+    SP04D1008: str
+    SP04D1004: str
+    SP04D1006: str
+    SP04D1014: str
+    SP04D1012: str
+    SP04D1013: str
+    SP04D1001: str
+    SP04D1009: list
+    SP04D1010: bool
+
+    SP04_id = db1.Column(db1.Integer(), primary_key=True)
+    SP04D1003 = db1.Column(db1.Integer())
+    SP04D1002 = db1.Column(db1.String())
+    SP04D1005 = db1.Column(db1.String())
+    SP04D1007 = db1.Column(db1.String())
+    SP04D1008 = db1.Column(db1.String())
+    SP04D1004 = db1.Column(db1.String())
+    SP04D1006 = db1.Column(db1.String())
+    SP04D1014 = db1.Column(db1.String())
+    SP04D1012 = db1.Column(db1.String())
+    SP04D1013 = db1.Column(db1.String())
+    SP04D1001 = db1.Column(db1.String())
+    SP04D1009 = db1.Column(ARRAY(String))
+    SP04D1010 = db1.Column(db1.Boolean())
+
+
+@dataclass
+class SPX_TaskList(db1.Model):
+    __tablename__ = "SPX_TaskList"
+
+    SPX_id: int
+    SPXD1003: int
+    SPXD1006: str
+    SPXD1002: str
+    SPXD1005: str
+    SPXD1012: str
+    SPXD1013: str
+    SPXD1014: str
+    SPXD1016: str
+    SPXD1017: str
+    SPXD1018: str
+    SPXD1001: str
+    SPXD1015: str
+    SPXD1010: bool
+    SPXD1020: bool
+
+    SPX_id = db1.Column(db1.Integer(), primary_key=True)
+    SPXD1003 = db1.Column(db1.Integer())
+    SPXD1006 = db1.Column(db1.String())
+    SPXD1002 = db1.Column(db1.String())
+    SPXD1005 = db1.Column(db1.String())
+    SPXD1012 = db1.Column(db1.String())
+    SPXD1013 = db1.Column(db1.String())
+    SPXD1014 = db1.Column(db1.String())
+    SPXD1016 = db1.Column(db1.String())
+    SPXD1017 = db1.Column(db1.String())
+    SPXD1018 = db1.Column(db1.String())
+    SPXD1001 = db1.Column(db1.String())
+    SPXD1015 = db1.Column(db1.String())
+    SPXD1010 = db1.Column(db1.Boolean())
+    SPXD1020 = db1.Column(db1.Boolean())

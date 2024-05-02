@@ -72,31 +72,62 @@ def readSP01Services():
     return jsonify(recDict)
 
 
-@app.route("/getSP02ServicesProps", methods=["GET"])
-def readSP02SerProps():
+@app.route("/getSP02ServicesProps/<string:SP02D1002>", methods=["GET"])
+def readSP02SerProps(SP02D1002):
     serPropSession = models.SP02_ServiceProperties
     query = db1.session.query(serPropSession)
     records = query.all()
 
-    print(records)
+    recDf = pd.DataFrame(records)
+    propDf = recDf[(recDf["SP02D1002"] == SP02D1002)]
+    propDict = propDf.to_dict("records")
 
-    return records
+    print("Property Page")
+    print(propDict)
+
+    return jsonify(propDict)
 
 
-@app.route("/getSP04Rooms/<string:SP04D1008>", methods=["GET"])
-def readSP04Rooms(SP04D1008):
-    roomSession = models.SP04_Rooms
-    query = db1.session.query(roomSession)
+@app.route("/getSP03PropBuilds/<string:SP03D1007>", methods=["GET"])
+def readSP03SerPropBuilds(SP03D1007):
+    propBuildSession = models.SP03_PropertyBuildings
+    query = db1.session.query(propBuildSession)
     records = query.all()
 
     recDf = pd.DataFrame(records)
-    propBuildDf = recDf[(recDf["SP04D1008"] == SP04D1008)]
+    propBuildDf = recDf[(recDf["SP03D1007"] == SP03D1007)]
     propBuildDict = propBuildDf.to_dict("records")
 
-    print("Rooms Page")
+    print("Property Page")
     print(propBuildDict)
 
     return jsonify(propBuildDict)
+
+
+@app.route("/getSP05SerRooms/<string:SP05D1016>", methods=["GET"])
+def readSP04Rooms(SP05D1016):
+    serRoomsSession = models.SP05_ServiceRooms
+    query = db1.session.query(serRoomsSession)
+    records = query.all()
+
+    recDf = pd.DataFrame(records)
+    serRoomsDf = recDf[(recDf["SP05D1016"] == SP05D1016)]
+    serRoomsDict = serRoomsDf.to_dict("records")
+
+    print("Rooms Page")
+    print(SP05D1016)
+    print(serRoomsDict)
+
+    return jsonify(serRoomsDict)
+
+
+@app.route("/getSPXTaskList", methods=["GET"])
+def readSPXTasks():
+    taskSession = models.SPX_TaskList
+    query = db1.session.query(taskSession)
+    records = query.all()
+
+    return jsonify(records)
 
 
 @app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])

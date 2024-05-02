@@ -14,6 +14,10 @@ import {
   getJobCreationTemp,
   postHandleJobCreation,
 } from "../../../connections/HandleJobCreation";
+import {
+  fetchPropBuilds,
+  fetchProperties,
+} from "../../../connections/ServiceFetch";
 
 function JobProperty() {
   // Initialize Navigate
@@ -31,18 +35,34 @@ function JobProperty() {
   const [airAptCheck, setAirAptCheck] = useState(false);
 
   // Get Staged Data
-  const [stagedJobData, setStagedJobData] = useState<{ [key: string]: any }>(
-    {}
-  );
+  const [stagedJobData, setStagedJobData] = useState<{
+    [key: string]: any;
+  }>({});
+  const [serProperties, setSerProperties] = useState<
+    {
+      [key: string]: any;
+    }[]
+  >([]);
+  const [serPropBuilds, setSerPropBuilds] = useState<
+    {
+      [key: string]: any;
+    }[]
+  >([]);
   useEffect(() => {
     getJobCreationTemp(st01_D1002).then((data) => {
       setStagedJobData(data);
     });
+    fetchProperties(sp01_D1002).then((data) => {
+      setSerProperties(data);
+    });
+    fetchPropBuilds(sp01_D1002).then((data) => {
+      setSerPropBuilds(data);
+    });
   }, []);
-  useEffect(() => {
-    console.log("PropUE");
-    console.log(stagedJobData);
-  }, [stagedJobData]);
+  // useEffect(() => {
+  //   console.log("PropUE");
+  //   console.log(stagedJobData);
+  // }, [stagedJobData]);
 
   return (
     <>
@@ -74,7 +94,7 @@ function JobProperty() {
                     ST01D1006: homeCheck
                       ? "House"
                       : aptCheck
-                      ? "Apartment"
+                      ? "Condo-Apartment"
                       : "Commercial",
                   },
                   stagedJobData.ST01D1002
@@ -85,9 +105,14 @@ function JobProperty() {
                     sp01_D1002 == "FLOS6"
                   ) {
                     navigate(
-                      `/JourneyRooms/${sp01_D1002}/${
-                        data.response
-                      }/${"RESHOUP1"}`
+                      `/JourneyRooms/${sp01_D1002}/${data.response}/${
+                        serPropBuilds.filter(
+                          (item) =>
+                            item.SP03D1007 == sp01_D1002 &&
+                            item.SP03D1012 == "Residential" &&
+                            item.SP03D1001 == "House"
+                        )[0].SP03D1008
+                      }`
                     );
                   } else {
                     navigate("/JourneyFinal");

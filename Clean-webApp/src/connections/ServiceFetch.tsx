@@ -27,9 +27,51 @@ export const _fetchService = async () => {
   }
 };
 
-export const fetchRooms = async (SP04D1008: any) => {
+export const fetchProperties = async (SP02D1002: any) => {
   try {
-    const resp = await fetch(sweepServer + "/getSP04Rooms/" + SP04D1008, {
+    const resp = await fetch(
+      sweepServer + "/getSP02ServicesProps/" + SP02D1002,
+      {
+        mode: "cors",
+      }
+    );
+    // const resp = await fetch(url + "/_readonhand", { mode: "cors" });
+    return await resp.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const fetchPropBuilds = async (SP03D1007: any) => {
+  try {
+    const resp = await fetch(sweepServer + "/getSP03PropBuilds/" + SP03D1007, {
+      mode: "cors",
+    });
+    // const resp = await fetch(url + "/_readonhand", { mode: "cors" });
+    return await resp.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const fetchSerRooms = async (SP05D1016: any) => {
+  try {
+    const resp = await fetch(sweepServer + "/getSP05SerRooms/" + SP05D1016, {
+      mode: "cors",
+    });
+    // const resp = await fetch(url + "/_readonhand", { mode: "cors" });
+    return await resp.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+export const fetchTasks = async () => {
+  try {
+    const resp = await fetch(sweepServer + "/getSPXTaskList", {
       mode: "cors",
     });
     // const resp = await fetch(url + "/_readonhand", { mode: "cors" });

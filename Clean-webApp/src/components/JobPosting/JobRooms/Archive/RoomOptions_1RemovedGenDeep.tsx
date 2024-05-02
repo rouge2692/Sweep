@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // Icons
 import { AiFillCheckCircle } from "react-icons/ai";
@@ -15,26 +15,20 @@ import ServiceItem from "./ServiceItem";
 import CleanLevelOps from "./RoomOptions/CleanLevelOps";
 
 interface Props {
-  roomData: { [key: string]: any };
-  taskData: any;
+  data: { [key: string]: any };
   cate: string;
   getSerRoom: (title: string, amount: number) => void;
-  handleCleanLevel: (cleanLevel: string, roomLevel: string) => void;
-  handleTaskSelect: (taskSel: boolean, taskNum: string) => void;
 }
 
-function RoomOptions({
-  roomData,
-  getSerRoom,
-  cate,
-  taskData,
-  handleCleanLevel,
-  handleTaskSelect,
-}: Props) {
+function RoomOptions({ data, getSerRoom, cate }: Props) {
+  const [amount, setAmount] = useState(0);
+
   const [openAcc, setOpenAcc] = useState(false);
   const [openSerList, setOpenSerList] = useState(false);
 
-  const [amount, setAmount] = useState(0);
+  const [simpleCheck, setSimpleCheck] = useState(false);
+  const [deepCheck, setDeepCheck] = useState(false);
+
   const handleAmount = (oper: string, unitamount: number, title: string) => {
     if (oper == "+") {
       setAmount((preAmount) => preAmount + 1);
@@ -52,14 +46,6 @@ function RoomOptions({
         getSerRoom(title, amount);
       }
     }
-  };
-  const [cleanOpSelected, setCleanOpSelected] = useState("");
-  const handleCleanOp = (cleanOp: string) => {
-    setCleanOpSelected(cleanOp);
-    handleCleanLevel(cleanOp, roomData.SP05D1015);
-  };
-  const handleTaskSelection = (taskSel: boolean, taskNum: string) => {
-    handleTaskSelect(taskSel, taskNum);
   };
 
   return (
@@ -81,7 +67,7 @@ function RoomOptions({
             } flex font-bold w-full justify-start items-center rounded-lg`}
           >
             <h1 className="sm:ml-5 mr-3 ml-2">img</h1>
-            {roomData.SP05D1001}
+            {data.SP05D1001}
           </button>
           <button
             className={`${
@@ -120,32 +106,78 @@ function RoomOptions({
           openAcc ? "h-1/2" : "h-0 hidden"
         }`}
       >
-        {roomData.SP05D1009.length > 0 && (
-          <div className="mr-2 lg:mr-6">
-            <div className="sm:flex-row sm:flex mt-1">
-              <h1 className="font-bold mr-3 mb-2">Cleaning Level:</h1>
-              {/* Map */}
-              {roomData.SP05D1009.map((item: string, index: number) => {
-                return (
-                  <CleanLevelOps
-                    key={index}
-                    level={item}
-                    selected={cleanOpSelected == item}
-                    handleCleanOp={handleCleanOp}
-                  />
-                );
-              })}
-              {/* ^ Map */}
+        {/* Level */}
+        <div className="mr-2 lg:mr-6">
+          <div className="sm:flex-row sm:flex mt-1">
+            <h1 className="font-bold mr-3 mb-2">Cleaning Level:</h1>
+            {/* Map */}
+            {data.SP05D1009.map((item: string, index: number) => {
+              return <CleanLevelOps key={index} level={item} />;
+            })}
+            {/* ^ Map */}
+            {/* General */}
+            <div
+              className={`flex flex-col border border-solid sm:mr-2 sm:m-0 mb-2 px-1 ${
+                simpleCheck
+                  ? "transition-color duration-500 border-teal-600 border-2"
+                  : "border-slate-300"
+              } transition-transform duration-200 hover:scale-90 shadow-md rounded-xl bg-white hover:cursor-pointer`}
+              onClick={() => {
+                setSimpleCheck(!simpleCheck);
+                setDeepCheck(false);
+              }}
+            >
+              <div className="m-1 flex flex-row items-center">
+                {simpleCheck ? (
+                  <AiFillCheckCircle className="text-teal-600" />
+                ) : (
+                  <BsCircle className="text-slate-300" />
+                )}
+                <TfiBrushAlt
+                  className={`size-5 md:size-7 ${
+                    simpleCheck
+                      ? "transition-color duration-500 text-teal-600"
+                      : "text-slate-300"
+                  } m-2`}
+                />
+                <h2 className="text-xs lg:text-base">General Clean</h2>
+              </div>
             </div>
+            {/* General */}
+            {/* Deep */}
+            <div
+              className={`flex flex-col border border-solid px-1 ${
+                deepCheck
+                  ? "transition-color duration-500 border-teal-600 border-2"
+                  : "border-slate-300"
+              } transition-transform duration-200 hover:scale-90 shadow-md rounded-xl bg-white hover:cursor-pointer`}
+              onClick={() => {
+                setDeepCheck(!deepCheck);
+                setSimpleCheck(false);
+              }}
+            >
+              <div className="m-1 flex flex-row items-center">
+                {deepCheck ? (
+                  <AiFillCheckCircle className="text-teal-600" />
+                ) : (
+                  <BsCircle className="text-slate-300" />
+                )}
+                <MdOutlineCleanHands
+                  className={`size-5 md:size-7 ${
+                    deepCheck
+                      ? "transition-color duration-500 text-teal-600"
+                      : "text-slate-300"
+                  } m-2`}
+                />
+                <h2 className="text-xs lg:text-base">Deep Cleaning</h2>
+              </div>
+            </div>
+            {/* Deep */}
           </div>
-        )}
-
+        </div>
+        {/* ^Level */}
         {/* Combo - Multi Sel Parent */}
-        <div
-          className={`w-full ${
-            roomData.SP05D1009.length > 0 && "mt-3"
-          } md:flex md:flex-row hover:cursor-pointer`}
-        >
+        <div className="w-full mt-3 md:flex md:flex-row hover:cursor-pointer">
           <h1 className="font-bold md:mr-20">Tasks:</h1>
 
           <div className="border-2 border-slate-300 hover:border-slate-300 rounded-lg mt-1 w-full shadow-md">
@@ -155,15 +187,7 @@ function RoomOptions({
                 onClick={() => setOpenSerList(!openSerList)}
                 className="w-full hover:opacity-50 h-full flex items-start text-sm lg:text-base"
               >
-                {taskData.filter(
-                  (item: { [key: string]: any }) => item.SPXD1020 == true
-                ).length > 0
-                  ? `${
-                      taskData.filter(
-                        (item: { [key: string]: any }) => item.SPXD1020 == true
-                      ).length
-                    } Services Selected`
-                  : "List of Services"}
+                List of Services
               </button>
               {openSerList ? (
                 <MdOutlineKeyboardArrowUp
@@ -180,19 +204,9 @@ function RoomOptions({
             {/* ^ Header Button */}
             {/* Hidden Element */}
             {openSerList && (
-              <div className="px-3 pb-3 flex flex-wrap">
-                {taskData.map((item: { [key: string]: any }, index: number) => {
-                  return (
-                    <ServiceItem
-                      key={index}
-                      task={item}
-                      taskName={item.SPXD1001}
-                      selected={item.SPXD1020}
-                      taskNum={item.SPXD1002}
-                      handleTaskSelect={handleTaskSelection}
-                    />
-                  );
-                })}
+              <div className="px-3 pb-3">
+                <div className="border-t mb-3"></div>
+                <ServiceItem />
               </div>
             )}
             {/* ^ Hidden Element */}

@@ -11,9 +11,9 @@ function NavBar() {
         className="flex flex-row items-center justify-center m-1 hover:cursor-pointer"
         onClick={() => navigate("/HomeMain")}
       >
-        {/* <TfiBrushAlt className="text-teal-600 size-12" /> */}
-        <PiBroom className="text-teal-600 size-12" />
-        {/* <h1 className="text-2xl font-sans font-semibold text-teal-600">
+        {/* <TfiBrushAlt className="text-pink-600 size-12" /> */}
+        <PiBroom className="text-pink-600 size-12" />
+        {/* <h1 className="text-2xl font-sans font-semibold text-pink-600">
           Sweep
         </h1> */}
       </div>

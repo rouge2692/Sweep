@@ -106,7 +106,7 @@ function JobRooms() {
           {/* ^Title */}
 
           {/* Next */}
-          {rooms.length < 0 && (
+          {tasks.filter((item) => item.SPXD1020 == true).length > 0 && (
             <div className="m-2 shadow-md bg-green-600 p-2 px-4 rounded-xl hover:bg-green-400 transition-colors duration-300">
               <Link
                 to="/JourneyFinal"

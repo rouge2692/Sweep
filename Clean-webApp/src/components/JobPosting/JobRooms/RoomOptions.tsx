@@ -65,12 +65,12 @@ function RoomOptions({
   return (
     <div
       className={`shadow-lg mb-3 rounded-lg hover:scale-105 transition-transform duration-200 bg-white ${
-        openAcc ? "border-teal-600 border-2" : "border-gray-300 border"
+        openAcc ? "border-pink-600 border-2" : "border-gray-300 border"
       }`}
     >
       <div
         className={`sm:flex sm:flex-row sm:justify-between ${
-          openAcc ? "bg-teal-600 border-4 border-white shadow-md" : "bg-white"
+          openAcc ? "bg-pink-600 border-4 border-white shadow-md" : "bg-white"
         } rounded-lg`}
       >
         <div className="flex p-3 justify-between w-full">

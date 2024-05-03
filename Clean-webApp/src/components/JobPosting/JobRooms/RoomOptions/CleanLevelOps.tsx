@@ -17,7 +17,7 @@ function CleanLevelOps({ level, selected, handleCleanOp }: Props) {
     <div
       className={`flex flex-col border border-solid sm:mr-2 sm:m-0 mb-2 px-1 ${
         selected
-          ? "transition-color duration-500 border-teal-600 border-2 text-teal-600 font-bold"
+          ? "transition-color duration-500 border-pink-600 border-2 text-pink-600 font-bold"
           : "border-slate-300"
       } transition-transform duration-200 hover:scale-90 shadow-md rounded-xl bg-white hover:cursor-pointer`}
       onClick={() => {
@@ -26,7 +26,7 @@ function CleanLevelOps({ level, selected, handleCleanOp }: Props) {
     >
       <div className="m-1 flex flex-row items-center">
         {selected ? (
-          <AiFillCheckCircle className="text-teal-600" />
+          <AiFillCheckCircle className="text-pink-600" />
         ) : (
           <BsCircle className="text-slate-300" />
         )}
@@ -34,7 +34,7 @@ function CleanLevelOps({ level, selected, handleCleanOp }: Props) {
           <TfiBrushAlt
             className={`size-5 md:size-7 ${
               selected
-                ? "transition-color duration-500 text-teal-600"
+                ? "transition-color duration-500 text-pink-600"
                 : "text-slate-300"
             } m-2`}
           />
@@ -42,7 +42,7 @@ function CleanLevelOps({ level, selected, handleCleanOp }: Props) {
           <MdOutlineCleanHands
             className={`size-5 md:size-7 ${
               selected
-                ? "transition-color duration-500 text-teal-600"
+                ? "transition-color duration-500 text-pink-600"
                 : "text-slate-300"
             } m-2`}
           />

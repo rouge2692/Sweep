@@ -41,12 +41,12 @@ function LandingHome() {
       <NavBar />
       {/* ^ Nav */}
       {/* Header */}
-      <h1 className="sm:hidden text-center text-teal-600 font-extrabold font-logo text-8xl">
+      <h1 className="sm:hidden text-center text-pink-600 font-extrabold font-logo text-8xl">
         Sweep
       </h1>
       <section className="bg-herobg sm:bg-heromdbg bg-cover md:bg-cover bg-center bg-no-repeat py-32 sm:py-48">
         {/* bg-[url('../../../src/assets/MobileHeroBanner.png')] */}
-        <h1 className="hidden sm:block text-center text-teal-600 font-extrabold font-logo text-8xl">
+        <h1 className="hidden sm:block text-center text-pink-600 font-extrabold font-logo text-8xl">
           Sweep
         </h1>
         <div className="flex justify-center">
@@ -68,7 +68,7 @@ function LandingHome() {
                 navigate(`/JourneyService/${data.response}`);
               });
             }}
-            className="bg-teal-600 p-3 rounded-full text-white font-bold ml-1"
+            className="bg-pink-600 p-3 rounded-full text-white font-bold ml-1"
           >
             Post Job
           </button>

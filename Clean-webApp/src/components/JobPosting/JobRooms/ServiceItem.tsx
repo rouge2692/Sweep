@@ -23,12 +23,12 @@ function ServiceItem({
     <button
       onClick={() => handleTaskSelect(!selected, taskNum)}
       className={`flex items-center border-2 transition-colors duration-200 ${
-        selected && "border-teal-600 font-bold text-teal-600"
+        selected && "border-pink-600 font-bold text-pink-600"
       } px-2 shadow-md rounded-lg hover:opacity-75 mb-2 mr-2 hover:font-bold`}
     >
       {selected ? (
         <MdCheckBox
-          className=" text-teal-600"
+          className=" text-pink-600"
           onClick={() => handleTaskSelect(!selected, taskNum)}
         />
       ) : (

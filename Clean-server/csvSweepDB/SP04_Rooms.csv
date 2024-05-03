@@ -1,0 +1,50 @@
+"SP04_id","SP04D1003","SP04D1002","SP04D1005","SP04D1007","SP04D1008","SP04D1004","SP04D1006","SP04D1014","SP04D1012","SP04D1013","SP04D1001","SP04D1009","SP04D1010"
+18,18,"COMRESP3-PARR18","COMRES","P3","COMRESP3","PAR","R18","PARR18","Commercial","Restaurant","Parking Lot","{}",True
+19,19,"COMOFFP4-KITR19","COMOFF","P4","COMOFFP4","KIT","R19","KITR19","Commercial","Office","Kitchen","{General,Deep}",True
+20,20,"COMOFFP4-BATR20","COMOFF","P4","COMOFFP4","BAT","R20","BATR20","Commercial","Office","Bathroom","{}",True
+21,21,"COMOFFP4-LANR21","COMOFF","P4","COMOFFP4","LAN","R21","LANR21","Commercial","Office","Landscape","{}",True
+22,22,"COMOFFP4-PARR22","COMOFF","P4","COMOFFP4","PAR","R22","PARR22","Commercial","Office","Parking Lot","{}",True
+23,23,"COMOFFP4-LOBR23","COMOFF","P4","COMOFFP4","LOB","R23","LOBR23","Commercial","Office","Lobby","{}",True
+24,48,"COMOFFP4-BRER48","COMOFF","P4","COMOFFP4","BRE","R48","BRER48","Commercial","Office","Breakroom","{}",True
+25,49,"COMOFFP4-WORR49","COMOFF","P4","COMOFFP4","WOR","R49","WORR49","Commercial","Office","Work Stations","{}",True
+26,24,"COMEVEP5-KITR24","COMEVE","P5","COMEVEP5","KIT","R24","KITR24","Commercial","Event","Kitchen","{General,Deep}",True
+27,25,"COMEVEP5-DINR25","COMEVE","P5","COMEVEP5","DIN","R25","DINR25","Commercial","Event","Dining Space","{}",True
+28,26,"COMEVEP5-BATR26","COMEVE","P5","COMEVEP5","BAT","R26","BATR26","Commercial","Event","Bathroom","{}",True
+29,27,"COMEVEP5-LANR27","COMEVE","P5","COMEVEP5","LAN","R27","LANR27","Commercial","Event","Landscape","{}",True
+30,28,"COMEVEP5-PARR28","COMEVE","P5","COMEVEP5","PAR","R28","PARR28","Commercial","Event","Parking Lot","{}",True
+31,29,"COMWARP6-BATR29","COMWAR","P6","COMWARP6","BAT","R29","BATR29","Commercial","Warehouse","Bathroom","{}",True
+32,30,"COMWARP6-KITR30","COMWAR","P6","COMWARP6","KIT","R30","KITR30","Commercial","Warehouse","Kitchen","{General,Deep}",True
+33,31,"COMWARP6-BRER31","COMWAR","P6","COMWARP6","BRE","R31","BRER31","Commercial","Warehouse","Breakroom","{}",True
+34,32,"COMPROP7-BATR32","COMPRO","P7","COMPROP7","BAT","R32","BATR32","Commercial","Production Site","Bathroom","{}",True
+1,1,"RESHOUP1-GARR1","RESHOU","P1","RESHOUP1","GAR","R1","GARR1","Residential","House","Garage","{}",True
+2,2,"RESHOUP1-KITR2","RESHOU","P1","RESHOUP1","KIT","R2","KITR2","Residential","House","Kitchen","{General,Deep}",True
+3,3,"RESHOUP1-BATR3","RESHOU","P1","RESHOUP1","BAT","R3","BATR3","Residential","House","Bathroom","{}",True
+4,4,"RESHOUP1-BEDR4","RESHOU","P1","RESHOUP1","BED","R4","BEDR4","Residential","House","Bedroom","{}",True
+5,5,"RESHOUP1-LIVR5","RESHOU","P1","RESHOUP1","LIV","R5","LIVR5","Residential","House","Living Space","{}",True
+6,6,"RESHOUP1-OUTR6","RESHOU","P1","RESHOUP1","OUT","R6","OUTR6","Residential","House","Outdoor","{General}",True
+7,7,"RESHOUP1-DINR7","RESHOU","P1","RESHOUP1","DIN","R7","DINR7","Residential","House","Dining Space","{}",True
+8,8,"RESCONP2-KITR8","RESCON","P2","RESCONP2","KIT","R8","KITR8","Residential","Condo-Apartment","Kitchen","{General,Deep}",True
+9,9,"RESCONP2-BATR9","RESCON","P2","RESCONP2","BAT","R9","BATR9","Residential","Condo-Apartment","Bathroom","{}",True
+10,10,"RESCONP2-BEDR10","RESCON","P2","RESCONP2","BED","R10","BEDR10","Residential","Condo-Apartment","Bedroom","{}",True
+11,11,"RESCONP2-DINR11","RESCON","P2","RESCONP2","DIN","R11","DINR11","Residential","Condo-Apartment","Dining Space","{}",True
+12,12,"RESCONP2-LIVR12","RESCON","P2","RESCONP2","LIV","R12","LIVR12","Residential","Condo-Apartment","Living Space","{}",True
+13,13,"RESCONP2-STOR13","RESCON","P2","RESCONP2","STO","R13","STOR13","Residential","Condo-Apartment","Storage Locker","{}",True
+14,14,"COMRESP3-KITR14","COMRES","P3","COMRESP3","KIT","R14","KITR14","Commercial","Restaurant","Kitchen","{General,Deep}",True
+15,15,"COMRESP3-DINR15","COMRES","P3","COMRESP3","DIN","R15","DINR15","Commercial","Restaurant","Dining Space","{}",True
+16,16,"COMRESP3-BATR16","COMRES","P3","COMRESP3","BAT","R16","BATR16","Commercial","Restaurant","Bathroom","{}",True
+17,17,"COMRESP3-LANR17","COMRES","P3","COMRESP3","LAN","R17","LANR17","Commercial","Restaurant","Landscape","{}",True
+35,33,"COMPROP7-KITR33","COMPRO","P7","COMPROP7","KIT","R33","KITR33","Commercial","Production Site","Kitchen","{General,Deep}",True
+36,34,"COMPROP7-BRER34","COMPRO","P7","COMPROP7","BRE","R34","BRER34","Commercial","Production Site","Breakroom","{}",True
+37,35,"AIRHOUP8-DINR35","AIRHOU","P8","AIRHOUP8","DIN","R35","DINR35","AirBnb","House","Dining Space","{}",True
+38,36,"AIRHOUP8-KITR36","AIRHOU","P8","AIRHOUP8","KIT","R36","KITR36","AirBnb","House","Kitchen","{General,Deep}",True
+39,37,"AIRHOUP8-BATR37","AIRHOU","P8","AIRHOUP8","BAT","R37","BATR37","AirBnb","House","Bathroom","{}",True
+40,38,"AIRHOUP8-BEDR38","AIRHOU","P8","AIRHOUP8","BED","R38","BEDR38","AirBnb","House","Bedroom","{}",True
+41,39,"AIRHOUP8-LIVR39","AIRHOU","P8","AIRHOUP8","LIV","R39","LIVR39","AirBnb","House","Living Space","{}",True
+42,40,"AIRHOUP8-OUTR40","AIRHOU","P8","AIRHOUP8","OUT","R40","OUTR40","AirBnb","House","Outdoor","{General}",True
+43,41,"AIRHOUP8-GARR41","AIRHOU","P8","AIRHOUP8","GAR","R41","GARR41","AirBnb","House","Garage","{}",True
+44,42,"AIRCONP9-DINR42","AIRCON","P9","AIRCONP9","DIN","R42","DINR42","AirBnb","Condo-Apartment","Dining Space","{}",True
+45,43,"AIRCONP9-KITR43","AIRCON","P9","AIRCONP9","KIT","R43","KITR43","AirBnb","Condo-Apartment","Kitchen","{General,Deep}",True
+46,44,"AIRCONP9-BATR44","AIRCON","P9","AIRCONP9","BAT","R44","BATR44","AirBnb","Condo-Apartment","Bathroom","{}",True
+47,45,"AIRCONP9-BEDR45","AIRCON","P9","AIRCONP9","BED","R45","BEDR45","AirBnb","Condo-Apartment","Bedroom","{}",True
+48,46,"AIRCONP9-LIVR46","AIRCON","P9","AIRCONP9","LIV","R46","LIVR46","AirBnb","Condo-Apartment","Living Space","{}",True
+49,47,"AIRCONP9-STOR47","AIRCON","P9","AIRCONP9","STO","R47","STOR47","AirBnb","Condo-Apartment","Storage Locker","{}",True

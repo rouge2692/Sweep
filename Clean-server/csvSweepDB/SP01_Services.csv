@@ -1,0 +1,10 @@
+"SP01_id","SP01D1003","SP01D1004","SP01D1005","SP01D1006","SP01D1002","SP01D1001","SP01D1007","SP01D1008","SP01D1009","SP01D1010","SP01D1011","SP01D1020"
+8,7,"EXT","SP05","S7","EXTS7","External Windows","/ExtWind","SP05_AddOnTask",NULL,True,False,False
+9,8,"LAN","SP05","S8","LANS8","Landscape","/Landscape","SP05_AddOnTask",NULL,True,False,False
+4,2,"JUN","SP05","S2","JUNS2","Junk Removal","/JunkRemoval","SP05_AddOnTask","Find a scrapping expert to unload junk and declutter your space. Some materials have recycling incentive.",True,False,False
+3,5,"SMA","SP05","S5","SMAS5","Small Repairs","/SmallRepairs","SP05_AddOnTask","Mount shelves or TVs on a wall, fix up holes in dry wall, put together furniture, etc.",True,False,False
+5,3,"MOV","SP05","S3","MOVS3","Move In/Out","/MoveInOut","SP05_AddOnTask","Focus on your move by giving tedious cleaning tasks to expert mover cleaners. Some services include scrap/junk removal, cleaning empty spaces, unpacking large furniture, etc.",True,False,False
+6,4,"POS","SP05","S4","POSS4","Post-Renovation","/PostReno","SP05_AddOnTask","Place the finishing touches on your freshly renovated spaces. Tasks include scrap removal, dust cleaning, wiping surfaces, etc.",True,False,False
+2,9,"PAI","SP07","S9","PAIS9","Paint","/Paint","SP07_PAIS9",NULL,True,True,False
+1,1,"CLE","SP04","S1","CLES1","Cleaning","/Clean","SP04_CLES1","A cleaner can clean everything from the corners of your floors, inside of appliances, to the outside of your windows. Select this option if your looking for a general or deep clean of your space.",True,True,False
+7,6,"FLO","SP06","S6","FLOS6","Floors & Carpets","/FloorsCarpets","SP09_FLOS6","Are you just looking for washing, sweeping, mopping, or polishing your floors. Cleaners can focus on just the floors with this option. Please note that through the cleaning option you can instruct cleaners to include cleaning of floors as well.",True,True,False

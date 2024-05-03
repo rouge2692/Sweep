@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
 from flask_mongoengine import MongoEngine
+from pymongo import MongoClient
 
 # import firebase_admin
 # from firebase_admin import firestore
@@ -14,16 +15,15 @@ from flask_mongoengine import MongoEngine
 
 app = Flask(__name__)
 app.config.from_object("config")
-
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db1 = SQLAlchemy(app)
+db2 = MongoClient(app.config['MONGODB_SETTINGS']).get_database("SweepNoDB")
+# db2 = MongoEngine(app)
 
-db2 = MongoEngine(app)
-
+# FIREBASE
 # cred = credentials.ApplicationDefault()
 # app2 = firebase_admin.initialize_app(cred)
 # db3 = firestore.client()
-
 
 # @app.route("/getFireServices", methods=["GET"])
 # def fireReadServices():
@@ -35,7 +35,7 @@ db2 = MongoEngine(app)
 #     return jsonify(docs)
 
 
-# mongo
+# MONGO
 @app.route("/getServices", methods=["GET"])
 def readServices():
     serviceSession = list(models.SP03_Services.objects)
@@ -44,8 +44,90 @@ def readServices():
 
     return jsonify(serviceSession)
 
+@app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])
+def handleJobCreation(jobHash):
+    # MONGOENGINE
+    # stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
+    # stagedJob = stagedJobSession.first()
 
-# post
+    # MONGOCLIENT
+    stagedJobCollection = db2["ST01_HandleJobCreation"]
+    stagedJob = stagedJobCollection.find_one({"ST01D1002":jobHash})
+
+    if request.method == "POST":
+        if not stagedJob:
+            data = request.json
+
+            hashSet = (
+                "J9z0HZf5azJT4d1s29dc5s3J0TYf2z7bx28g3Z1d01vkur7jzJ4Erv61Y7Y5QSO2w6e6W"
+            )
+            recId = "".join(random.sample(hashSet, 10))
+
+            new_record = models.ST01_HandleJobCreation(**data)
+            new_record.ST01D1002 = recId
+            new_record.save()
+
+            coll = models.ST01_HandleJobCreation.objects
+
+            updatedRec = coll(ST01D1002=recId)
+            updatedRec = updatedRec.first()
+
+            return jsonify({"response": updatedRec.ST01D1002})
+        else:
+            data = request.json
+            stagedJob.delete()
+            new_record = models.ST01_HandleJobCreation(**data)
+            new_record.save()
+
+            coll = models.ST01_HandleJobCreation.objects
+
+            updatedRec = coll(ST01D1002=jobHash)
+            updatedRec = updatedRec.first()
+
+            return jsonify({"response": updatedRec.ST01D1002})
+
+    else:
+        stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
+        stagedJob = stagedJobSession.first()
+        print(stagedJob)
+        return jsonify(stagedJob)
+
+
+@app.route("/refreshST01", methods=["POST"])
+def findCustomer():
+    customerID = request.json
+    # MONGOENGINE
+    # customerJobs = models.ST01_HandleJobCreation.objects(ST01D1003=customerID)
+
+    # MONGOCLIENT
+    customerJobs = db2["ST01_HandleJobCreation"]
+
+    # if not customerJobs:
+    if customerJobs.count_documents({"ST01D1003": customerID}) == 0:
+        return jsonify({"error": "no data"})
+    else:
+        customerJobs.delete_many({"ST01D1003": customerID})
+        return jsonify({"success": f"deleted {customerID} jobs"})
+
+
+@app.route("/getDataTemp/<string:collection>", methods=["GET"])
+def readDataTemp(collection):
+    # MONGOENGINE
+    # dataTempSession = models.SP98_DataTemps.objects(COLL=collection)
+
+    # MONGOCLIENT
+    dataTempCollection = db2["SP98_DataTemps"]
+    ST01coll = dataTempCollection.find_one({"COLL" : collection})
+    ST01Data = ST01coll.DATA
+    
+    print("ST01HEREHEHERHERHERE")
+    print(ST01Data)
+
+    return jsonify(ST01Data)
+
+#########################################
+####### POSTGRES
+#########################################
 @app.route("/getRooms", methods=["GET"])
 def readRooms():
     roomSession = models.SP02_Rooms
@@ -66,8 +148,8 @@ def readSP01Services():
     recDf = pd.DataFrame(records).sort_values(by=["SP01D1003"])
     recDict = recDf.to_dict("records")
 
-    print("Service Page")
-    print(recDict)
+    # print("Service Page")
+    # print(recDict)
 
     return jsonify(recDict)
 
@@ -128,74 +210,6 @@ def readSPXTasks():
     records = query.all()
 
     return jsonify(records)
-
-
-@app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])
-def handleJobCreation(jobHash):
-    stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
-    stagedJob = stagedJobSession.first()
-
-    if request.method == "POST":
-        if not stagedJob:
-            data = request.json
-
-            hashSet = (
-                "J9z0HZf5azJT4d1s29dc5s3J0TYf2z7bx28g3Z1d01vkur7jzJ4Erv61Y7Y5QSO2w6e6W"
-            )
-            recId = "".join(random.sample(hashSet, 10))
-
-            new_record = models.ST01_HandleJobCreation(**data)
-            new_record.ST01D1002 = recId
-            new_record.save()
-
-            coll = models.ST01_HandleJobCreation.objects
-
-            updatedRec = coll(ST01D1002=recId)
-            updatedRec = updatedRec.first()
-
-            return jsonify({"response": updatedRec.ST01D1002})
-        else:
-            data = request.json
-            stagedJob.delete()
-            new_record = models.ST01_HandleJobCreation(**data)
-            new_record.save()
-
-            coll = models.ST01_HandleJobCreation.objects
-
-            updatedRec = coll(ST01D1002=jobHash)
-            updatedRec = updatedRec.first()
-
-            return jsonify({"response": updatedRec.ST01D1002})
-
-    else:
-        stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
-        stagedJob = stagedJobSession.first()
-        print(stagedJob)
-        return jsonify(stagedJob)
-
-
-@app.route("/refreshST01", methods=["POST"])
-def findCustomer():
-    customerID = request.json
-    customerJobs = models.ST01_HandleJobCreation.objects(ST01D1003=customerID)
-
-    if not customerJobs:
-        return jsonify({"error": "no data"})
-    else:
-        customerJobs.delete()
-        return jsonify({"success": f"deleted {customerID} jobs"})
-
-
-@app.route("/getDataTemp/<string:collection>", methods=["GET"])
-def readDataTemp(collection):
-    dataTempSession = models.SP98_DataTemps.objects(COLL=collection)
-
-    ST01coll = dataTempSession.first()
-    ST01Data = ST01coll.DATA
-
-    print(ST01Data)
-
-    return jsonify(ST01Data)
 
 
 from app import models

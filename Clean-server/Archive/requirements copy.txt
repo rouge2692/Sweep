@@ -1,6 +1,7 @@
 altair==4.2.2
 anaconda-client==1.11.3
 anaconda-navigator==2.4.1
+# anaconda-project @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_6ddp1qj6b_/croots/recipe/anaconda-project_1660339893712/work
 anyio==3.7.0
 apispec==5.2.2
 appnope @ file:///Users/ktietz/ci_310/appnope_1643965056645/work

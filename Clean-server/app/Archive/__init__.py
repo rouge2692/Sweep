@@ -18,6 +18,7 @@ app.config.from_object("config")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db1 = SQLAlchemy(app)
 db2 = MongoClient(app.config['MONGODB_SETTINGS']).get_database("SweepNoDB")
+# db2 = MongoEngine(app)
 
 # FIREBASE
 # cred = credentials.ApplicationDefault()
@@ -45,6 +46,9 @@ def readServices():
 
 @app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])
 def handleJobCreation(jobHash):
+    # MONGOENGINE
+    # stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
+    # stagedJob = stagedJobSession.first()
 
     # MONGOCLIENT
     stagedJobCollection = db2["ST01_HandleJobCreation"]
@@ -58,6 +62,16 @@ def handleJobCreation(jobHash):
                 "J9z0HZf5azJT4d1s29dc5s3J0TYf2z7bx28g3Z1d01vkur7jzJ4Erv61Y7Y5QSO2w6e6W"
             )
             recId = "".join(random.sample(hashSet, 10))
+            
+            # MONGOENGINE
+            # new_record = models.ST01_HandleJobCreation(**data)
+            # new_record.ST01D1002 = recId
+            # new_record.save()
+
+            # coll = models.ST01_HandleJobCreation.objects
+
+            # updatedRec = coll(ST01D1002=recId)
+            # updatedRec = updatedRec.first()
 
             # MONGOCLIENT
             data['ST01D1002'] = recId
@@ -68,21 +82,35 @@ def handleJobCreation(jobHash):
             return jsonify({"response": updatedRec})
         else:
             data = request.json
+
+            # MONGOENG
+            # stagedJob.delete()
+            # new_record = models.ST01_HandleJobCreation(**data)
+            # new_record.save()
+
             # MONGOCLIENT
             stagedJobCollection.delete_one({"ST01D1002":jobHash})
             stagedJobCollection.insert_one(data)
-        
+            
+            # MONGOENG
+            # coll = models.ST01_HandleJobCreation.objects
+
+            # updatedRec = coll(ST01D1002=jobHash)
+            # updatedRec = updatedRec.first()
+
             # MONGOCLIENT
-            updatedRec = stagedJobCollection.find_one({"ST01D1002":jobHash})['ST01D1002']
+            updatedRec = stagedJobCollection.find_one({"ST01D1002":recId})['ST01D1002']
 
             return jsonify({"response": updatedRec})
 
     else:
+        #  MONGOENGINE
+        # stagedJobSession = models.ST01_HandleJobCreation.objects(ST01D1002=jobHash)
+        # stagedJob = stagedJobSession.first()
+
         # MONGOCLIENT
         stagedJobCollection = db2["ST01_HandleJobCreation"]
         stagedJob = stagedJobCollection.find_one({"ST01D1002":jobHash})
-
-        del stagedJob['_id']
 
         print(stagedJob)
         return jsonify(stagedJob)
@@ -91,6 +119,8 @@ def handleJobCreation(jobHash):
 @app.route("/refreshST01", methods=["POST"])
 def findCustomer():
     customerID = request.json
+    # MONGOENGINE
+    # customerJobs = models.ST01_HandleJobCreation.objects(ST01D1003=customerID)
 
     # MONGOCLIENT
     customerJobs = db2["ST01_HandleJobCreation"]
@@ -105,6 +135,8 @@ def findCustomer():
 
 @app.route("/getDataTemp/<string:collection>", methods=["GET"])
 def readDataTemp(collection):
+    # MONGOENGINE
+    # dataTempSession = models.SP98_DataTemps.objects(COLL=collection)
 
     # MONGOCLIENT
     dataTempCollection = db2["SP98_DataTemps"]

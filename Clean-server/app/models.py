@@ -7,37 +7,37 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy import String
 
-from mongoengine import (
-    Document,
-    DateTimeField,
-    StringField,
-    ReferenceField,
-    ListField,
-    IntField,
-    DictField,
-    DynamicDocument,
-)
-from flask_mongoengine import MongoEngine
+# from mongoengine import (
+#     Document,
+#     DateTimeField,
+#     StringField,
+#     ReferenceField,
+#     ListField,
+#     IntField,
+#     DictField,
+#     DynamicDocument,
+# )
+# from flask_mongoengine import MongoEngine
 
 
-# MONGO
-# class SP03_Services(Document):
-#     Service = StringField()
-#     Description = StringField()
-#     Route = StringField()
+# # MONGO
+# # class SP03_Services(Document):
+# #     Service = StringField()
+# #     Description = StringField()
+# #     Route = StringField()
+# #     meta = {"collection": "SP03_Services", "allow_inheritance": False}
+
+
+# class SP03_Services(DynamicDocument):
 #     meta = {"collection": "SP03_Services", "allow_inheritance": False}
 
 
-class SP03_Services(DynamicDocument):
-    meta = {"collection": "SP03_Services", "allow_inheritance": False}
+# class ST01_HandleJobCreation(DynamicDocument):
+#     meta = {"collection": "ST01_HandleJobCreation", "allow_inheritance": False}
 
 
-class ST01_HandleJobCreation(DynamicDocument):
-    meta = {"collection": "ST01_HandleJobCreation", "allow_inheritance": False}
-
-
-class SP98_DataTemps(DynamicDocument):
-    meta = {"collection": "SP98_DataTemps", "allow_inheritance": False}
+# class SP98_DataTemps(DynamicDocument):
+#     meta = {"collection": "SP98_DataTemps", "allow_inheritance": False}
 
 
 # POSTGRES

@@ -6,7 +6,7 @@ import random
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
-from flask_mongoengine import MongoEngine
+# from flask_mongoengine import MongoEngine
 from pymongo import MongoClient
 
 # import firebase_admin

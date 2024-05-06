@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config.from_object("config")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db1 = SQLAlchemy(app)
-db2 = MongoClient(app.config['MONGODB_SETTINGS']).get_database("SweepNoDB")
+db2 = MongoClient(app.config["MONGODB_SETTINGS"]).get_database("SweepNoDB")
 
 # FIREBASE
 # cred = credentials.ApplicationDefault()
@@ -43,12 +43,13 @@ db2 = MongoClient(app.config['MONGODB_SETTINGS']).get_database("SweepNoDB")
 
 #     return jsonify(serviceSession)
 
+
 @app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])
 def handleJobCreation(jobHash):
 
     # MONGOCLIENT
     stagedJobCollection = db2["ST01_HandleJobCreation"]
-    stagedJob = stagedJobCollection.find_one({"ST01D1002":jobHash})
+    stagedJob = stagedJobCollection.find_one({"ST01D1002": jobHash})
 
     if request.method == "POST":
         if not stagedJob:
@@ -60,29 +61,31 @@ def handleJobCreation(jobHash):
             recId = "".join(random.sample(hashSet, 10))
 
             # MONGOCLIENT
-            data['ST01D1002'] = recId
+            data["ST01D1002"] = recId
             stagedJobCollection.insert_one(data)
 
-            updatedRec = stagedJobCollection.find_one({"ST01D1002":recId})['ST01D1002']
+            updatedRec = stagedJobCollection.find_one({"ST01D1002": recId})["ST01D1002"]
 
             return jsonify({"response": updatedRec})
         else:
             data = request.json
             # MONGOCLIENT
-            stagedJobCollection.delete_one({"ST01D1002":jobHash})
+            stagedJobCollection.delete_one({"ST01D1002": jobHash})
             stagedJobCollection.insert_one(data)
-        
+
             # MONGOCLIENT
-            updatedRec = stagedJobCollection.find_one({"ST01D1002":jobHash})['ST01D1002']
+            updatedRec = stagedJobCollection.find_one({"ST01D1002": jobHash})[
+                "ST01D1002"
+            ]
 
             return jsonify({"response": updatedRec})
 
     else:
         # MONGOCLIENT
         stagedJobCollection = db2["ST01_HandleJobCreation"]
-        stagedJob = stagedJobCollection.find_one({"ST01D1002":jobHash})
+        stagedJob = stagedJobCollection.find_one({"ST01D1002": jobHash})
 
-        del stagedJob['_id']
+        del stagedJob["_id"]
 
         print(stagedJob)
         return jsonify(stagedJob)
@@ -108,14 +111,12 @@ def readDataTemp(collection):
 
     # MONGOCLIENT
     dataTempCollection = db2["SP98_DataTemps"]
-    ST01coll = dataTempCollection.find_one({"COLL" : collection})
+    ST01coll = dataTempCollection.find_one({"COLL": collection})
     # ST01Data = ST01coll.DATA
-    ST01Data = ST01coll['DATA']
-    
-    print("ST01HEREHEHERHERHERE")
-    print(ST01Data)
+    ST01Data = ST01coll["DATA"]
 
     return jsonify(ST01Data)
+
 
 #########################################
 ####### POSTGRES

@@ -1,4 +1,4 @@
-const sweepServer = "http://localhost:8080";
+const sweepServer = "http://99.79.64.241:8080";
 
 export const postHandleJobCreation = async (a = {}, D1002: any) => {
   try {

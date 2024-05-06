@@ -35,13 +35,13 @@ db2 = MongoClient(app.config['MONGODB_SETTINGS']).get_database("SweepNoDB")
 
 
 # MONGO
-@app.route("/getServices", methods=["GET"])
-def readServices():
-    serviceSession = list(models.SP03_Services.objects)
+# @app.route("/getServices", methods=["GET"])
+# def readServices():
+#     serviceSession = list(models.SP03_Services.objects)
 
-    print(serviceSession)
+#     print(serviceSession)
 
-    return jsonify(serviceSession)
+#     return jsonify(serviceSession)
 
 @app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])
 def handleJobCreation(jobHash):

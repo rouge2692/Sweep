@@ -76,7 +76,7 @@ function LandingHome() {
       </section>
       {/* ^ Header */}
       {/* Mobile Service Carosel */}
-      <section className="sm:hidden">
+      <section className="md:hidden">
         <div className="flex justify-between items-center px-5">
           <h1 className="font-bold">Services</h1>
           <h1 className="underline text-sm text-gray-600">All Services</h1>

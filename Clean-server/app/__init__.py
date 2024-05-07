@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import json
 import pandas as pd
 import random
@@ -13,7 +14,7 @@ from pymongo import MongoClient
 # from firebase_admin import firestore
 # from firebase_admin import credentials
 
-app = Flask(__name__)
+app = CORS(Flask(__name__))
 app.config.from_object("config")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db1 = SQLAlchemy(app)

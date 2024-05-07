@@ -14,11 +14,13 @@ from pymongo import MongoClient
 # from firebase_admin import firestore
 # from firebase_admin import credentials
 
-app = CORS(Flask(__name__))
+app = Flask(__name__)
 app.config.from_object("config")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db1 = SQLAlchemy(app)
 db2 = MongoClient(app.config["MONGODB_SETTINGS"]).get_database("SweepNoDB")
+
+CORS(app)
 
 # FIREBASE
 # cred = credentials.ApplicationDefault()

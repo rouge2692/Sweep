@@ -44,7 +44,7 @@ function LandingHome() {
       <h1 className="sm:hidden text-center text-pink-600 font-extrabold font-logo text-8xl">
         Sweep
       </h1>
-      <section className="bg-herobg bg-cover sm:bg-white md:bg-cover bg-center bg-no-repeat py-32 sm:py-48">
+      <section className="bg-herobg bg-cover md:bg-none bg-center bg-no-repeat py-32 sm:py-48">
         {/* bg-[url('../../../src/assets/MobileHeroBanner.png')] */}
         <h1 className="hidden sm:block text-center text-pink-600 font-extrabold font-logo text-8xl">
           Sweep

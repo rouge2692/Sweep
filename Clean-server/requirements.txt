@@ -71,6 +71,7 @@ pillow==10.3.0
 platformdirs==4.2.1
 plotly==5.22.0
 prometheus_client==0.20.0
+psycopg2==2.9.9
 ptyprocess==0.7.0
 pycparser==2.22
 Pygments==2.18.0

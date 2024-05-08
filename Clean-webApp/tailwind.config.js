@@ -7,6 +7,7 @@ export default {
         daycareone: "url(/public/iStock-684059604.jpg)",
         herobg: "url(/src/assets/MobileHeroBanner.png)",
         heromdbg: "url(src/assets/mdSecHero.png)",
+        heroban: "url(src/assets/hero-banner.webp)",
       },
       fontFamily: {
         logo: ['"Dancing Script"', "cursive"],

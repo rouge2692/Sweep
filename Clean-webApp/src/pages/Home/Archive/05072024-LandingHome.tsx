@@ -5,9 +5,9 @@ import {
 } from "../../connections/HandleJobCreation";
 import { useEffect, useState } from "react";
 import { getDataTemp } from "../../connections/DataTemps";
+import NavBar from "../../components/global/NavBar/NavBar";
 import { _fetchService } from "../../connections/ServiceFetch";
 import ServicePoster from "../../components/JobServices/ServicePoster";
-import NavBar from "../../components/LandingHome/NavBar/NavBar";
 
 const testJob = "testJob";
 const testCustomer = "testCustomer";
@@ -36,64 +36,55 @@ function LandingHome() {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div>
       {/* Nav */}
       <NavBar />
       {/* ^ Nav */}
       {/* Header */}
-      <h1 className="md:hidden text-center text-pink-600 font-extrabold font-logo text-8xl">
+      <h1 className="sm:hidden text-center text-pink-600 font-extrabold font-logo text-8xl">
         Sweep
       </h1>
-
-      <div className="flex flex-col md:flex-row items-start h-3/4">
-        <div className="flex justify-center w-1/2">
-          <h1 className="hidden md:block text-pink-600 font-extrabold font-logo text-8xl m-10 p-5 rounded-lg">
-            Sweep
-          </h1>
+      <section className="bg-herobg bg-cover md:bg-none bg-center bg-no-repeat py-32 sm:py-48">
+        {/* bg-[url('../../../src/assets/MobileHeroBanner.png')] */}
+        <h1 className="hidden sm:block text-center text-pink-600 font-extrabold font-logo text-8xl">
+          Sweep
+        </h1>
+        <div className="flex justify-center">
+          <input
+            type="text"
+            className="border border-black rounded-full p-3 mr-1 md:w-1/2"
+            placeholder="Find a Task or Cleaner"
+          />
+          <button
+            onClick={() => {
+              postHandleJobCreation(
+                {
+                  ...stagedJobData,
+                  ST01D1001: testJob,
+                  ST01D1003: testCustomer,
+                },
+                "newJobHash"
+              ).then((data) => {
+                navigate(`/JourneyService/${data.response}`);
+              });
+            }}
+            className="bg-pink-600 p-3 rounded-full text-white font-bold ml-1"
+          >
+            Post Job
+          </button>
         </div>
-
-        <div className="w-full md:w-1/2 p-3 flex h-full items-center justify-center">
-          <div className="bg-white p-5 rounded-lg shadow-lg w-1/2">
-            <div className="mb-5 p-1">
-              <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600">
-                Clean
-              </h1>
-              <h1 className="text-3xl lg:text-6xl font-sans font-bold">
-                with open
-              </h1>
-              <h1 className="text-3xl lg:text-6xl font-sans font-bold">
-                hearts
-              </h1>
-            </div>
-
-            <div className="mb-5 p-1">
-              <h1>
-                Pick what rooms, spaces and how deep you want the cleaners to go
-              </h1>
-            </div>
-
-            <button
-              onClick={() => {
-                postHandleJobCreation(
-                  {
-                    ...stagedJobData,
-                    ST01D1001: testJob,
-                    ST01D1003: testCustomer,
-                  },
-                  "newJobHash"
-                ).then((data) => {
-                  navigate(`/JourneyService/${data.response}`);
-                });
-              }}
-              className="bg-pink-600 p-3 m-1 rounded-lg text-white font-bold"
-            >
-              Start Here
-            </button>
-          </div>
+      </section>
+      {/* ^ Header */}
+      <div className="flex justify-center items-center">
+        <div className="bg-pink-600 rounded-lg">
+          <img
+            src="src/assets/cleanerLady.jpg"
+            style={{ height: "35vh", width: "35vw" }}
+            className="m-3 rounded-lg"
+          />
         </div>
       </div>
 
-      {/* ^ Header */}
       {/* Mobile Service Carosel */}
       <section className="sm:hidden">
         <div className="flex justify-between items-center px-5">

@@ -1,11 +1,14 @@
+// React
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+//Connections
 import {
   postHandleJobCreation,
   refreshCustomerJobs,
 } from "../../connections/HandleJobCreation";
-import { useEffect, useState } from "react";
 import { getDataTemp } from "../../connections/DataTemps";
 import { _fetchService } from "../../connections/ServiceFetch";
+//Components
 import ServicePoster from "../../components/JobServices/ServicePoster";
 import NavBar from "../../components/LandingHome/NavBar/NavBar";
 
@@ -55,7 +58,7 @@ function LandingHome() {
         </div>
 
         <div className="w-full md:w-1/2 p-3 flex h-full items-center justify-center">
-          <div className="bg-white p-5 rounded-lg shadow-lg md:w-1/2">
+          <div className="bg-white p-5 md:p-10 rounded-lg shadow-lg md:w-3/4">
             <div className="mb-5 p-1">
               <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600">
                 Clean

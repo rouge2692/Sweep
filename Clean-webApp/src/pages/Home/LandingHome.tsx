@@ -41,11 +41,13 @@ function LandingHome() {
       <NavBar />
       {/* ^ Nav */}
       {/* Header */}
-      <h1 className="md:hidden text-center text-pink-600 font-extrabold font-logo text-8xl">
-        Sweep
-      </h1>
+      <div className="md:hidden bg-herobg bg-cover bg-top h-1/2">
+        <h1 className="md:hidden text-center text-pink-600 font-extrabold font-logo text-8xl">
+          Sweep
+        </h1>
+      </div>
 
-      <div className="flex flex-col md:flex-row items-start h-3/4">
+      <div className="flex flex-col md:flex-row items-start sm:h-3/4">
         <div className="flex justify-center w-1/2">
           <h1 className="hidden md:block text-pink-600 font-extrabold font-logo text-8xl m-10 p-5 rounded-lg">
             Sweep
@@ -53,7 +55,7 @@ function LandingHome() {
         </div>
 
         <div className="w-full md:w-1/2 p-3 flex h-full items-center justify-center">
-          <div className="bg-white p-5 rounded-lg shadow-lg w-1/2">
+          <div className="bg-white p-5 rounded-lg shadow-lg md:w-1/2">
             <div className="mb-5 p-1">
               <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600">
                 Clean

@@ -11,6 +11,7 @@ import { _fetchService } from "../../connections/ServiceFetch";
 //Components
 import ServicePoster from "../../components/JobServices/ServicePoster";
 import NavBar from "../../components/LandingHome/NavBar/NavBar";
+import { TbBrandAirbnb } from "react-icons/tb";
 
 const testJob = "testJob";
 const testCustomer = "testCustomer";
@@ -37,6 +38,17 @@ function LandingHome() {
       setServiceData(data);
     });
   }, []);
+
+  const headers = ["House 🏡", "AirBnb", "Office 🏢", "Apartment 🏤"];
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % headers.length);
+    }, 3000); // Change header every 3 seconds
+
+    return () => clearInterval(intervalId); // Clean up the interval on component unmount
+  }, [headers.length]);
 
   return (
     <div className="h-screen">
@@ -73,12 +85,25 @@ function LandingHome() {
               <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600 mb-1">
                 Cleaners
               </h1>
-              <h1 className="text-3xl lg:text-6xl font-sans font-bold mb-1">
+              <h1 className="text-3xl lg:text-6xl font-sans font-bold mb-2">
                 for your
               </h1>
-              <h1 className="text-3xl lg:text-6xl font-sans font-bold">
-                house 🏡
-              </h1>
+              {headers.map((header, index) => (
+                <div
+                  key={index}
+                  style={{ display: index === activeIndex ? "flex" : "none" }}
+                  className="flex flex-row items-center"
+                >
+                  <h1 className="text-3xl lg:text-6xl font-sans font-bold mb-1">
+                    {header}
+                  </h1>
+                  <div>
+                    {header == "AirBnb" && (
+                      <TbBrandAirbnb className="text-pink-600 size-10 sm:size-16" />
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className="mb-5 p-1">

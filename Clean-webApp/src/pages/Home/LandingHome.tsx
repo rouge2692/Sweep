@@ -125,7 +125,7 @@ function LandingHome() {
                   navigate(`/JourneyService/${data.response}`);
                 });
               }}
-              className="bg-pink-600 p-3 m-1 rounded-lg text-white font-bold"
+              className="bg-pink-600 p-3 m-1 rounded-lg text-white font-bold animate-bounce"
             >
               Start Here
             </button>

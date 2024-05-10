@@ -44,35 +44,45 @@ function LandingHome() {
       <NavBar />
       {/* ^ Nav */}
       {/* Header */}
-      <div className="md:hidden bg-herobg bg-cover bg-top h-1/2">
-        <h1 className="md:hidden text-center text-pink-600 font-extrabold font-logo text-8xl">
+      <div className="sm:hidden flex flex-col items-center bg-herobg bg-cover bg-top h-1/2">
+        <h1 className="sm:hidden text-center text-pink-600 font-extrabold font-logo text-8xl py-7">
           Sweep
         </h1>
+        <div className="flex">
+          <h1>1</h1>
+          <h1>2</h1>
+          <h1>3</h1>
+        </div>
       </div>
 
       <div className="flex flex-col md:flex-row items-start sm:h-3/4">
-        <div className="flex justify-center w-1/2">
-          <h1 className="hidden md:block text-pink-600 font-extrabold font-logo text-8xl m-10 p-5 rounded-lg">
-            Sweep
+        <div className="flex-col flex w-1/2 bg-yellow-50 items-center h-full">
+          <h1 className="hidden sm:block text-pink-600 font-extrabold font-sans text-8xl m-10 p-5 rounded-lg">
+            sweep
           </h1>
+          <div className="hidden sm:flex">
+            <h1>1</h1>
+            <h1>2</h1>
+            <h1>3</h1>
+          </div>
         </div>
 
         <div className="w-full md:w-1/2 p-3 flex h-full items-center justify-center">
           <div className="bg-white p-5 md:p-10 rounded-lg shadow-lg md:w-3/4">
             <div className="mb-5 p-1">
-              <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600">
-                Clean
+              <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600 mb-1">
+                Cleaners
+              </h1>
+              <h1 className="text-3xl lg:text-6xl font-sans font-bold mb-1">
+                for your
               </h1>
               <h1 className="text-3xl lg:text-6xl font-sans font-bold">
-                with open
-              </h1>
-              <h1 className="text-3xl lg:text-6xl font-sans font-bold">
-                hearts
+                house 🏡
               </h1>
             </div>
 
             <div className="mb-5 p-1">
-              <h1>
+              <h1 className="font-semibold">
                 Pick what rooms, spaces and how deep you want the cleaners to go
               </h1>
             </div>

@@ -81,22 +81,22 @@ function LandingHome() {
             />
             <FlowStep
               stepNum={2}
-              stepDescrip="Pick a Property"
+              stepDescrip="Select Rooms and Tasks"
               stepImage="step2_LandingHome"
             />
             <FlowStep
               stepNum={3}
-              stepDescrip="Pick a Property"
+              stepDescrip="Arange Location and Time"
               stepImage="step3_LandingHome"
             />
           </div>
         </div>
 
         <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full items-center justify-center">
-          <div className="bg-white p-5 md:p-10 rounded-lg shadow-2xl md:w-5/6">
+          <div className="bg-white p-5 md:p-10 rounded-2xl shadow-2xl md:w-5/6 border border-slate-300">
             <div className="mb-5 p-1">
               <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600 mb-1">
-                Cleaners
+                Find Cleaners
               </h1>
               <h1 className="text-3xl lg:text-6xl font-sans font-bold mb-2">
                 for your
@@ -121,7 +121,8 @@ function LandingHome() {
 
             <div className="mb-5 p-1">
               <h1 className="font-semibold">
-                Pick what rooms, spaces and how deep you want the cleaners to go
+                Match with cleaners based on your property type, cleaning tasks
+                need done, and your availiablity and location.
               </h1>
             </div>
 
@@ -138,7 +139,7 @@ function LandingHome() {
                   navigate(`/JourneyService/${data.response}`);
                 });
               }}
-              className="bg-pink-600 p-3 m-1 rounded-lg text-white font-bold animate-bounce"
+              className="bg-pink-600 p-3 m-1 rounded-lg text-white font-bold animate-wiggle animate-infinite"
             >
               Start Here
             </button>

@@ -12,6 +12,7 @@ import { _fetchService } from "../../connections/ServiceFetch";
 import ServicePoster from "../../components/JobServices/ServicePoster";
 import NavBar from "../../components/LandingHome/NavBar/NavBar";
 import { TbBrandAirbnb } from "react-icons/tb";
+import FlowStep from "../../components/LandingHome/MatchFlow/FlowStep";
 
 const testJob = "testJob";
 const testCustomer = "testCustomer";
@@ -39,7 +40,7 @@ function LandingHome() {
     });
   }, []);
 
-  const headers = ["House 🏡", "AirBnb", "Office 🏢", "Apartment 🏤"];
+  const headers = ["House 🏡", "AirBnb", "Office 🏢", "Condo 🏤"];
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -60,27 +61,39 @@ function LandingHome() {
         <h1 className="sm:hidden text-center text-pink-600 font-extrabold font-logo text-8xl py-7">
           Sweep
         </h1>
-        <div className="flex">
+        <div className="flex flex-row">
           <h1>1</h1>
           <h1>2</h1>
           <h1>3</h1>
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-start sm:h-3/4">
-        <div className="flex-col flex w-1/2 bg-yellow-50 items-center h-full">
-          <h1 className="hidden sm:block text-pink-600 font-extrabold font-sans text-8xl m-10 p-5 rounded-lg">
+      <div className="flex flex-col lg:flex-row items-start sm:h-3/4">
+        <div className="flex-col flex w-full lg:w-3/5 items-center h-full">
+          <h1 className="hidden sm:block text-pink-600 font-extrabold font-sans text-8xl mx-10 my-5 p-5 rounded-lg">
             sweep
           </h1>
-          <div className="hidden sm:flex">
-            <h1>1</h1>
-            <h1>2</h1>
-            <h1>3</h1>
+          <div className="hidden sm:flex sm:flex-row p-5">
+            <FlowStep
+              stepNum={1}
+              stepDescrip="Pick a Property"
+              stepImage="step1_LandingHome"
+            />
+            <FlowStep
+              stepNum={2}
+              stepDescrip="Pick a Property"
+              stepImage="step2_LandingHome"
+            />
+            <FlowStep
+              stepNum={3}
+              stepDescrip="Pick a Property"
+              stepImage="step3_LandingHome"
+            />
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 p-3 flex h-full items-center justify-center">
-          <div className="bg-white p-5 md:p-10 rounded-lg shadow-lg md:w-3/4">
+        <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full items-center justify-center">
+          <div className="bg-white p-5 md:p-10 rounded-lg shadow-2xl md:w-5/6">
             <div className="mb-5 p-1">
               <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600 mb-1">
                 Cleaners

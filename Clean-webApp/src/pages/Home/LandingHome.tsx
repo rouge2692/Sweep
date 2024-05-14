@@ -92,7 +92,7 @@ function LandingHome() {
           </div>
         </div>
 
-        <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full items-center justify-center">
+        <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full bg-pink-600 items-center justify-center">
           <div className="bg-white p-5 md:p-10 rounded-2xl shadow-2xl md:w-5/6 border border-slate-300">
             <div className="mb-5 p-1">
               <h1 className="text-3xl lg:text-6xl font-sans font-bold text-pink-600 mb-1">

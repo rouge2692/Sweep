@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function NavBar() {
   const navigate = useNavigate();
   return (
-    <nav className="p-3 sm:px-5 flex items-center justify-between bg-white">
+    <nav className="p-3 sm:px-5 flex items-center justify-between bg-white border-b">
       {/* Logo */}
       <div className="flex items-center">
         <div

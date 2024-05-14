@@ -60,7 +60,7 @@ function MbStartHere({ stagedJobData, testCustomer, testJob }: Props) {
             navigate(`/JourneyService/${data.response}`);
           });
         }}
-        className="bg-pink-600 p-3 rounded-lg text-white font-bold animate-wiggle animate-infinite"
+        className="bg-pink-600 p-2 rounded-lg text-white font-bold animate-wiggle animate-infinite"
       >
         Start Here
       </button>

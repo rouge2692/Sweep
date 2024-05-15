@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 // Components
-import NavBar from "../../../components/JobPosting/NavBar/NavBar";
+import NavBar from "../../../../components/JobPosting/NavBar/NavBar";
 // Icons
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle, BsBuildingsFill } from "react-icons/bs";
@@ -13,7 +13,7 @@ import { TbBrandAirbnb } from "react-icons/tb";
 import {
   getJobCreationTemp,
   postHandleJobCreation,
-} from "../../../connections/HandleJobCreation";
+} from "../../../../connections/HandleJobCreation";
 
 function JobProperty() {
   //Params

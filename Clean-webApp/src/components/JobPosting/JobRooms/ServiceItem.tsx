@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 
 interface Props {
-  task: any;
+  // task: any;
   taskName: string;
   selected: boolean;
   taskNum: string;
   handleTaskSelect: (taskSel: boolean, taskNum: string) => void;
 }
 
-function ServiceItem({
-  taskName,
-  selected,
-  taskNum,
-  task,
-  handleTaskSelect,
-}: Props) {
+function ServiceItem({ taskName, selected, taskNum, handleTaskSelect }: Props) {
   // console.log("Service Item " + taskName + " " + selected);
 
   return (

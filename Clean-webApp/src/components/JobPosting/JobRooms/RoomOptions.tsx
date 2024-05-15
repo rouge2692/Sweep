@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+// React
+import { useState } from "react";
 
 // Icons
-import { AiFillCheckCircle } from "react-icons/ai";
-import { BsCircle } from "react-icons/bs";
 import {
   MdOutlineKeyboardArrowUp,
   MdOutlineKeyboardArrowDown,
-  MdOutlineCleanHands,
 } from "react-icons/md";
-import { TfiBrushAlt } from "react-icons/tfi";
+// import { AiFillCheckCircle } from "react-icons/ai";
+// import { BsCircle } from "react-icons/bs";
+// import {
+//   MdOutlineKeyboardArrowUp,
+//   MdOutlineKeyboardArrowDown,
+//   MdOutlineCleanHands,
+// } from "react-icons/md";
+// import { TfiBrushAlt } from "react-icons/tfi";
 
 // Components
 import ServiceItem from "./ServiceItem";
@@ -185,7 +190,7 @@ function RoomOptions({
                   return (
                     <ServiceItem
                       key={index}
-                      task={item}
+                      // task={item}
                       taskName={item.SPXD1001}
                       selected={item.SPXD1020}
                       taskNum={item.SPXD1002}

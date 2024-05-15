@@ -1,4 +1,4 @@
-import NavBar from "../../../components/JobPosting/NavBar/NavBar";
+import NavBar from "../../../../components/JobPosting/NavBar/NavBar";
 
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle } from "react-icons/bs";
@@ -10,7 +10,7 @@ import {
 import { IoMdCheckboxOutline } from "react-icons/io";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function JobFreq() {
   const [oneTimeCheck, setOneTimeCheck] = useState(false);
@@ -19,7 +19,7 @@ function JobFreq() {
   const [entireCheck, setEntireCheck] = useState(false);
   const [singleCheck, setSingleCheck] = useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <>

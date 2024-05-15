@@ -27,7 +27,7 @@ function MbStartHere({ stagedJobData, testCustomer, testJob }: Props) {
     return () => clearInterval(intervalId); // Clean up the interval on component unmount
   }, [headers.length]);
   return (
-    <div className="flex justify-between m-2 p-3 border rounded-2xl border-pink-600 w-full">
+    <div className="flex justify-between m-2 p-3 border rounded-2xl border-pink-600 bg-white w-full">
       <div className="flex items-center justify-start">
         <h1 className="text-pink-600 font-bold mr-1">Find cleaners</h1>
         <h1 className="font-bold mr-1">for</h1>

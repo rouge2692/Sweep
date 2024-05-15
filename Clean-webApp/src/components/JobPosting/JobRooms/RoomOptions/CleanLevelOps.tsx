@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+// React
+// import React, { useEffect, useState } from "react";
 
+// Icons
 import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle } from "react-icons/bs";
 
 import { TfiBrushAlt } from "react-icons/tfi";
 import { MdOutlineCleanHands } from "react-icons/md";
 
+// Props
 interface Props {
   level: string;
   selected: boolean;

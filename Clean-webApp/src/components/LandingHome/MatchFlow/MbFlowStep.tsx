@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 
 interface Props {
   stepNum: number;
@@ -14,7 +14,7 @@ function MbFlowStep({ stepNum, stepDescrip, stepImage }: Props) {
       </div>
 
       <img src={`src/assets/${stepImage}.png`} className="rounded-2xl" />
-      <h1 className="font-bold relative bottom-2 text-lg lg:text-xl text-slate-600">
+      <h1 className="font-bold relative bottom-2 md:text-xl text-slate-600">
         {stepDescrip}
       </h1>
     </div>

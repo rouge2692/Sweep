@@ -1,5 +1,6 @@
 // Navigate
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { postHandleJobCreation } from "../../connections/HandleJobCreation";
 
 interface Props {
@@ -41,7 +42,7 @@ function ServicePoster({
               ST01D1008: title,
             },
             dataTemp.ST01D1002
-          ).then((data) =>
+          ).then(() =>
             navigate(`/JourneyStart/${service}/${dataTemp.ST01D1002}`)
           );
         }}

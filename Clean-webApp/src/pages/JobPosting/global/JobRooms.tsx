@@ -1,6 +1,6 @@
 // React
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // Components
 import NavBar from "../../../components/JobPosting/NavBar/NavBar";
@@ -13,18 +13,18 @@ import {
   fetchSerRooms,
   fetchTasks,
 } from "../../../connections/ServiceFetch";
-import ServiceSelection from "../../../components/JobPosting/JobRooms/ServiceSelection";
+// import ServiceSelection from "../../../components/JobPosting/JobRooms/ServiceSelection";
 
 //icons
 
 function JobRooms() {
   // Initialize Navigate
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Params
-  const { st01_D1002 } = useParams();
   const { st01_D1007D1006 } = useParams();
-  const { sp01_D1002 } = useParams();
+  // const { st01_D1002 } = useParams();
+  // const { sp01_D1002 } = useParams();
 
   const [rooms, setRooms] = useState<{ [key: string]: any }[]>([]);
   const [tasks, setTasks] = useState<{ [key: string]: any }[]>([]);

@@ -1,6 +1,6 @@
 // React
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // Components
 import NavBar from "../../../components/JobPosting/NavBar/NavBar";
 // Icons
@@ -8,7 +8,7 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import { BsCircle, BsBuildingsFill } from "react-icons/bs";
 import { GiFamilyHouse } from "react-icons/gi";
 import { IoStorefrontSharp } from "react-icons/io5";
-import { TbBrandAirbnb } from "react-icons/tb";
+// import { TbBrandAirbnb } from "react-icons/tb";
 // Conections
 import {
   getJobCreationTemp,
@@ -63,6 +63,10 @@ function JobProperty() {
   //   console.log("PropUE");
   //   console.log(stagedJobData);
   // }, [stagedJobData]);
+
+  useEffect(() => {
+    console.log(serProperties);
+  }, [serProperties]);
 
   return (
     <>

@@ -1,14 +1,15 @@
 import { AiFillCheckCircle } from "react-icons/ai";
-import { BsCircle, BsBuildingsFill } from "react-icons/bs";
-import IconHome from "../../../assets/IconHome";
+import { BsCircle } from "react-icons/bs";
+// import { BsCircle, BsBuildingsFill } from "react-icons/bs";
+// import IconHome from "../../../assets/IconHome";
 
 interface Props {
   position: number;
   index: number;
-  icon: string;
+  // icon: string;
 }
 
-function PropertySelection({ position, icon, index }: Props) {
+function PropertySelection({ position, index }: Props) {
   return (
     <div
       className={`flex flex-col justify-center items-center border m-5 border-solid bg-white ${

@@ -1,10 +1,9 @@
 import "tailwindcss/tailwind.css";
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import JourneyFinal from "./pages/JobPosting/global/JourneyFinal";
 import JobProperty from "./pages/JobPosting/global/JobProperty";
-import JobFreq from "./pages/JobPosting/global/JobFreq";
+import JobFreq from "./pages/JobPosting/global/Archive/JobFreq";
 import JobRooms from "./pages/JobPosting/global/JobRooms";
 import JobService from "./pages/ServiceListings/JobService";
 import LandingHome from "./pages/Home/LandingHome";

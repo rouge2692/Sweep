@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 
 interface Props {
   stepNum: number;
@@ -8,8 +8,8 @@ interface Props {
 
 function FlowStep({ stepNum, stepDescrip, stepImage }: Props) {
   return (
-    <div className="bg-white relative text-center m-1 md:m-2 border rounded-2xl">
-      <div className="rounded-t-2xl relative block bg-pink-600 border-pink-600">
+    <div className="bg-white relative text-center m-1 md:m-2 border-2 rounded-2xl shadow-2xl">
+      <div className="rounded-t-2xl relative bg-pink-600">
         <h1 className="font-bold text-lg md:text-5xl text-white">{stepNum}</h1>
       </div>
 

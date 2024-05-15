@@ -7,10 +7,7 @@ import ServicePoster from "../../components/JobServices/ServicePoster";
 
 // Connections
 import { _fetchService } from "../../connections/ServiceFetch";
-import {
-  getJobCreationTemp,
-  refreshCustomerJobs,
-} from "../../connections/HandleJobCreation";
+import { getJobCreationTemp } from "../../connections/HandleJobCreation";
 
 function JobService() {
   const { st01_D1002 } = useParams();

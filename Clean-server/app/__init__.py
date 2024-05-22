@@ -3,16 +3,13 @@ from flask_cors import CORS
 import json
 import pandas as pd
 import random
+from geopy.geocoders import GeoNames
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
 # from flask_mongoengine import MongoEngine
 from pymongo import MongoClient
-
-# import firebase_admin
-# from firebase_admin import firestore
-# from firebase_admin import credentials
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -22,22 +19,9 @@ db2 = MongoClient(app.config["MONGODB_SETTINGS"]).get_database("SweepNoDB")
 
 CORS(app)
 
-# FIREBASE
-# cred = credentials.ApplicationDefault()
-# app2 = firebase_admin.initialize_app(cred)
-# db3 = firestore.client()
-
-# @app.route("/getFireServices", methods=["GET"])
-# def fireReadServices():
-#     fireServices = db3.collection("SP03_Services")
-#     docs = fireServices.stream()
-
-#     for doc in docs:
-#         print(f"{doc.id} => {doc.to_dict()}")
-#     return jsonify(docs)
-
-
-# MONGO
+#########################################
+####### MONGO
+#########################################
 # @app.route("/getServices", methods=["GET"])
 # def readServices():
 #     serviceSession = list(models.SP03_Services.objects)
@@ -126,7 +110,7 @@ def readDataTemp(collection):
 #########################################
 @app.route("/getRooms", methods=["GET"])
 def readRooms():
-    roomSession = models.SP02_Rooms
+    roomSession = models.SP04_Rooms
     query = db1.session.query(roomSession)
     records = query.all()
 
@@ -203,6 +187,15 @@ def readSP04Rooms(SP05D1016):
 def readSPXTasks():
     taskSession = models.SPX_TaskList
     query = db1.session.query(taskSession)
+    records = query.all()
+
+    return jsonify(records)
+
+
+@app.route("/getCities", methods=["GET"])
+def get_cities():
+    regionSession = models.SP06_Regions
+    query = db1.session.query(regionSession)
     records = query.all()
 
     return jsonify(records)

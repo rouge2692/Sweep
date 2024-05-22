@@ -81,3 +81,16 @@ export const fetchTasks = async () => {
     return [];
   }
 };
+
+export const fetchRegions = async () => {
+  try {
+    const resp = await fetch(sweepServer + "/getCities", {
+      mode: "cors",
+    });
+    // const resp = await fetch(url + "/_readonhand", { mode: "cors" });
+    return await resp.json();
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};

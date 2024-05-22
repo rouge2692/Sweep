@@ -197,6 +197,35 @@ class SP05_ServiceRooms(db1.Model):
 
 
 @dataclass
+class SP06_Regions(db1.Model):
+    __tablename__ = "SP06_Regions"
+
+    SP06_id: int
+    SP06D1004: str
+    SP06D1002: str
+    SP06D1005: str
+    SP06D1001: str
+    SP06D1003: int
+    SP06D1010: bool
+    SP06D1020: bool
+    SP06D1011: str
+    SP06D1012: str
+    SP06D1006: str
+
+    SP06_id = db1.Column(db1.Integer(), primary_key=True)
+    SP06D1004 = db1.Column(db1.String())
+    SP06D1002 = db1.Column(db1.String())
+    SP06D1005 = db1.Column(db1.String())
+    SP06D1001 = db1.Column(db1.String())
+    SP06D1003 = db1.Column(db1.Integer())
+    SP06D1010 = db1.Column(db1.Boolean())
+    SP06D1020 = db1.Column(db1.Boolean())
+    SP06D1011 = db1.Column(db1.String())
+    SP06D1012 = db1.Column(db1.String())
+    SP06D1006 = db1.Column(db1.String())
+
+
+@dataclass
 class SPX_TaskList(db1.Model):
     __tablename__ = "SPX_TaskList"
 

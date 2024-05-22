@@ -1,4 +1,8 @@
+import { Navigate, useNavigate } from "react-router-dom";
+
 function Login() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col md:flex-row md:h-screen">
       {/* INFORMATION PANEL */}
@@ -116,7 +120,10 @@ function Login() {
 
             {/* SIGN UP BUTTON */}
             <div className="text-center mt-4">
-              <button className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded w-1/2">
+              <button
+                className="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded w-1/2"
+                onClick={() => navigate("/RegiLocation")}
+              >
                 Sign Up
               </button>
             </div>

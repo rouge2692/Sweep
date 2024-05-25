@@ -9,6 +9,7 @@ import JobService from "./pages/ServiceListings/JobService";
 import LandingHome from "./pages/Home/LandingHome";
 import Login from "./pages/Login/Login";
 import RegiLocation from "./pages/CleanerRegistration/RegiLocation/RegiLocation";
+import ProfileRoot from "./pages/CleanerProfile/Profile/ProfileRoot";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/HomeMain" element={<LandingHome />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/RegiLocation" element={<RegiLocation />} />
+          <Route path="/Profile/*" element={<ProfileRoot />} />
           <Route path="/JourneyService/:st01_D1002" element={<JobService />} />
           <Route
             path="/JourneyStart/:sp01_D1002/:st01_D1002"

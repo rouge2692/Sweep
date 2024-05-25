@@ -1,41 +1,43 @@
 // React Libraries
 import { useEffect, useState } from "react";
-import Select from "react-select";
+import Select, { MultiValue } from "react-select";
 import makeAnimated from "react-select/animated";
+import { useNavigate } from "react-router-dom";
 
 // Components
 import NavBar from "../../../components/CleanerRegistration/NavBar/NavBar";
 // Connections
 import { fetchRegions } from "../../../connections/ServiceFetch";
 
+interface RegionOption {
+  value: string;
+  label: string;
+}
+
 function RegiLocation() {
-  const [regions, setRegions] = useState<{ value: string; label: string }[]>(
-    []
-  );
+  const navigate = useNavigate();
+
+  const [regions, setRegions] = useState<RegionOption[]>([]);
   const [selectedCities, setSelectedCities] = useState<
-    { value: string; label: string }[]
+    MultiValue<RegionOption>
   >([]);
 
   useEffect(() => {
     fetchRegions().then((data) => {
-      console.log("Fetched data:", data);
       const cities = data.map((region: { [key: string]: string | number }) => ({
-        value: region.SP06D1006,
-        label: region.SP06D1006,
+        value: region.SP06D1006 as string,
+        label: region.SP06D1006 as string,
       }));
-      console.log("Processed cities:", cities);
       setRegions(cities);
     });
   }, []);
 
-  const handleCityChange = (
-    selectedOptions: { value: string; label: string }[]
-  ) => {
+  const handleCityChange = (selectedOptions: MultiValue<RegionOption>) => {
     setSelectedCities(selectedOptions);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       <NavBar />
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Select Cities</h1>
@@ -48,14 +50,26 @@ function RegiLocation() {
           className="mb-4"
           placeholder="Type or select cities..."
         />
-        <div className="mt-4">
-          <h2 className="text-xl font-semibold">Selected Cities:</h2>
+        <div
+          className={`${
+            selectedCities.length > 0 ? "flex justify-center" : "hidden"
+          }`}
+        >
+          <button
+            className={`p-3 bg-pink-600 rounded-lg text-white font-bold`}
+            onClick={() => navigate("/Profile")}
+          >
+            Next
+          </button>
+        </div>
+        <div>
+          <h2 className="text-xl font-semibold">Your Cities:</h2>
           {selectedCities.length > 0 ? (
             <ul className="mt-2">
               {selectedCities.map((city) => (
                 <li
                   key={city.value}
-                  className="bg-blue-100 px-4 py-2 rounded mb-2"
+                  className="bg-pink-100 px-4 py-2 rounded mb-2"
                 >
                   {city.label}
                 </li>

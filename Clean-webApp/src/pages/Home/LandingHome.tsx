@@ -46,9 +46,9 @@ function LandingHome() {
       {/* Nav */}
       <NavBar />
       {/* ^ Nav */}
-      {/* Header */}
-      <div className="md:hidden flex flex-col items-center h-1/2 p-2 bg-pink-600">
-        <h1 className="text-center text-white font-extrabold text-6xl md:text-8xl py-4">
+      {/* Mobile Header */}
+      <div className="md:hidden flex flex-col items-center h-1/2 p-2 bg-white">
+        <h1 className="text-center text-pink-600 font-extrabold text-6xl md:text-8xl py-2">
           sweep
         </h1>
         <MbStartHere
@@ -74,10 +74,11 @@ function LandingHome() {
           />
         </div>
       </div>
+      {/* ^ Mobile Header */}
 
-      <div className="flex flex-col lg:flex-row items-start lg:h-3/4 bg-pink-600">
+      <div className="flex flex-col lg:flex-row items-start lg:h-3/4 bg-white">
         <div className="flex-col flex w-full lg:w-3/5 items-center h-full">
-          <h1 className="hidden md:block text-white font-extrabold font-sans text-8xl mx-10 p-5">
+          <h1 className="hidden md:block text-pink-600 font-extrabold font-sans text-8xl mx-10 py-3">
             sweep
           </h1>
           <div className="hidden">
@@ -106,7 +107,7 @@ function LandingHome() {
           </div>
         </div>
 
-        <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full bg-pink-600 items-center justify-center">
+        <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full bg-white items-center justify-center">
           <StartHere
             stagedJobData={stagedJobData}
             testCustomer={testCustomer}

@@ -30,10 +30,10 @@ function StartHere({ stagedJobData, testCustomer, testJob }: Props) {
   return (
     <div className="bg-white p-5 md:p-10 rounded-2xl shadow-2xl md:w-5/6 border border-slate-300">
       <div className="mb-5 p-1">
-        <h1 className="text-3xl lg:text-5xl xl:text-6xl font-sans font-bold text-pink-600 mb-1">
+        <h1 className="text-3xl lg:text-5xl font-sans font-bold text-pink-600 mb-1">
           Find Cleaners
         </h1>
-        <h1 className="text-3xl lg:text-5xl xl:text-6xl font-sans font-bold mb-2">
+        <h1 className="text-3xl lg:text-5xl font-sans font-bold mb-2">
           for your
         </h1>
         {headers.map((header, index) => (
@@ -42,7 +42,7 @@ function StartHere({ stagedJobData, testCustomer, testJob }: Props) {
             style={{ display: index === activeIndex ? "flex" : "none" }}
             className="flex flex-row items-center"
           >
-            <h1 className="text-3xl lg:text-5xl xl:text-6xl font-sans font-bold mb-1">
+            <h1 className="text-3xl lg:text-5xl font-sans font-bold mb-1">
               {header}
             </h1>
             <div>

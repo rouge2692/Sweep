@@ -14,7 +14,7 @@ function FlowStep({ stepNum, stepDescrip, stepImage }: Props) {
       </div>
 
       <img src={`src/assets/${stepImage}.png`} className="rounded-2xl" />
-      <h1 className="font-bold relative bottom-2 px-2 text-sm md:p-0 md:text-lg lg:text-xl">
+      <h1 className="font-bold relative bottom-2 px-2 text-sm md:p-2 md:text-lg lg:text-xl">
         {stepDescrip}
       </h1>
     </div>

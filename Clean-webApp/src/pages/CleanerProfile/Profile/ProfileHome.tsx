@@ -234,7 +234,7 @@ function ProfileHome() {
                   </div>
 
                   {/* Selection */}
-                  <div className="h-96 sm:h-96 overflow-y-scroll mt-5 bg-pink-600 rounded-lg">
+                  <div className="overflow-y-scroll h-64 mt-5 bg-pink-600 rounded-lg">
                     <div>
                       <h1 className="text-white font-bold p-2">
                         Room Settings:

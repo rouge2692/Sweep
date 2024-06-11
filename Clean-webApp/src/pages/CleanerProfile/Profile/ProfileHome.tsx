@@ -215,7 +215,7 @@ function ProfileHome() {
                               <input
                                 type="number"
                                 placeholder="Flat Rate"
-                                className="p-1 rounded w-32 text-sm sm:text-lg"
+                                className="p-1 rounded w-32 sm:w-36 text-sm sm:text-lg"
                               />
                             </div>
                             <select className="p-1 rounded text-sm sm:text-lg bg-white text-slate-600">
@@ -250,7 +250,7 @@ function ProfileHome() {
                           <div className="flex justify-between py-2 mb-1 border-gray-200">
                             {/* Header */}
                             <div
-                              className="text-slate-600 hover:cursor-pointer flex items-center px-1"
+                              className="text-slate-600 hover:cursor-pointer flex items-center px-2"
                               onClick={() => handleRoomSelect(room.SP05D1001)}
                             >
                               <div className="mr-1 text-xs">
@@ -272,7 +272,7 @@ function ProfileHome() {
                                 <input
                                   type="number"
                                   placeholder="Flat Rate"
-                                  className="p-1 rounded w-24 sm:w-32 text-sm sm:text-lg"
+                                  className="p-1 rounded w-32 sm:w-36 text-sm sm:text-lg"
                                 />
                               </div>
                               <select className="p-1 rounded text-sm sm:text-lg bg-white text-slate-600 mr-1 sm:mr-3">
@@ -285,7 +285,7 @@ function ProfileHome() {
                           </div>
                           {/* ^ Room Header */}
                           {selectedRoom === room.SP05D1001 && (
-                            <div className="mt-2">
+                            <div className="mt-2 mb-1">
                               {taskData
                                 .filter(
                                   (task) =>
@@ -296,7 +296,7 @@ function ProfileHome() {
                                 .map((item, taskIndex) => (
                                   <div
                                     key={taskIndex}
-                                    className="flex justify-between mt-1 items-center"
+                                    className="flex justify-between mt-1 items-center pl-3 pb-3"
                                   >
                                     <div className="flex space-x-1 sm:space-x-2">
                                       <input

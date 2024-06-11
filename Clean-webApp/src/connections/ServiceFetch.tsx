@@ -27,7 +27,7 @@ export const _fetchService = async () => {
   }
 };
 
-export const fetchProperties = async (SP02D1002: any) => {
+export const fetchProperties = async (SP02D1002: string) => {
   try {
     const resp = await fetch(
       sweepServer + "/getSP02ServicesProps/" + SP02D1002,

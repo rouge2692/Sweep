@@ -13,59 +13,63 @@ function ProfileRootSideBar() {
   return (
     <div className="h-screen">
       <div className="hidden bg-pink-700 py-4 md:flex md:flex-col justify-between rounded-xl sm:h-3/5 lg:h-4/5">
-        <div className="md:mx-6">
+        <div className="md:mx-3">
           <div className="mt-4">
-            <div className="hover:bg-white rounded-full transition-colors duration-200">
-              <FaHome
-                onClick={() => navigate("Home")}
-                className="text-white cursor-pointer lg:size-6 hover:text-pink-700"
-              >
+            <div className="hover:bg-white p-3 rounded-full transition-colors duration-200 cursor-pointer  text-white  hover:text-pink-600">
+              <FaHome onClick={() => navigate("Home")} className="lg:text-2xl">
                 Home
               </FaHome>
             </div>
           </div>
-          <div className="border-b-2 border-white rounded-full my-8"></div>
+          <div className="border-b-2 border-white rounded-full my-6"></div>
           <div className="mt-4">
-            <IoPersonSharp
-              onClick={() => navigate("Jobs")}
-              className="text-white cursor-pointer lg:size-6"
-            >
-              Home
-            </IoPersonSharp>
+            <div className="hover:bg-white text-white cursor-pointer hover:text-pink-600 p-3 rounded-full transition-colors duration-200">
+              <IoPersonSharp
+                onClick={() => navigate("Jobs")}
+                className="lg:text-2xl"
+              >
+                Home
+              </IoPersonSharp>
+            </div>
           </div>
-          <div className="mt-8">
-            <FaClipboardList
-              onClick={() => navigate("Jobs")}
-              className="text-white cursor-pointer lg:size-6"
-            >
-              Home
-            </FaClipboardList>
+          <div className="mt-4">
+            <div className="hover:bg-white text-white cursor-pointer hover:text-pink-600 p-3 rounded-full transition-colors duration-200">
+              <FaClipboardList
+                onClick={() => navigate("Jobs")}
+                className="lg:text-2xl"
+              >
+                Home
+              </FaClipboardList>
+            </div>
           </div>
-          <div className="mt-8">
-            <IoIosChatbubbles
-              onClick={() => navigate("Chats")}
-              className="text-white cursor-pointer lg:size-6"
-            >
-              Home
-            </IoIosChatbubbles>
+          <div className="mt-4">
+            <div className="hover:bg-white text-white cursor-pointer hover:text-pink-600 p-3 rounded-full transition-colors duration-200">
+              <IoIosChatbubbles
+                onClick={() => navigate("Chats")}
+                className="lg:text-2xl"
+              >
+                Home
+              </IoIosChatbubbles>
+            </div>
           </div>
-          <div className="mt-8">
-            <FaChartArea
-              onClick={() => navigate("Chats")}
-              className="text-white cursor-pointer lg:size-6"
-            >
-              Home
-            </FaChartArea>
+          <div className="mt-4">
+            <div className="hover:bg-white text-white cursor-pointer hover:text-pink-600 p-3 rounded-full transition-colors duration-200">
+              <FaChartArea
+                onClick={() => navigate("Chats")}
+                className="lg:text-2xl"
+              >
+                Home
+              </FaChartArea>
+            </div>
           </div>
         </div>
 
-        <div className="mb-4 md:mx-6">
-          <FaGear
-            onClick={() => navigate("Chats")}
-            className="text-white cursor-pointer lg:size-6"
-          >
-            Home
-          </FaGear>
+        <div className="mb-4 mx-3">
+          <div className="hover:bg-white text-white cursor-pointer hover:text-pink-600 p-3 rounded-full transition-colors duration-200">
+            <FaGear onClick={() => navigate("Chats")} className=" lg:text-2xl ">
+              Home
+            </FaGear>
+          </div>
         </div>
       </div>
     </div>

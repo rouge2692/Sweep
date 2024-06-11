@@ -167,7 +167,7 @@ def readSP03SerPropBuilds(SP03D1007):
 
 
 @app.route("/getSP05SerRooms/<string:SP05D1016>", methods=["GET"])
-def readSP04Rooms(SP05D1016):
+def readSP05Rooms(SP05D1016):
     serRoomsSession = models.SP05_ServiceRooms
     query = db1.session.query(serRoomsSession)
     records = query.all()

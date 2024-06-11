@@ -25,7 +25,7 @@ function ProfileHomeHeader() {
             </div>
             {/* ^ Title */}
             {/* Badges */}
-            <div className="sm:mt-0 mt-5">
+            <div className="sm:mt-1 mt-3">
               <h1 className="text-slate-600 text-sm lg:text-base">BADGES</h1>
               <h1 className="text-slate-600 text-sm lg:text-base">World</h1>
             </div>
@@ -33,7 +33,7 @@ function ProfileHomeHeader() {
           </div>
 
           {/* Contact */}
-          <div className="flex flex-col space-y-2 mt-5 sm:mt-0">
+          <div className="flex flex-col space-y-2 mt-3 sm:mt-0">
             <div>
               <FaPhoneAlt className="text-slate-600 sm:text-md xl:text-xl" />
               <MdEmail className="text-slate-600 sm:text-md xl:text-xl mt-2" />

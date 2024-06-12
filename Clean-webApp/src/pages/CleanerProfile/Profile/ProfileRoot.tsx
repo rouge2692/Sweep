@@ -9,9 +9,9 @@ import ProfileRootSideBar from "../../../components/CleanerProfile/SideBar/Profi
 
 function ProfileRoot() {
   return (
-    <div>
+    <div className="relative">
       <NavBar />
-      <div className="flex py-3 px-5 md:p-5 min-h-screen">
+      <div className="relative flex py-3 px-5 md:p-5 min-h-screen">
         <ProfileRootSideBar />
         <div className="flex-grow">
           <Routes>
@@ -21,6 +21,9 @@ function ProfileRoot() {
             <Route path="Chats" element={<h1>Chats</h1>}></Route>
           </Routes>
         </div>
+      </div>
+      <div className="flex bg-yellow-50 absolute bottom-0">
+        <h1>bottom</h1>
       </div>
     </div>
   );

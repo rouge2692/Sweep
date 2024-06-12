@@ -174,8 +174,8 @@ function ProfileHome() {
                   </button>
                 </div>
                 <div className="mt-4">
-                  <h2 className="text-gray-800 text-lg font-bold">
-                    Select your buildings:
+                  <h2 className="text-slate-600 text-lg font-bold">
+                    1 - Select your buildings:
                   </h2>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {buildingData
@@ -188,7 +188,7 @@ function ProfileHome() {
                             handleBuildGet(item.SP03D1008, item.SP03D1001)
                           }
                         >
-                          <h1 className="text-gray-800 text-sm">
+                          <h1 className="text-gray-800 text-sm sm:text-base">
                             {item.SP03D1001}
                           </h1>
                         </div>
@@ -196,64 +196,75 @@ function ProfileHome() {
                   </div>
                 </div>
                 <div className="mt-5">
-                  <div className="bg-pink-600 rounded-lg px-1 pt-2 pb-1">
+                  <div className="rounded-lg">
                     <div>
-                      <h1 className="font-bold text-white px-1">
-                        Master Setting:
+                      <h1 className="font-bold text-lg text-slate-600">
+                        2 - Building Master Setting:
                       </h1>
                     </div>
-                    <div className="flex justify-between border-pink-600 bg-white border-2 rounded-lg p-2 m-1">
+                    <div className="border border-slate-300 bg-white rounded-lg mt-2">
                       {/* Selected Building */}
                       {serRoomsData.length > 0 ? (
-                        <>
-                          <h1 className="font-bold text-lg text-slate-600 text-center">
+                        <div className="flex justify-between">
+                          <h1 className="font-bold p-2 text-lg sm:text-2xl text-slate-600 text-center">
                             {building}
                           </h1>
-                          // {/* ^ Selected Building */}
-                          <div className="flex flex-col justify-end">
-                            <div>
+                          {/* ^ Selected Building */}
+                          <div className="hidden flex flex-col justify-end bg-blue-50 p-2 px-4 space-y-1">
+                            <div className="flex items-center justify-end">
+                              <label className="text-slate-600 mr-1 text-sm sm:text-base font-bold">
+                                General:
+                              </label>
                               <input
                                 type="number"
-                                placeholder="Flat Rate"
-                                className="p-1 rounded w-32 sm:w-36 text-sm sm:text-lg"
+                                placeholder="per hour"
+                                className="p-1 rounded w-32 sm:w-36 text-sm sm:text-lg text-center border-b-2 transition-colors duration-200 focus:border-b-pink-600 focus:outline-none"
                               />
                             </div>
-                            <select className="p-1 rounded text-sm sm:text-lg bg-white text-slate-600">
-                              <option value="select">Cleaning Level</option>
-                              <option value="General">General</option>
-                              <option value="Deep">Deep</option>
-                            </select>
+                            <div className="flex items-center justify-end">
+                              <label className="text-slate-600 mr-1 text-sm sm:text-base font-bold">
+                                Deep:
+                              </label>
+                              <input
+                                type="number"
+                                placeholder="per hour"
+                                className="p-1 rounded w-32 sm:w-36 text-sm sm:text-lg text-center border-b-2 transition-colors duration-200 focus:border-b-pink-600 focus:outline-none"
+                              />
+                            </div>
                           </div>
-                        </>
+                        </div>
                       ) : (
-                        <h1 className="text-gray-600 p-2 font-bold bg-white mx-2 rounded-lg h-1/2 flex justify-center items-center">
-                          Select Building Above
-                        </h1>
+                        <div className="flex justify-center items-center">
+                          <h1 className="text-gray-600 font-bold rounded-lg">
+                            Select Building Above
+                          </h1>
+                        </div>
                       )}
                     </div>
+                    {/* ^ Selected Building */}
                   </div>
 
                   {/* Selection */}
-                  <div className="overflow-y-scroll h-64 mt-5 bg-pink-600 rounded-lg">
+                  <div className="overflow-y-scroll sm:h-72 h-96 mt-5 rounded-lg">
                     <div>
-                      <h1 className="text-white font-bold p-2">
-                        Room Settings:
+                      <h1 className="text-slate-600 text-lg font-bold pb-2">
+                        3 - Room Settings:
                       </h1>
                     </div>
                     {serRoomsData.length > 0 ? (
                       serRoomsData.map((room, index) => (
                         <div
                           key={index}
-                          className="relative bg-white mx-2 rounded-lg"
+                          className="relative bg-white border border-slate-300 mb-2 rounded-lg"
                         >
                           {/* Room Header */}
-                          <div className="flex justify-between py-2 mb-1 border-gray-200">
+                          <div className="flex justify-between border-gray-200">
                             {/* Header */}
                             <div
-                              className="text-slate-600 hover:cursor-pointer flex items-center px-2"
+                              className="text-slate-600 hover:cursor-pointer flex items-center w-full p-2"
                               onClick={() => handleRoomSelect(room.SP05D1001)}
                             >
-                              <div className="mr-1 text-xs">
+                              <div className="mr-3 text-xs sm:text-lg">
                                 {selectedRoom === room.SP05D1001 ? (
                                   <FaAngleUp />
                                 ) : (
@@ -261,42 +272,53 @@ function ProfileHome() {
                                 )}
                               </div>
 
-                              <h1 className="sm:text-lg font-bold">
+                              <h1 className="text-lg sm:text-xl font-bold">
                                 {room.SP05D1001}
                               </h1>
                             </div>
                             {/* ^ Header */}
                             {/* Room Header Options */}
-                            <div className="flex flex-col items-center">
-                              <div className="bg-green-50">
-                                <input
-                                  type="number"
-                                  placeholder="Flat Rate"
-                                  className="p-1 rounded w-32 sm:w-36 text-sm sm:text-lg"
-                                />
-                              </div>
-                              <select className="p-1 rounded text-sm sm:text-lg bg-white text-slate-600 mr-1 sm:mr-3">
-                                <option value="select">Cleaning Level</option>
-                                <option value="General">General</option>
-                                <option value="Deep">Deep</option>
-                              </select>
+                            <div className="flex flex-col justify-end bg-blue-50 p-2 px-3 sm:px-6">
+                              {room.SP05D1009.map(
+                                (level: string, index: number) => {
+                                  return (
+                                    <div
+                                      className="flex items-center justify-end"
+                                      key={index}
+                                    >
+                                      <label className="text-slate-600 mr-1 text-sm sm:text-base font-bold">
+                                        {level}:
+                                      </label>
+                                      <input
+                                        type="number"
+                                        placeholder={`per hour`}
+                                        className="p-1 rounded text-sm sm:text-lg w-24 sm:w-36 text-center border-b-2 focus:outline-none focus:border-b-pink-600 transition-colors duration-200"
+                                      />
+                                    </div>
+                                  );
+                                }
+                              )}
                             </div>
                             {/* ^ Room Header Options */}
                           </div>
                           {/* ^ Room Header */}
                           {selectedRoom === room.SP05D1001 && (
-                            <div className="mt-2 mb-1">
+                            <div className="mt-2 mb-1 space-y-1">
+                              <h1 className="text-slate-600 font-bold text-sm pl-3">
+                                General
+                              </h1>
                               {taskData
                                 .filter(
                                   (task) =>
                                     task.SPXD1017 == room.SP05D1001 &&
                                     task.SPXD1013 == "CLES1" &&
-                                    task.SPXD1019 == room.SP05D1015
+                                    task.SPXD1019 == room.SP05D1015 &&
+                                    task.SPXD1015 == "General"
                                 )
                                 .map((item, taskIndex) => (
                                   <div
                                     key={taskIndex}
-                                    className="flex justify-between mt-1 items-center pl-3 pb-3"
+                                    className="flex justify-between items-center px-1 pl-3"
                                   >
                                     <div className="flex space-x-1 sm:space-x-2">
                                       <input
@@ -309,8 +331,43 @@ function ProfileHome() {
                                       <h1 className="text-gray-800 text-xs sm:text-sm">
                                         {item.SPXD1001}
                                       </h1>
+                                    </div>
+
+                                    <div className="text-gray-800 text-sm flex items-center">
+                                      <input
+                                        type="number"
+                                        placeholder="Flat Rate"
+                                        className="p-1 rounded mr-2 w-24 sm:w-32 border-b-2 focus:border-b-pink-600 focus:outline-none transition-colors duration-200"
+                                      />
+                                    </div>
+                                  </div>
+                                ))}
+                              <h1 className="text-slate-600 font-bold text-sm pl-3">
+                                Deep
+                              </h1>
+                              {taskData
+                                .filter(
+                                  (task) =>
+                                    task.SPXD1017 == room.SP05D1001 &&
+                                    task.SPXD1013 == "CLES1" &&
+                                    task.SPXD1019 == room.SP05D1015 &&
+                                    task.SPXD1015 == "Deep"
+                                )
+                                .map((item, taskIndex) => (
+                                  <div
+                                    key={taskIndex}
+                                    className="flex justify-between items-center px-1 pl-3"
+                                  >
+                                    <div className="flex space-x-1 sm:space-x-2">
+                                      <input
+                                        type="checkbox"
+                                        checked={item.SPXD1020}
+                                        onChange={() =>
+                                          handleTaskSelect(item.SPXD1001)
+                                        }
+                                      />
                                       <h1 className="text-gray-800 text-xs sm:text-sm">
-                                        ({item.SPXD1015})
+                                        {item.SPXD1001}
                                       </h1>
                                     </div>
 
@@ -318,7 +375,7 @@ function ProfileHome() {
                                       <input
                                         type="number"
                                         placeholder="Flat Rate"
-                                        className="border p-1 rounded mr-2 w-24 sm:w-32"
+                                        className="p-1 rounded mr-2 w-24 sm:w-32 border-b-2 focus:border-b-pink-600 focus:outline-none transition-colors duration-200"
                                       />
                                     </div>
                                   </div>
@@ -328,7 +385,7 @@ function ProfileHome() {
                         </div>
                       ))
                     ) : (
-                      <h1 className="text-gray-600 p-2 font-bold bg-white mx-2 rounded-lg h-1/2 flex justify-center items-center">
+                      <h1 className="text-gray-600 p-2 font-bold bg-white  border-2 border-pink-700 rounded-lg h-1/2 flex justify-center items-center">
                         Select Building Above
                       </h1>
                     )}

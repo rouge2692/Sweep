@@ -7,7 +7,7 @@ function ProfileHomeHeader() {
   return (
     <div className="flex flex-col h-1/2">
       {/* Header Title and Profile Pics */}
-      <div className="rounded-xl flex flex-col sm:flex-row items-center sm:items-start sm:h-1/2 xl:h-3/5">
+      <div className="rounded-xl flex flex-col sm:flex-row items-center sm:items-start sm:h-1/2 xl:h-2/5">
         {/* Profile Pics */}
         <div className="shadow-md rounded-xl mx-auto h-36 sm:h-full sm:mx-5 w-10/12 md:w-7/12 md:mx-0 flex justify-center items-center">
           <FaImages className="text-slate-300 text-6xl" />

@@ -8,8 +8,8 @@ import JobRooms from "./pages/JobPosting/global/JobRooms";
 import JobService from "./pages/ServiceListings/JobService";
 import LandingHome from "./pages/Home/LandingHome";
 import Login from "./pages/Login/Login";
-import RegiLocation from "./pages/CleanerRegistration/RegiLocation/RegiLocation";
 import ProfileRoot from "./pages/CleanerProfile/Profile/ProfileRoot";
+import RegiLocation from "./pages/CleanerRegistration/global/RegiLocation";
 
 function App() {
   return (

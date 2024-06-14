@@ -99,7 +99,7 @@ function ProfileHome() {
       </div>
       {/* ^ Left Panel */}
       {/* Right Panel */}
-      <div className="md:ml-2 lg:ml-3 flex flex-col mt-3 sm:mt-0 md:w-5/12 w-full">
+      <div className="md:ml-2 lg:ml-3 flex flex-col mt-3 mb-24 sm:mb-0 sm:mt-0 md:w-5/12 w-full">
         {/* Header */}
         {/* Accounting Header */}
         <div>
@@ -174,7 +174,7 @@ function ProfileHome() {
                   </button>
                 </div>
                 <div className="mt-4">
-                  <h2 className="text-slate-600 text-lg font-bold">
+                  <h2 className="text-lg sm:text-xl font-bold">
                     1 - Select your buildings:
                   </h2>
                   <div className="mt-2 flex flex-wrap gap-2">
@@ -195,22 +195,27 @@ function ProfileHome() {
                       ))}
                   </div>
                 </div>
+                {/* Step 2 - 3 */}
                 <div className="mt-5">
+                  {/* 2- Selected Building */}
                   <div className="rounded-lg">
                     <div>
-                      <h1 className="font-bold text-lg text-slate-600">
+                      <h1 className="font-bold text-lg sm:text-xl">
                         2 - Building Master Setting:
                       </h1>
                     </div>
+
                     <div className="border border-slate-300 bg-white rounded-lg mt-2">
-                      {/* Selected Building */}
                       {serRoomsData.length > 0 ? (
                         <div className="flex justify-between">
+                          {/* Selected Building Name */}
                           <h1 className="font-bold p-2 text-lg sm:text-2xl text-slate-600 text-center">
                             {building}
                           </h1>
-                          {/* ^ Selected Building */}
-                          <div className="hidden flex flex-col justify-end bg-blue-50 p-2 px-4 space-y-1">
+                          {/* ^ Selected Building Name */}
+                          {/* Selected Building Options */}
+                          {/* <div className="hidden flex flex-col justify-end bg-blue-50 p-2 px-4 space-y-1"> */}
+                          <div className="hidden bg-blue-50 p-2 px-4 space-y-1">
                             <div className="flex items-center justify-end">
                               <label className="text-slate-600 mr-1 text-sm sm:text-base font-bold">
                                 General:
@@ -232,25 +237,25 @@ function ProfileHome() {
                               />
                             </div>
                           </div>
+                          {/* ^ Selected Building Options */}
                         </div>
                       ) : (
                         <div className="flex justify-center items-center">
-                          <h1 className="text-gray-600 font-bold rounded-lg">
+                          <h1 className="text-gray-600 font-bold rounded-lg py-3">
                             Select Building Above
                           </h1>
                         </div>
                       )}
                     </div>
-                    {/* ^ Selected Building */}
                   </div>
-
-                  {/* Selection */}
-                  <div className="overflow-y-scroll sm:h-72 h-96 mt-5 rounded-lg">
-                    <div>
-                      <h1 className="text-slate-600 text-lg font-bold pb-2">
-                        3 - Room Settings:
-                      </h1>
-                    </div>
+                  {/* ^ 2 - Selected Building */}
+                  {/* 3 - Selection */}
+                  <div>
+                    <h1 className="text-lg sm:text-xl mt-5  font-bold pb-2">
+                      3 - Room Settings:
+                    </h1>
+                  </div>
+                  <div className="overflow-y-scroll sm:h-80 h-96 rounded-lg">
                     {serRoomsData.length > 0 ? (
                       serRoomsData.map((room, index) => (
                         <div
@@ -272,13 +277,13 @@ function ProfileHome() {
                                 )}
                               </div>
 
-                              <h1 className="text-lg sm:text-xl font-bold">
+                              <h1 className="text-lg sm:text-2xl font-bold">
                                 {room.SP05D1001}
                               </h1>
                             </div>
                             {/* ^ Header */}
                             {/* Room Header Options */}
-                            <div className="flex flex-col justify-end bg-blue-50 p-2 px-3 sm:px-6">
+                            <div className="flex flex-col justify-end bg-blue-50 p-2 px-3 sm:px-6 space-y-2">
                               {room.SP05D1009.map(
                                 (level: string, index: number) => {
                                   return (
@@ -286,7 +291,7 @@ function ProfileHome() {
                                       className="flex items-center justify-end"
                                       key={index}
                                     >
-                                      <label className="text-slate-600 mr-1 text-sm sm:text-base font-bold">
+                                      <label className="text-slate-600 mr-2 text-sm sm:text-base font-bold">
                                         {level}:
                                       </label>
                                       <input
@@ -303,8 +308,8 @@ function ProfileHome() {
                           </div>
                           {/* ^ Room Header */}
                           {selectedRoom === room.SP05D1001 && (
-                            <div className="mt-2 mb-1 space-y-1">
-                              <h1 className="text-slate-600 font-bold text-sm pl-3">
+                            <div className="space-y-1 bg-gray-50 rounded-b-lg py-2">
+                              <h1 className="text-slate-600 font-bold text-sm sm:text-lg pl-3">
                                 General
                               </h1>
                               {taskData
@@ -342,7 +347,7 @@ function ProfileHome() {
                                     </div>
                                   </div>
                                 ))}
-                              <h1 className="text-slate-600 font-bold text-sm pl-3">
+                              <h1 className="text-slate-600 font-bold text-sm sm:text-lg pl-3">
                                 Deep
                               </h1>
                               {taskData
@@ -385,13 +390,14 @@ function ProfileHome() {
                         </div>
                       ))
                     ) : (
-                      <h1 className="text-gray-600 p-2 font-bold bg-white  border-2 border-pink-700 rounded-lg h-1/2 flex justify-center items-center">
+                      <h1 className="text-gray-600 p-2 font-bold bg-white border-2 rounded-lg h-1/2 flex justify-center items-center">
                         Select Building Above
                       </h1>
                     )}
                   </div>
-                  {/* ^ Selection */}
+                  {/* ^ 3 - Selection */}
                 </div>
+                {/* ^ Step 2 - 3 */}
               </div>
             </div>
             {/* Bottom Controls */}

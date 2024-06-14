@@ -52,7 +52,7 @@ function JobProperty() {
     getJobCreationTemp(st01_D1002).then((data) => {
       setStagedJobData(data);
     });
-    fetchProperties(sp01_D1002).then((data) => {
+    fetchProperties("CLES1").then((data) => {
       setSerProperties(data);
     });
     fetchPropBuilds(sp01_D1002).then((data) => {

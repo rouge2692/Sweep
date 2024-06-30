@@ -11,7 +11,7 @@ function ProfileRoot() {
   return (
     <div className="relative">
       <NavBar />
-      <div className="relative flex py-3 px-5 md:p-5 min-h-screen xl:px-72">
+      <div className="relative flex py-3 px-5 md:p-5 min-h-screen xl:px-52">
         <ProfileRootSideBar />
         <div className="flex-grow">
           <Routes>

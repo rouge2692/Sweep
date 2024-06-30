@@ -10,6 +10,8 @@ import LandingHome from "./pages/Home/LandingHome";
 import Login from "./pages/Login/Login";
 import ProfileRoot from "./pages/CleanerProfile/Profile/ProfileRoot";
 import RegiLocation from "./pages/CleanerRegistration/global/RegiLocation";
+import RegiJobProperty from "./pages/CleanerRegistration/global/RegiJobProperty";
+import RegiJobRooms from "./pages/CleanerRegistration/global/RegiJobRooms";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/HomeMain" element={<LandingHome />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/RegiLocation" element={<RegiLocation />} />
+          <Route path="/RegiProperties" element={<RegiJobProperty />} />
+          <Route path="/RegiRooms" element={<RegiJobRooms />} />
           <Route path="/Profile/*" element={<ProfileRoot />} />
           <Route path="/JourneyService/:st01_D1002" element={<JobService />} />
           <Route

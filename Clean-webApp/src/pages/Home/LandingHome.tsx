@@ -107,7 +107,7 @@ function LandingHome() {
           </div>
         </div>
 
-        <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full bg-white items-center justify-center">
+        <div className="hidden w-full lg:w-2/5 p-3 lg:flex h-full bg-pink-600 items-center justify-center">
           <StartHere
             stagedJobData={stagedJobData}
             testCustomer={testCustomer}
@@ -118,7 +118,7 @@ function LandingHome() {
 
       {/* ^ Header */}
       {/* Tablet and Computer Service */}
-      <section className="hidden md:block">
+      <section className="hidden sm:block">
         {/* Service Selection */}
         <div>
           <h1 className="text-center font-bold py-5 text-6xl">Services</h1>

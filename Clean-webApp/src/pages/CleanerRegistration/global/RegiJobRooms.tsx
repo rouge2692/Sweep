@@ -17,7 +17,7 @@ import {
 
 //icons
 
-function JobRooms() {
+function RegiJobRooms() {
   // Initialize Navigate
   // const navigate = useNavigate();
 
@@ -155,4 +155,4 @@ function JobRooms() {
   );
 }
 
-export default JobRooms;
+export default RegiJobRooms;

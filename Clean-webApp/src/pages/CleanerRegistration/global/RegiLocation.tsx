@@ -57,7 +57,7 @@ function RegiLocation() {
         >
           <button
             className={`p-3 bg-pink-600 rounded-lg text-white font-bold`}
-            onClick={() => navigate("/Profile")}
+            onClick={() => navigate("/RegiProperties")}
           >
             Next
           </button>

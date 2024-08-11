@@ -10,10 +10,7 @@ import { GiFamilyHouse } from "react-icons/gi";
 import { IoStorefrontSharp } from "react-icons/io5";
 // import { TbBrandAirbnb } from "react-icons/tb";
 // Conections
-import {
-  getJobCreationTemp,
-  postHandleJobCreation,
-} from "../../../connections/HandleJobCreation";
+import { getJobCreationTemp } from "../../../connections/HandleJobCreation";
 import {
   fetchPropBuilds,
   fetchProperties,
@@ -59,14 +56,6 @@ function RegiJobProperty() {
       setSerPropBuilds(data);
     });
   }, []);
-  // useEffect(() => {
-  //   console.log("PropUE");
-  //   console.log(stagedJobData);
-  // }, [stagedJobData]);
-
-  useEffect(() => {
-    console.log(serProperties);
-  }, [serProperties]);
 
   return (
     <>
@@ -83,7 +72,7 @@ function RegiJobProperty() {
 
         {/* Next */}
         {(homeCheck || aptCheck || comCheck || airHomeCheck || airAptCheck) && (
-          <div className="mb-5 shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300">
+          <div className="shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300">
             <button
               onClick={() => navigate(`/RegiJobRooms`)}
               className="text-2xl text-white font-bold"
@@ -94,7 +83,7 @@ function RegiJobProperty() {
         )}
         {/* ^ Next */}
 
-        <div className="flex flex-col sm:flex-row sm:justify-center w-full sm:space-y-0 space-y-5">
+        <div className="flex flex-col sm:flex-row sm:justify-center w-full sm:space-y-0 space-y-5 mt-5">
           {/* Buttons */}
           {/* Residential Buttons */}
           <div className="flex flex-col">

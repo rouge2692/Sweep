@@ -6,7 +6,7 @@ function Login() {
   return (
     <div className="flex flex-col md:flex-row md:h-screen">
       {/* INFORMATION PANEL */}
-      <div className="md:w-1/2 w-full bg-pink-600 flex items-center justify-center p-4 md:p-10">
+      <div className="md:w-1/2 w-full bg-pink-600 flex items-center md:justify-center p-4 md:p-10">
         <div className="text-white md:max-w-sm">
           <h2 className="text-xl md:text-2xl lg:text-3xl mb-1">
             Welcome Back!
@@ -52,7 +52,7 @@ function Login() {
         {/* EMAIL LOGIN */}
         <div className="w-full bg-white border-slate-300">
           <div>
-            <h1 className="text-center font-bold text-lg md:text-2xl mt-5 text-slate-600">
+            <h1 className="text-center font-bold text-lg md:text-2xl mb-3 mt-5 text-slate-600">
               Create an account
             </h1>
           </div>
@@ -70,7 +70,7 @@ function Login() {
                 id="name"
                 type="text"
                 placeholder="Enter your Name or Company Name"
-                className="mt-1 p-1 md:p-2 lg:p-3 w-full border border-gray-300 rounded text-sm md:text-base lg:text-lg"
+                className="mt-1 p-2 lg:p-3 w-full border border-gray-300 rounded text-base lg:text-lg"
               />
             </div>
 
@@ -86,14 +86,14 @@ function Login() {
                 id="email"
                 type="email"
                 placeholder="Email Address"
-                className="mt-1 p-1 md:p-2 lg:p-3 w-full border border-gray-300 rounded text-sm md:text-base lg:text-lg"
+                className="mt-1 p-2 lg:p-3 w-full border border-gray-300 rounded text-base lg:text-lg"
               />
 
               <input
                 id="phone"
                 type="tel"
                 placeholder="Phone number"
-                className="mt-1 p-1 md:p-2 lg:p-3 w-full border border-gray-300 rounded text-sm md:text-base lg:text-lg"
+                className="mt-1 p-2 lg:p-3 w-full border border-gray-300 rounded text-base lg:text-lg"
               />
             </div>
 
@@ -109,12 +109,12 @@ function Login() {
                 id="password"
                 type="password"
                 placeholder="Password"
-                className="mt-1 p-1 md:p-2 lg:p-3 w-full border border-gray-300 rounded text-sm md:text-base lg:text-lg"
+                className="mt-1 p-2 lg:p-3 w-full border border-gray-300 rounded text-base lg:text-lg"
               />
               <input
                 type="password"
                 placeholder="Re-Enter Password"
-                className="mt-1 p-1 md:p-2 lg:p-3 w-full border border-gray-300 rounded text-sm md:text-base lg:text-lg"
+                className="mt-1 p-2 lg:p-3 w-full border border-gray-300 rounded text-base lg:text-lg"
               />
             </div>
 

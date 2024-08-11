@@ -19,18 +19,10 @@ db2 = MongoClient(app.config["MONGODB_SETTINGS"]).get_database("SweepNoDB")
 
 CORS(app)
 
-#########################################
+
+#######################################################
 ####### MONGO
-#########################################
-# @app.route("/getServices", methods=["GET"])
-# def readServices():
-#     serviceSession = list(models.SP03_Services.objects)
-
-#     print(serviceSession)
-
-#     return jsonify(serviceSession)
-
-
+#######################################################
 @app.route("/handleJobCreation/<string:jobHash>", methods=["GET", "POST"])
 def handleJobCreation(jobHash):
 
@@ -105,9 +97,20 @@ def readDataTemp(collection):
     return jsonify(ST01Data)
 
 
-#########################################
+@app.route("/serviceSPX/<string:userID>/<string:keyID>", methods=["GET", "POST"])
+def serviceSPX(userID, keyID):
+    dataTemp = db2["SP98_DataTemps"]
+    st02DataTemp = dataTemp.find_one({"COLL": "ST02"})["DATA"]
+
+    ST02 = db2["ST02_HandleServiceProfileRegistration"]
+    ST02.insert_one(st02DataTemp)
+
+    return jsonify({"success": "complete"})
+
+
+#######################################################
 ####### POSTGRES
-#########################################
+#######################################################
 @app.route("/getRooms", methods=["GET"])
 def readRooms():
     roomSession = models.SP04_Rooms
@@ -127,9 +130,6 @@ def readSP01Services():
 
     recDf = pd.DataFrame(records).sort_values(by=["SP01D1003"])
     recDict = recDf.to_dict("records")
-
-    # print("Service Page")
-    # print(recDict)
 
     return jsonify(recDict)
 
@@ -199,6 +199,43 @@ def get_cities():
     records = query.all()
 
     return jsonify(records)
+
+
+#######################################################
+####### MONGO POST
+#######################################################
+@app.route("/serviceprofileSPXST02", methods=["GET", "POST"])
+def readSPXpostST02():
+    taskSession = models.SPX_TaskList
+    roomSession = models.SP05_ServiceRooms
+    taskquery = db1.session.query(taskSession)
+    roomquery = db1.session.query(roomSession)
+    spx = taskquery.all()
+    sp05 = roomquery.all()
+
+    spxDF = pd.DataFrame(spx)
+    spxDF["SPXD1004"] = 0
+    # spxDict = spxDF.to_dict("records")
+    sp05DF = pd.DataFrame(sp05)
+    sp05DF["SP05D1017"] = 0
+    sp05DF["SP05D1018"] = 0
+
+    dataTemp = db2["SP98_DataTemps"]
+    st02DataTemp = dataTemp.find_one({"COLL": "ST02"})["DATA"]
+    st02UploadData = []
+
+    for building in st02DataTemp["ST02D1007"]:
+        tempDict = {building: spxDF[spxDF["SPXD1016"] == building].to_dict("records")}
+        st02UploadData.append(tempDict)
+
+    st02DataTemp["ST02D1008"] = st02UploadData
+
+    ST02 = db2["ST02_HandleServiceProfileRegistration"]
+    ST02.insert_one(st02DataTemp)
+
+    return jsonify({"success": "complete"})
+
+    # return jsonify(spxDict)
 
 
 from app import models

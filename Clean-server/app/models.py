@@ -262,3 +262,26 @@ class SPX_TaskList(db1.Model):
     SPXD1010 = db1.Column(db1.Boolean())
     SPXD1020 = db1.Column(db1.Boolean())
     SPXD1019 = db1.Column(db1.String())
+
+
+@dataclass
+class SP00_Profcuenta(db1.Model):
+    __tablename__ = "SP00_Profcuenta"
+
+    SP00_id: int
+    SP00D1001: str
+    SP00D1002: str
+    SP00D1005: str
+    SP00D1004: str
+    SP00D1010: bool
+    SP00D1020: bool
+    SP00D1006: str
+
+    SP00_id = db1.Column(db1.Integer(), primary_key=True)
+    SP00D1001 = db1.Column(db1.String(), nullable=False)
+    SP00D1002 = db1.Column(db1.String(), nullable=False, unique=True)
+    SP00D1005 = db1.Column(db1.String(), nullable=False)
+    SP00D1004 = db1.Column(db1.String())
+    SP00D1010 = db1.Column(db1.Boolean(), default=True)
+    SP00D1020 = db1.Column(db1.Boolean(), default=False)
+    SP00D1006 = db1.Column(db1.String(), nullable=False)

@@ -1,4 +1,11 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask_login import (
+    LoginManager,
+    current_user,
+    login_required,
+    login_user,
+    logout_user,
+)
 from flask_cors import CORS
 import json
 import pandas as pd
@@ -12,10 +19,19 @@ from sqlalchemy import text
 from pymongo import MongoClient
 
 app = Flask(__name__)
+# required authentication
+app.secret_key = "super secret string"
+# loads config.py to app.config dictionary
 app.config.from_object("config")
+
+# SQLAlchemy requires app object, automatically searches config object for URI string
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db1 = SQLAlchemy(app)
+# mongoclient requires connection string
 db2 = MongoClient(app.config["MONGODB_SETTINGS"]).get_database("SweepNoDB")
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 CORS(app)
 
@@ -106,6 +122,40 @@ def serviceSPX(userID, keyID):
     ST02.insert_one(st02DataTemp)
 
     return jsonify({"success": "complete"})
+
+
+@app.route("/serviceprofileSPXST02", methods=["GET", "POST"])
+def readSPXpostST02():
+    taskSession = models.SPX_TaskList
+    roomSession = models.SP05_ServiceRooms
+    taskquery = db1.session.query(taskSession)
+    roomquery = db1.session.query(roomSession)
+    spx = taskquery.all()
+    sp05 = roomquery.all()
+
+    spxDF = pd.DataFrame(spx)
+    spxDF["SPXD1004"] = 0
+    # spxDict = spxDF.to_dict("records")
+    sp05DF = pd.DataFrame(sp05)
+    sp05DF["SP05D1017"] = 0
+    sp05DF["SP05D1018"] = 0
+
+    dataTemp = db2["SP98_DataTemps"]
+    st02DataTemp = dataTemp.find_one({"COLL": "ST02"})["DATA"]
+    st02UploadData = []
+
+    for building in st02DataTemp["ST02D1007"]:
+        tempDict = {building: spxDF[spxDF["SPXD1016"] == building].to_dict("records")}
+        st02UploadData.append(tempDict)
+
+    st02DataTemp["ST02D1008"] = st02UploadData
+
+    ST02 = db2["ST02_HandleServiceProfileRegistration"]
+    ST02.insert_one(st02DataTemp)
+
+    return jsonify({"success": "complete"})
+
+    # return jsonify(spxDict)
 
 
 #######################################################
@@ -201,41 +251,40 @@ def get_cities():
     return jsonify(records)
 
 
-#######################################################
-####### MONGO POST
-#######################################################
-@app.route("/serviceprofileSPXST02", methods=["GET", "POST"])
-def readSPXpostST02():
-    taskSession = models.SPX_TaskList
-    roomSession = models.SP05_ServiceRooms
-    taskquery = db1.session.query(taskSession)
-    roomquery = db1.session.query(roomSession)
-    spx = taskquery.all()
-    sp05 = roomquery.all()
+@app.route("/postSP00Profcuenta", methods=["POST"])
+def postProfcuenta():
+    data = request.json
+    profcuentaSession = models.SP00_Profcuenta
 
-    spxDF = pd.DataFrame(spx)
-    spxDF["SPXD1004"] = 0
-    # spxDict = spxDF.to_dict("records")
-    sp05DF = pd.DataFrame(sp05)
-    sp05DF["SP05D1017"] = 0
-    sp05DF["SP05D1018"] = 0
+    hashSet = "Jx27Y5QSO2w8g3duc5s3J0Z1d01vk9z0T4d1s29TYf2z7br7jzJ4ErHZf5azJv61Y6e6W"
+    sp00D1006 = "".join(random.sample(hashSet, 10))
 
-    dataTemp = db2["SP98_DataTemps"]
-    st02DataTemp = dataTemp.find_one({"COLL": "ST02"})["DATA"]
-    st02UploadData = []
+    currPC = profcuentaSession(
+        SP00D1001=data["SP00D1001"].upper(),
+        SP00D1002=data["SP00D1002"].upper(),
+        SP00D1004=data["SP00D1004"],
+        SP00D1005=data["SP00D1005"],
+        SP00D1006=f"{data['SP00D1001'][:3].upper()}{data['SP00D1004'][-4:]}-{sp00D1006}",
+    )
 
-    for building in st02DataTemp["ST02D1007"]:
-        tempDict = {building: spxDF[spxDF["SPXD1016"] == building].to_dict("records")}
-        st02UploadData.append(tempDict)
+    db1.session.add(currPC)
 
-    st02DataTemp["ST02D1008"] = st02UploadData
+    db1.session.flush()
+    db1.session.commit()
 
-    ST02 = db2["ST02_HandleServiceProfileRegistration"]
-    ST02.insert_one(st02DataTemp)
+    query = db1.session.query(profcuentaSession)
+    new = query.filter(profcuentaSession.SP00D1001 == data["SP00D1001"]).first()
 
-    return jsonify({"success": "complete"})
+    return jsonify(new)
 
-    # return jsonify(spxDict)
+
+@app.route("/getSP00Profcuenta/<string:correNomb>", methods=["GET"])
+def readProfcuenta(correNomb):
+    profcuentaSession = models.SP00_Profcuenta
+    query = db1.session.query(profcuentaSession)
+    records = query.filter(profcuentaSession.SP00D1002 == correNomb)
+
+    return None
 
 
 from app import models

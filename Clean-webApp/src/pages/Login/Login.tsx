@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { postProfcuen } from "../../connections/HandleCuenta";
+import { postNewCuenta, postProfcuen } from "../../connections/HandleCuenta";
 import { useState } from "react";
 
 function Login() {
@@ -14,21 +14,25 @@ function Login() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [successes, setSuccesses] = useState<{ [key: string]: boolean }>({});
 
+  // Validation
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  // Validation
   const validatePhone = (phone: string) => {
-    const phoneRegex = /^\(\d{3}\) \d{3} - \d{4}$/;
+    const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$/;
     return phoneRegex.test(phone);
   };
 
+  // Validation
   const validatePassword = (password: string) => {
     const passwordRegex = /^(?=.*[A-Z]).{10,}$/;
     return passwordRegex.test(password);
   };
 
+  // Validation
   const formatPhoneNumber = (value: string) => {
     if (!value) return value;
 
@@ -93,7 +97,11 @@ function Login() {
         SP00D1002: email,
         SP00D1004: phone,
         SP00D1005: password,
-      }).then(() => navigate("/RegiLocation"));
+      })
+        .then((data) => postNewCuenta(data))
+        .then((data) =>
+          navigate("/RegiLocation", { state: { st02D1002: data["ST02D1002"] } })
+        );
     }
   };
 
@@ -153,6 +161,7 @@ function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 id="email"
                 type="email"
+                required
                 placeholder="Email Address"
                 className={`mt-1 p-2 lg:p-3 w-full border rounded text-base lg:text-lg ${
                   errors.email

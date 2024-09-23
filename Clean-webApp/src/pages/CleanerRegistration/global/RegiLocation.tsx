@@ -2,12 +2,13 @@
 import { useEffect, useState } from "react";
 import Select, { MultiValue } from "react-select";
 import makeAnimated from "react-select/animated";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Components
 import NavBar from "../../../components/CleanerRegistration/NavBar/NavBar";
 // Connections
 import { fetchRegions } from "../../../connections/ServiceFetch";
+import { postCities } from "../../../connections/HandleCuenta";
 
 interface RegionOption {
   value: string;
@@ -16,11 +17,13 @@ interface RegionOption {
 
 function RegiLocation() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [regions, setRegions] = useState<RegionOption[]>([]);
   const [selectedCities, setSelectedCities] = useState<
     MultiValue<RegionOption>
   >([]);
+  // const [profcuent, setProfCuenta] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     fetchRegions().then((data) => {
@@ -30,7 +33,12 @@ function RegiLocation() {
       }));
       setRegions(cities);
     });
+    // getCuenta(location.state.st02D1002).then((data) => setProfCuenta(data));
   }, []);
+
+  // useEffect(() => {
+  //   console.log(selectedCities);
+  // }, [selectedCities]);
 
   const handleCityChange = (selectedOptions: MultiValue<RegionOption>) => {
     setSelectedCities(selectedOptions);
@@ -57,7 +65,14 @@ function RegiLocation() {
         >
           <button
             className={`p-3 bg-pink-600 rounded-lg text-white font-bold`}
-            onClick={() => navigate("/RegiProperties")}
+            onClick={() =>
+              postCities(location.state.st02D1002, selectedCities).then(
+                (data) =>
+                  navigate("/RegiProperties", {
+                    state: { st02D1002: data["ST02D1002"] },
+                  })
+              )
+            }
           >
             Next
           </button>

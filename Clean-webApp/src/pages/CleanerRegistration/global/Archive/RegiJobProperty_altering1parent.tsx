@@ -1,6 +1,6 @@
 // React
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // Components
 import NavBar from "../../../components/JobPosting/NavBar/NavBar";
 // Icons
@@ -10,13 +10,14 @@ import { GiFamilyHouse } from "react-icons/gi";
 import { IoStorefrontSharp } from "react-icons/io5";
 // import { TbBrandAirbnb } from "react-icons/tb";
 // Conections
-import { fetchProperties } from "../../../connections/ServiceFetch";
-import { postProps } from "../../../connections/HandleCuenta";
+import {
+  fetchPropBuilds,
+  fetchProperties,
+} from "../../../connections/ServiceFetch";
 
 function RegiJobProperty() {
   // Initialize Navigate
   const navigate = useNavigate();
-  const location = useLocation();
 
   // Params
   // const { st01_D1002 } = useParams();
@@ -30,24 +31,27 @@ function RegiJobProperty() {
   const [airAptCheck, setAirAptCheck] = useState(false);
 
   // Get Staged Data
+  const [stagedJobData, setStagedJobData] = useState<{
+    [key: string]: any;
+  }>({});
   const [serProperties, setSerProperties] = useState<
     {
       [key: string]: any;
     }[]
   >([]);
-
-  function handlePropPostNav(a: any) {
-    postProps(location.state.st02D1002, a).then((data) =>
-      navigate("/RegiRooms", {
-        state: { st02D1002: data["ST02D1002"] },
-      })
-    );
-  }
+  // const [serPropBuilds, setSerPropBuilds] = useState<
+  //   {
+  //     [key: string]: any;
+  //   }[]
+  // >([]);
 
   useEffect(() => {
     fetchProperties("CLES1").then((data) => {
       setSerProperties(data);
     });
+    // fetchPropBuilds(sp01_D1002).then((data) => {
+    //   setSerPropBuilds(data);
+    // });
   }, []);
 
   return (
@@ -67,37 +71,7 @@ function RegiJobProperty() {
         {(homeCheck || aptCheck || comCheck || airHomeCheck || airAptCheck) && (
           <div className="shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300">
             <button
-              onClick={() =>
-                handlePropPostNav({
-                  data: [
-                    {
-                      Property: "Residential",
-                      Building: "House",
-                      Active: homeCheck,
-                    },
-                    {
-                      Property: "Residential",
-                      Building: "Condo-Apartment",
-                      Active: aptCheck,
-                    },
-                    {
-                      Property: "Commercial",
-                      Building: "Events",
-                      Active: comCheck,
-                    },
-                    {
-                      Property: "AirBnb",
-                      Building: "House",
-                      Active: airHomeCheck,
-                    },
-                    {
-                      Property: "AirBnb",
-                      Building: "Condo-Apartment",
-                      Active: airAptCheck,
-                    },
-                  ],
-                })
-              }
+              onClick={() => navigate(`/RegiJobRooms`)}
               className="text-2xl text-white font-bold"
             >
               NEXT

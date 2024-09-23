@@ -113,49 +113,85 @@ def readDataTemp(collection):
     return jsonify(ST01Data)
 
 
-@app.route("/serviceSPX/<string:userID>/<string:keyID>", methods=["GET", "POST"])
-def serviceSPX(userID, keyID):
+@app.route("/getprofcuenta/<string:ST02D1002>", methods=["GET"])
+def getprofcuenta(ST02D1002):
+    profcuentaDB = db2["ST02_HandleServiceProfileRegistration"]
+    profcuenta = profcuentaDB.find_one({"ST02D1002": ST02D1002}, {"_id": 0})
+
+    return jsonify(profcuenta)
+
+
+@app.route("/handleNewCuenta", methods=["POST"])
+def handleNewCuenta():
+    data = request.json
+
     dataTemp = db2["SP98_DataTemps"]
     st02DataTemp = dataTemp.find_one({"COLL": "ST02"})["DATA"]
+
+    st02DataTemp["ST02D1002"] = data["SP00D1006"]
+    st02DataTemp["ST02D1001"] = data["SP00D1001"]
+    st02DataTemp["ST02D1003"] = data["SP00D1001"]
+    st02DataTemp["ST02D1004"] = data["SP00D1002"]
+    st02DataTemp["ST02D1005"] = data["SP00D1004"]
 
     ST02 = db2["ST02_HandleServiceProfileRegistration"]
     ST02.insert_one(st02DataTemp)
 
-    return jsonify({"success": "complete"})
+    profcuentaDB = db2["ST02_HandleServiceProfileRegistration"]
+    profcuenta = profcuentaDB.find_one({"ST02D1002": data["SP00D1006"]}, {"_id": 0})
+
+    return jsonify(profcuenta)
 
 
-@app.route("/serviceprofileSPXST02", methods=["GET", "POST"])
-def readSPXpostST02():
+@app.route("/CitiesSPXST02/<string:ST02D1002>", methods=["POST"])
+def readCitiesSPXpostST02(ST02D1002):
+    profcuentaDB = db2["ST02_HandleServiceProfileRegistration"]
+
+    profcuentaFilter = profcuentaDB.find_one({"ST02D1002": ST02D1002})["_id"]
+
+    selCities = request.json
+    selCitiesArray = [x["value"] for x in selCities]
+    profcuentaDB.update_one(
+        {"_id": profcuentaFilter}, {"$set": {"ST02D1006": selCitiesArray}}
+    )
+
+    profcuenta = profcuentaDB.find_one({"ST02D1002": ST02D1002}, {"_id": 0})
+
+    return jsonify(profcuenta)
+
+
+@app.route("/profCuentaProperties/<string:ST02D1002>", methods=["POST"])
+def postProperties(ST02D1002):
     taskSession = models.SPX_TaskList
-    roomSession = models.SP05_ServiceRooms
+    profcuentaDB = db2["ST02_HandleServiceProfileRegistration"]
+    profcuentaFilter = profcuentaDB.find_one({"ST02D1002": ST02D1002})["_id"]
+
     taskquery = db1.session.query(taskSession)
-    roomquery = db1.session.query(roomSession)
     spx = taskquery.all()
-    sp05 = roomquery.all()
 
     spxDF = pd.DataFrame(spx)
-    spxDF["SPXD1004"] = 0
-    # spxDict = spxDF.to_dict("records")
-    sp05DF = pd.DataFrame(sp05)
-    sp05DF["SP05D1017"] = 0
-    sp05DF["SP05D1018"] = 0
+    spxDF["SPXD1004"] = 0  # Rate
 
-    dataTemp = db2["SP98_DataTemps"]
-    st02DataTemp = dataTemp.find_one({"COLL": "ST02"})["DATA"]
-    st02UploadData = []
+    selPropers = request.json
 
-    for building in st02DataTemp["ST02D1007"]:
-        tempDict = {building: spxDF[spxDF["SPXD1016"] == building].to_dict("records")}
-        st02UploadData.append(tempDict)
+    for selProperty in selPropers["data"]:
+        if selProperty["Active"] == True:
+            propertyTaskDF = spxDF[
+                (spxDF["SPXD1014"] == selProperty["Property"])
+                & (spxDF["SPXD1016"] == selProperty["Building"])
+            ]
+            propertyTaskDict = propertyTaskDF.to_dict("records")
 
-    st02DataTemp["ST02D1008"] = st02UploadData
+            selProperty["Tasks"] = propertyTaskDict
 
-    ST02 = db2["ST02_HandleServiceProfileRegistration"]
-    ST02.insert_one(st02DataTemp)
+        else:
+            pass
 
-    return jsonify({"success": "complete"})
+    profcuentaDB.update_one(
+        {"_id": profcuentaFilter}, {"$set": {"ST02D1007": selPropers["data"]}}
+    )
 
-    # return jsonify(spxDict)
+    return jsonify(profcuentaDB.find_one({"ST02D1002": ST02D1002}, {"_id": 0}))
 
 
 #######################################################
@@ -273,7 +309,10 @@ def postProfcuenta():
     db1.session.commit()
 
     query = db1.session.query(profcuentaSession)
-    new = query.filter(profcuentaSession.SP00D1001 == data["SP00D1001"]).first()
+    new = query.filter(
+        profcuentaSession.SP00D1006
+        == f"{data['SP00D1001'][:3].upper()}{data['SP00D1004'][-4:]}-{sp00D1006}"
+    ).first()
 
     return jsonify(new)
 

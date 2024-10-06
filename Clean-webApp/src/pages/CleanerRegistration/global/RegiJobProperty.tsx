@@ -39,7 +39,7 @@ function RegiJobProperty() {
   function handlePropPostNav(a: any) {
     postProps(location.state.st02D1002, a).then((data) =>
       navigate("/RegiRooms", {
-        state: { st02D1002: data["ST02D1002"] },
+        state: { st02D1002: data["ST02D1002"], sp02d1002: "CLES1" },
       })
     );
   }
@@ -65,44 +65,42 @@ function RegiJobProperty() {
 
         {/* Next */}
         {(homeCheck || aptCheck || comCheck || airHomeCheck || airAptCheck) && (
-          <div className="shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300">
-            <button
-              onClick={() =>
-                handlePropPostNav({
-                  data: [
-                    {
-                      Property: "Residential",
-                      Building: "House",
-                      Active: homeCheck,
-                    },
-                    {
-                      Property: "Residential",
-                      Building: "Condo-Apartment",
-                      Active: aptCheck,
-                    },
-                    {
-                      Property: "Commercial",
-                      Building: "Events",
-                      Active: comCheck,
-                    },
-                    {
-                      Property: "AirBnb",
-                      Building: "House",
-                      Active: airHomeCheck,
-                    },
-                    {
-                      Property: "AirBnb",
-                      Building: "Condo-Apartment",
-                      Active: airAptCheck,
-                    },
-                  ],
-                })
-              }
-              className="text-2xl text-white font-bold"
-            >
-              NEXT
-            </button>
-          </div>
+          <button
+            onClick={() =>
+              handlePropPostNav({
+                data: [
+                  {
+                    Property: "Residential",
+                    Building: "House",
+                    Active: homeCheck,
+                  },
+                  {
+                    Property: "Residential",
+                    Building: "Condo-Apartment",
+                    Active: aptCheck,
+                  },
+                  {
+                    Property: "Commercial",
+                    Building: "Events",
+                    Active: comCheck,
+                  },
+                  {
+                    Property: "AirBnb",
+                    Building: "House",
+                    Active: airHomeCheck,
+                  },
+                  {
+                    Property: "AirBnb",
+                    Building: "Condo-Apartment",
+                    Active: airAptCheck,
+                  },
+                ],
+              })
+            }
+            className="text-2xl text-white font-bold shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300"
+          >
+            NEXT
+          </button>
         )}
         {/* ^ Next */}
 

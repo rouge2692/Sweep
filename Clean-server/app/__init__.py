@@ -179,10 +179,17 @@ def postProperties(ST02D1002):
             propertyTaskDF = spxDF[
                 (spxDF["SPXD1014"] == selProperty["Property"])
                 & (spxDF["SPXD1016"] == selProperty["Building"])
+                & (spxDF["SPXD1013"] == "CLES1")
             ]
+            propertyRoomsList = propertyTaskDF["SPXD1017"].unique().tolist()
             propertyTaskDict = propertyTaskDF.to_dict("records")
 
             selProperty["Tasks"] = propertyTaskDict
+            selProperty["Selected"] = False
+            selProperty["Rooms"] = [
+                {"Room": x, "General": 0, "Deep": 0, "Selected": False}
+                for x in propertyRoomsList
+            ]
 
         else:
             pass

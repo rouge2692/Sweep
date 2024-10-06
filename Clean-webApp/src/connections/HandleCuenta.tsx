@@ -43,6 +43,7 @@ export const postNewCuenta = async (a = {}) => {
   }
 };
 
+// get account info
 export const getCuenta = async (ST02D1002 = "") => {
   try {
     const resp = await fetch(sweepServer + "/getprofcuenta/" + ST02D1002, {

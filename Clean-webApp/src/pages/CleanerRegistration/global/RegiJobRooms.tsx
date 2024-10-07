@@ -60,13 +60,33 @@ function RegiJobRooms() {
       })
     );
   }
-  useEffect(() => {
-    console.log(tmpProfProp);
-  }, [tmpProfProp]);
 
+  // Handle Task Selection
+  function handleTaskSel(a: string, b: string, c: string, d: string) {
+    setTmpProfProp((prevData) =>
+      prevData.map((property) => {
+        if (property.Property == a && property.Building == b) {
+          return {
+            ...property,
+            Tasks: property.Tasks.map((task: { [key: string]: any }) =>
+              task.SPXD1017 == c && task.SPXD1001 == d
+                ? { ...task, SPXD1020: !task.SPXD1020 }
+                : task
+            ),
+          };
+        }
+        return property;
+      })
+    );
+  }
+
+  // useEffect
   useEffect(() => {
     propsFromProf(location.state.st02D1002);
   }, []);
+  useEffect(() => {
+    console.log(tmpProfProp);
+  }, [tmpProfProp]);
 
   return (
     <>
@@ -74,20 +94,12 @@ function RegiJobRooms() {
       <div className="relative py-5">
         {/* Navigation */}
         <div className="flex justify-between items-center px-5 pb-7">
-          <div
-            onClick={() => console.log(tmpProfProp)}
-            className="text-lg flex items-center text-gray-400 hover:text-gray-800 active:text-gray-800 duration-500 transition-colors"
-          >
+          <div className="text-lg flex items-center text-gray-400 hover:text-gray-800 active:text-gray-800 duration-500 transition-colors">
             <IoIosArrowBack />
             <h1>Back</h1>
           </div>
 
-          <button
-            onClick={() =>
-              handleRates("Residential", "House", "Bathroom", "General", 23)
-            }
-            className="sm:text-lg text-white font-bold shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300"
-          >
+          <button className="sm:text-lg text-white font-bold shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300">
             NEXT
           </button>
         </div>
@@ -178,12 +190,18 @@ function RegiJobRooms() {
                                 <h1 className="font-bold pl-3">{room}</h1>
                               </div>
 
-                              <div className="space-x-2 flex w-1/2 py-3 pr-3">
+                              <div className="space-x-2 flex w-2/3 py-3 pr-3">
                                 <div className="flex flex-col w-1/2 space-y-2">
                                   <h1 className="text-sm font-bold">
                                     General:
                                   </h1>
                                   <input
+                                    placeholder="per hour"
+                                    value={
+                                      profRoom.General == 0
+                                        ? ""
+                                        : profRoom.General
+                                    }
                                     type="number"
                                     className="border-b-2 w-full"
                                     onChange={(e) =>
@@ -201,6 +219,10 @@ function RegiJobRooms() {
                                 <div className="flex flex-col w-1/2 space-y-2">
                                   <h1 className="text-sm font-bold">Deep:</h1>
                                   <input
+                                    placeholder="per hour"
+                                    value={
+                                      profRoom.Deep == 0 ? "" : profRoom.Deep
+                                    }
                                     type="number"
                                     className="border-b-2 w-full"
                                     onChange={(e) =>
@@ -237,13 +259,27 @@ function RegiJobRooms() {
                                   task: { [key: string]: any },
                                   index: number
                                 ) => {
+                                  let taskName = task.SPXD1001;
                                   return (
-                                    <p
+                                    <div
                                       key={index}
-                                      className="text-sm sm:text-base"
+                                      className="flex space-x-2 items-center"
                                     >
-                                      {task.SPXD1001}
-                                    </p>
+                                      <input
+                                        type="checkbox"
+                                        onClick={() =>
+                                          handleTaskSel(
+                                            selProp[0],
+                                            selProp[1],
+                                            room,
+                                            taskName
+                                          )
+                                        }
+                                      />
+                                      <p className="text-sm sm:text-base">
+                                        {taskName}
+                                      </p>
+                                    </div>
                                   );
                                 }
                               )}
@@ -259,13 +295,27 @@ function RegiJobRooms() {
                                   task: { [key: string]: any },
                                   index: number
                                 ) => {
+                                  let taskName = task.SPXD1001;
                                   return (
-                                    <p
+                                    <div
                                       key={index}
-                                      className="text-sm sm:text-base"
+                                      className="flex space-x-2 items-center"
                                     >
-                                      {task.SPXD1001}
-                                    </p>
+                                      <input
+                                        type="checkbox"
+                                        onClick={() =>
+                                          handleTaskSel(
+                                            selProp[0],
+                                            selProp[1],
+                                            room,
+                                            taskName
+                                          )
+                                        }
+                                      />
+                                      <p className="text-sm sm:text-base">
+                                        {taskName}
+                                      </p>
+                                    </div>
                                   );
                                 }
                               )}

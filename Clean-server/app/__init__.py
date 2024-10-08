@@ -187,8 +187,7 @@ def postProperties(ST02D1002):
             selProperty["Tasks"] = propertyTaskDict
             selProperty["Selected"] = False
             selProperty["Rooms"] = [
-                {"Room": x, "General": 0, "Deep": 0, "Selected": False}
-                for x in propertyRoomsList
+                {"Room": x, "Rate": 0, "Selected": False} for x in propertyRoomsList
             ]
 
         else:
@@ -199,6 +198,20 @@ def postProperties(ST02D1002):
     )
 
     return jsonify(profcuentaDB.find_one({"ST02D1002": ST02D1002}, {"_id": 0}))
+
+
+@app.route("/profCuentaTask/<string:ST02D1002>", methods=["POST"])
+def postCuentaTask(ST02D1002):
+    profCuentaTaskDB = db2["SP0X_ProfcuentaTask"]
+    profCuentaDB = db2["ST02_HandleServiceProfileRegistration"]
+
+    profCuentaTaskData = request.json
+
+    cuenta = profCuentaDB.find_one({"ST02D1002": ST02D1002}, {"_id": 0})
+    cuenta["ST02D1007"] = profCuentaTaskData
+    profCuentaTaskDB.insert_one(cuenta)
+
+    return jsonify(profCuentaTaskDB.find_one({"ST02D1002": ST02D1002}, {"_id": 0}))
 
 
 #######################################################

@@ -92,3 +92,20 @@ export const postProps = async (st02D1002 = "", a: any) => {
     return [];
   }
 };
+
+export const postProfCuentTask = async (st02D1002 = "", a: any) => {
+  try {
+    const pack = await fetch(sweepServer + "/profCuentaTask/" + st02D1002, {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(a),
+    });
+    return await pack.json();
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};

@@ -4,10 +4,7 @@ import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 
 // Components
 import NavBar from "../../../components/JobPosting/NavBar/NavBar";
-import {
-  getCuenta,
-  postProfCuentTask,
-} from "../../../connections/HandleCuenta";
+import { getCuenta } from "../../../connections/HandleCuenta";
 
 // Connections
 
@@ -38,12 +35,8 @@ function RegiJobRooms() {
   }
 
   // Handle Next
-  function handleNavProf(a: string, b: any) {
-    postProfCuentTask(a, b).then((data) =>
-      navigate("/Profile", {
-        state: { st02D1002: data["ST02D1002"] },
-      })
-    );
+  function handleNavProf() {
+    null;
   }
 
   // Handle General and Deep Rates
@@ -58,8 +51,6 @@ function RegiJobRooms() {
                 return { ...room, General: e };
               } else if (room.Room == c && d == "Deep") {
                 return { ...room, Deep: e };
-              } else if (room.Room == c && d == "Rate") {
-                return { ...room, Rate: e };
               }
               return room;
             }),
@@ -89,41 +80,6 @@ function RegiJobRooms() {
     );
   }
 
-  // Handle Select All Task Selection
-  function handleAllTaskSel(
-    a: string,
-    b: string,
-    c: string,
-    d: string,
-    e: boolean
-  ) {
-    setTmpProfProp((prevData) =>
-      prevData.map((property) => {
-        if (property.Property == a && property.Building == b) {
-          return {
-            ...property,
-            Tasks: property.Tasks.map((task: { [key: string]: any }) => {
-              if (task.SPXD1017 == c && d == "General" && task.SPXD1015 == d) {
-                return {
-                  ...task,
-                  SPXD1020: e,
-                };
-              } else if (task.SPXD1017 == c && d == "Deep") {
-                return {
-                  ...task,
-                  SPXD1020: e,
-                };
-              }
-
-              return task;
-            }),
-          };
-        }
-        return property;
-      })
-    );
-  }
-
   // useEffect
   useEffect(() => {
     propsFromProf(location.state.st02D1002);
@@ -135,22 +91,12 @@ function RegiJobRooms() {
       <div className="relative py-5">
         {/* Navigation */}
         <div className="flex justify-between items-center px-5 pb-7">
-          <button
-            onClick={() =>
-              navigate("/RegiProperties", {
-                state: { st02D1002: location.state.st02D1002 },
-              })
-            }
-            className="text-lg flex items-center text-gray-400 hover:text-gray-800 active:text-gray-800 duration-500 transition-colors"
-          >
+          <div className="text-lg flex items-center text-gray-400 hover:text-gray-800 active:text-gray-800 duration-500 transition-colors">
             <IoIosArrowBack />
             <h1>Back</h1>
-          </button>
+          </div>
 
-          <button
-            onClick={() => handleNavProf(location.state.st02D1002, tmpProfProp)}
-            className="sm:text-lg text-white font-bold shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300"
-          >
+          <button className="sm:text-lg text-white font-bold shadow-md bg-pink-600 p-2 px-4 rounded-xl hover:bg-pink-400 transition-colors duration-300">
             NEXT
           </button>
         </div>
@@ -243,7 +189,7 @@ function RegiJobRooms() {
                         (task: { [key: string]: any }) => task.SPXD1020
                       ).length
                   }{" "}
-                  Selected
+                  Selected Tasks
                 </h1>
                 <h1 className="font-bold">/</h1>
                 <h1 className="font-bold">
@@ -320,29 +266,52 @@ function RegiJobRooms() {
                                 <h1 className="font-bold">{room}</h1>
                               </div>
 
-                              <div className="flex w-1/2 py-3 pr-3">
-                                <div className="flex flex-col w-full space-y-2">
-                                  <h1 className="text-sm font-bold w-full text-right">
-                                    Hourly Rate:
+                              <div className="space-x-2 flex w-2/3 py-3 pr-3">
+                                <div className="flex flex-col w-1/2 space-y-2">
+                                  <h1 className="text-sm font-bold">
+                                    General:
                                   </h1>
                                   <input
                                     placeholder="per hour"
                                     value={
-                                      profRoom.Rate == 0 ? "" : profRoom.Rate
+                                      profRoom.General == 0
+                                        ? ""
+                                        : profRoom.General
                                     }
                                     type="number"
-                                    className="border-b-2 text-left"
+                                    className="border-b-2 w-full"
                                     onChange={(e) =>
                                       handleRates(
                                         selProp[0],
                                         selProp[1],
                                         room,
-                                        "Rate",
+                                        "General",
                                         Number(e.target.value)
                                       )
                                     }
                                   />
                                 </div>
+
+                                {/* <div className="flex flex-col w-1/2 space-y-2">
+                                  <h1 className="text-sm font-bold">Deep:</h1>
+                                  <input
+                                    placeholder="per hour"
+                                    value={
+                                      profRoom.Deep == 0 ? "" : profRoom.Deep
+                                    }
+                                    type="number"
+                                    className="border-b-2 w-full"
+                                    onChange={(e) =>
+                                      handleRates(
+                                        selProp[0],
+                                        selProp[1],
+                                        room,
+                                        "Deep",
+                                        Number(e.target.value)
+                                      )
+                                    }
+                                  />
+                                </div> */}
                               </div>
                             </div>
                             {/* Ac Header */}
@@ -354,39 +323,10 @@ function RegiJobRooms() {
                                   : "max-h-0 overflow-hidden transition-all duration-500 ease-in-out space-y-0 p-0"
                               }
                             >
-                              <div className="flex justify-between">
+                              <div className="flex">
                                 <h1 className="text-sm sm:text-base font-bold">
                                   General Clean Tasks
                                 </h1>
-                                <div className="flex space-x-1">
-                                  <h1 className="text-sm">Select All</h1>
-                                  <input
-                                    type="checkbox"
-                                    checked={
-                                      profProp.Tasks.filter(
-                                        (task: { [key: string]: any }) =>
-                                          task.SPXD1017 == room &&
-                                          task.SPXD1015 == "General" &&
-                                          task.SPXD1020 == true
-                                      ).length /
-                                        profProp.Tasks.filter(
-                                          (task: { [key: string]: any }) =>
-                                            task.SPXD1017 == room &&
-                                            task.SPXD1015 == "General"
-                                        ).length ==
-                                      1
-                                    }
-                                    onChange={(e) =>
-                                      handleAllTaskSel(
-                                        selProp[0],
-                                        selProp[1],
-                                        room,
-                                        "General",
-                                        e.target.checked
-                                      )
-                                    }
-                                  />
-                                </div>
                               </div>
 
                               {profProp.Tasks.filter(
@@ -423,37 +363,10 @@ function RegiJobRooms() {
                                   );
                                 }
                               )}
-                              <div className="flex justify-between">
+                              <div className="flex">
                                 <h1 className="text-sm sm:text-base font-bold">
                                   Deep Clean Tasks
                                 </h1>
-                                <div className="flex space-x-1">
-                                  <h1 className="text-sm">Select All</h1>
-                                  <input
-                                    type="checkbox"
-                                    checked={
-                                      profProp.Tasks.filter(
-                                        (task: { [key: string]: any }) =>
-                                          task.SPXD1017 == room &&
-                                          task.SPXD1020 == true
-                                      ).length /
-                                        profProp.Tasks.filter(
-                                          (task: { [key: string]: any }) =>
-                                            task.SPXD1017 == room
-                                        ).length ==
-                                      1
-                                    }
-                                    onChange={(e) =>
-                                      handleAllTaskSel(
-                                        selProp[0],
-                                        selProp[1],
-                                        room,
-                                        "Deep",
-                                        e.target.checked
-                                      )
-                                    }
-                                  />
-                                </div>
                               </div>
                               {profProp.Tasks.filter(
                                 (task: { [key: string]: any }) =>
